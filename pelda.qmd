@@ -1,0 +1,145 @@
+---
+pagetitle: "Példa"
+jupyter: python3
+
+format:
+  html:
+    theme:
+      - cosmo
+      - tema.scss
+    toc: false
+    anchor-sections: false
+    number-sections: false
+    smooth-scroll: true
+    code-copy: true
+    html-math-method: mathjax
+---
+
+<aside id="quarto-margin-sidebar">
+  <nav id="TOC">
+    <div class="toc-title">Tartalomjegyzék</div>
+    <ul id="custom-toc-list"></ul>
+  </nav>
+</aside>
+
+[Vissza](index.qmd){.back-link}
+
+# Példa {.unnumbered .unlisted}
+
+---
+
+# Elméleti alapok
+
+## Konvexitási feltételek
+
+::: {.callout-note title="Definíció – Konvexitás"}
+Egy $f: \mathbb{R}^n \to \mathbb{R}$ függvény konvex, ha tetszőleges $x, y \in \text{dom}(f)$ és $\lambda \in [0, 1]$ esetén:
+$$
+f(\lambda x + (1 - \lambda)y) \le \lambda f(x) + (1 - \lambda)f(y)
+$$
+:::
+
+## Optimumkritériumok
+
+::: {.callout-tip title="Tétel – Elsőrendű optimumfeltétel"}
+Legyen $f: \mathbb{R}^n \to \mathbb{R}$ folytonosan differenciálható. Ha $x^*$ lokális minimumhely, akkor a gradiens zérus:
+$$
+\nabla f(x^*) = 0
+$$
+:::
+
+::: {.callout-tip title="Bizonyítás – Elsőrendű optimumfeltétel" collapse="true"}
+Tetszőleges $d \in \mathbb{R}^n$ irány mentén tekintsük a $\phi(\alpha) = f(x^* + \alpha d)$ függvényt. Mivel $x^*$ lokális minimum, $\alpha > 0$ mellett:
+$$
+\phi'(0) = \nabla f(x^*)^T d \ge 0
+$$
+Mivel ez $d$-re és $-d$-re is teljesül, ezért $\nabla f(x^*) = 0$.
+:::
+
+# Lépésközválasztás és példák
+
+## Armijo-szabály és visszalépéses keresés
+
+::: {.callout-warning title="Feltétel – Armijo-szabály"}
+Az $\alpha_k$ lépésköz kielégíti az elégséges csökkenés feltételét, ha:
+$$
+f(x_k + \alpha_k d_k) \le f(x_k) + c_1 \alpha_k \nabla f(x_k)^T d_k \quad (0 < c_1 < 1)
+$$
+:::
+
+::: {.callout-important title="Fontos – Konvergencia kritérium"}
+A ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: $\|\nabla f(x_k)\| < \varepsilon$.
+:::
+
+## Számítási példa
+
+::: {.callout-caution title="Példa – Manuális gradiens lépés és levezetés" collapse="true"}
+Tegyük fel, hogy $f(x_1, x_2) = 1.5 x_1^2 + x_2^2 + x_1 x_2 - 2x_1 + x_2$ és a kezdőpont $x_0 = (0, 0)^T$.
+
+1. **Gradiens meghatározása:** $\nabla f(0, 0) = (-2, 1)^T$.
+2. **Keresési irány:** $d_0 = -\nabla f(0, 0) = (2, -1)^T$.
+3. **Új pont számítása:** $\alpha_0 = 0.5$ esetén $x_1 = x_0 + \alpha_0 d_0 = (1.0, -0.5)^T$.
+:::
+
+# Numerikus szimuláció
+
+## Kvadratikus felület modellezése
+
+```{python}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Python kód megjelenítése"
+#| fig-align: center
+#| out-width: "50%"
+import numpy as np
+
+A = np.array([[3, 1], [1, 2]])
+print("Mátrix A:\n", A)
+print("Inverze: \n", np.linalg.inv(A))
+```
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toc = document.getElementById("TOC");
+  const title = document.querySelector("#TOC .toc-title");
+  const list = document.getElementById("custom-toc-list");
+
+  if (title) {
+    title.addEventListener("click", function () {
+      toc.classList.toggle("toc-collapsed");
+    });
+  }
+
+  const headings = document.querySelectorAll("main.content h1:not(.unlisted), main.content h2");
+  let currentH1List = null;
+
+  headings.forEach((heading, idx) => {
+    if (!heading.id) {
+      heading.id = "sec-" + idx;
+    }
+
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + heading.id;
+    a.textContent = heading.innerText.trim();
+
+    if (heading.tagName === "H1") {
+      li.className = "toc-h1";
+      li.appendChild(a);
+      currentH1List = document.createElement("ul");
+      li.appendChild(currentH1List);
+      list.appendChild(li);
+    } else if (heading.tagName === "H2") {
+      li.className = "toc-h2";
+      li.appendChild(a);
+      if (currentH1List) {
+        currentH1List.appendChild(li);
+      } else {
+        list.appendChild(li);
+      }
+    }
+  });
+});
+</script>
+```

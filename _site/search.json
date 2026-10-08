@@ -1,0 +1,135 @@
+[
+  {
+    "objectID": "optimalizalas.html",
+    "href": "optimalizalas.html",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nHaladó optimalizációs módszerek\n\n\n\nTartalom"
+  },
+  {
+    "objectID": "optimalizalas.html#bevezetés",
+    "href": "optimalizalas.html#bevezetés",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "0.1 Bevezetés",
+    "text": "0.1 Bevezetés\nA feltétel nélküli optimalizálás alapfeladata:\n\\[\n\\min_{x \\in \\mathbb{R}^n} f(x)\n\\]"
+  },
+  {
+    "objectID": "optimalizalas.html#példa-gradiens-módszer-visszalépéses-lépésközválasztással",
+    "href": "optimalizalas.html#példa-gradiens-módszer-visszalépéses-lépésközválasztással",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Példa – Gradiens módszer visszalépéses lépésközválasztással",
+    "text": "Példa – Gradiens módszer visszalépéses lépésközválasztással"
+  },
+  {
+    "objectID": "optimalizalas.html#másod",
+    "href": "optimalizalas.html#másod",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Másod",
+    "text": "Másod\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "optimalizalas.html#elsődrendű-szimuláció",
+    "href": "optimalizalas.html#elsődrendű-szimuláció",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Elsődrendű szimuláció",
+    "text": "Elsődrendű szimuláció\nBlablabalsdlaldsaldald sdald aslda dsa daldas dla"
+  },
+  {
+    "objectID": "optimalizalas.html#másodrendű",
+    "href": "optimalizalas.html#másodrendű",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "másodrendű",
+    "text": "másodrendű\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "optimalizalas.html#konvexitási-feltételek",
+    "href": "optimalizalas.html#konvexitási-feltételek",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Konvexitási feltételek",
+    "text": "Konvexitási feltételek\n\n\n\n\n\n\nNoteDefiníció – Konvexitás\n\n\n\nEgy \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvény konvex, ha tetszőleges \\(x, y \\in \\text{dom}(f)\\) és \\(\\lambda \\in [0, 1]\\) esetén: \\[\nf(\\lambda x + (1 - \\lambda)y) \\le \\lambda f(x) + (1 - \\lambda)f(y)\n\\]"
+  },
+  {
+    "objectID": "optimalizalas.html#optimumkritériumok",
+    "href": "optimalizalas.html#optimumkritériumok",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Optimumkritériumok",
+    "text": "Optimumkritériumok\n\n\n\n\n\n\nTipTétel – Elsőrendű optimumfeltétel\n\n\n\nLegyen \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) folytonosan differenciálható. Ha \\(x^*\\) lokális minimumhely, akkor a gradiens zérus: \\[\n\\nabla f(x^*) = 0\n\\]\n\n\n\n\n\n\n\n\nTipBizonyítás – Elsőrendű optimumfeltétel\n\n\n\n\n\nTetszőleges \\(d \\in \\mathbb{R}^n\\) irány mentén tekintsük a \\(\\phi(\\alpha) = f(x^* + \\alpha d)\\) függvényt. Mivel \\(x^*\\) lokális minimum, \\(\\alpha &gt; 0\\) mellett: \\[\n\\phi'(0) = \\nabla f(x^*)^T d \\ge 0\n\\] Mivel ez \\(d\\)-re és \\(-d\\)-re is teljesül, ezért \\(\\nabla f(x^*) = 0\\)."
+  },
+  {
+    "objectID": "optimalizalas.html#armijo-szabály-és-visszalépéses-keresés",
+    "href": "optimalizalas.html#armijo-szabály-és-visszalépéses-keresés",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Armijo-szabály és visszalépéses keresés",
+    "text": "Armijo-szabály és visszalépéses keresés\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
+  },
+  {
+    "objectID": "optimalizalas.html#számítási-példa",
+    "href": "optimalizalas.html#számítási-példa",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Számítási példa",
+    "text": "Számítási példa\n\n\n\n\n\n\nCautionPélda – Manuális gradiens lépés és levezetés\n\n\n\n\n\nTegyük fel, hogy \\(f(x_1, x_2) = 1.5 x_1^2 + x_2^2 + x_1 x_2 - 2x_1 + x_2\\) és a kezdőpont \\(x_0 = (0, 0)^T\\).\n\nGradiens meghatározása: \\(\\nabla f(0, 0) = (-2, 1)^T\\).\nKeresési irány: \\(d_0 = -\\nabla f(0, 0) = (2, -1)^T\\).\nÚj pont számítása: \\(\\alpha_0 = 0.5\\) esetén \\(x_1 = x_0 + \\alpha_0 d_0 = (1.0, -0.5)^T\\)."
+  },
+  {
+    "objectID": "optimalizalas.html#kvadratikus-felület-modellezése",
+    "href": "optimalizalas.html#kvadratikus-felület-modellezése",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Kvadratikus felület modellezése",
+    "text": "Kvadratikus felület modellezése\n\n\nPython kód megjelenítése\nimport numpy as np\n\nA = np.array([[3, 1], [1, 2]])\nprint(\"Mátrix A:\\n\", A)\nprint(\"Inverze: \\n\", np.linalg.inv(A))\n\n\nMátrix A:\n [[3 1]\n [1 2]]\nInverze: \n [[ 0.4 -0.2]\n [-0.2  0.6]]"
+  },
+  {
+    "objectID": "optimalizalas.html#armijo-szabály-és-visszalépéses-kereséss",
+    "href": "optimalizalas.html#armijo-szabály-és-visszalépéses-kereséss",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Armijo-szabály és visszalépéses kereséss",
+    "text": "Armijo-szabály és visszalépéses kereséss\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
+  },
+  {
+    "objectID": "optimalizalas.html#másodrendű-szimuláció",
+    "href": "optimalizalas.html#másodrendű-szimuláció",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "másodrendű szimuláció",
+    "text": "másodrendű szimuláció\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "pelda.html",
+    "href": "pelda.html",
+    "title": "Példa",
+    "section": "",
+    "text": "Tartalomjegyzék\nVissza"
+  },
+  {
+    "objectID": "pelda.html#konvexitási-feltételek",
+    "href": "pelda.html#konvexitási-feltételek",
+    "title": "Példa",
+    "section": "Konvexitási feltételek",
+    "text": "Konvexitási feltételek\n\n\n\n\n\n\nNoteDefiníció – Konvexitás\n\n\n\nEgy \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvény konvex, ha tetszőleges \\(x, y \\in \\text{dom}(f)\\) és \\(\\lambda \\in [0, 1]\\) esetén: \\[\nf(\\lambda x + (1 - \\lambda)y) \\le \\lambda f(x) + (1 - \\lambda)f(y)\n\\]"
+  },
+  {
+    "objectID": "pelda.html#optimumkritériumok",
+    "href": "pelda.html#optimumkritériumok",
+    "title": "Példa",
+    "section": "Optimumkritériumok",
+    "text": "Optimumkritériumok\n\n\n\n\n\n\nTipTétel – Elsőrendű optimumfeltétel\n\n\n\nLegyen \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) folytonosan differenciálható. Ha \\(x^*\\) lokális minimumhely, akkor a gradiens zérus: \\[\n\\nabla f(x^*) = 0\n\\]\n\n\n\n\n\n\n\n\nTipBizonyítás – Elsőrendű optimumfeltétel\n\n\n\n\n\nTetszőleges \\(d \\in \\mathbb{R}^n\\) irány mentén tekintsük a \\(\\phi(\\alpha) = f(x^* + \\alpha d)\\) függvényt. Mivel \\(x^*\\) lokális minimum, \\(\\alpha &gt; 0\\) mellett: \\[\n\\phi'(0) = \\nabla f(x^*)^T d \\ge 0\n\\] Mivel ez \\(d\\)-re és \\(-d\\)-re is teljesül, ezért \\(\\nabla f(x^*) = 0\\)."
+  },
+  {
+    "objectID": "pelda.html#armijo-szabály-és-visszalépéses-keresés",
+    "href": "pelda.html#armijo-szabály-és-visszalépéses-keresés",
+    "title": "Példa",
+    "section": "Armijo-szabály és visszalépéses keresés",
+    "text": "Armijo-szabály és visszalépéses keresés\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
+  },
+  {
+    "objectID": "pelda.html#számítási-példa",
+    "href": "pelda.html#számítási-példa",
+    "title": "Példa",
+    "section": "Számítási példa",
+    "text": "Számítási példa\n\n\n\n\n\n\nCautionPélda – Manuális gradiens lépés és levezetés\n\n\n\n\n\nTegyük fel, hogy \\(f(x_1, x_2) = 1.5 x_1^2 + x_2^2 + x_1 x_2 - 2x_1 + x_2\\) és a kezdőpont \\(x_0 = (0, 0)^T\\).\n\nGradiens meghatározása: \\(\\nabla f(0, 0) = (-2, 1)^T\\).\nKeresési irány: \\(d_0 = -\\nabla f(0, 0) = (2, -1)^T\\).\nÚj pont számítása: \\(\\alpha_0 = 0.5\\) esetén \\(x_1 = x_0 + \\alpha_0 d_0 = (1.0, -0.5)^T\\)."
+  },
+  {
+    "objectID": "pelda.html#kvadratikus-felület-modellezése",
+    "href": "pelda.html#kvadratikus-felület-modellezése",
+    "title": "Példa",
+    "section": "Kvadratikus felület modellezése",
+    "text": "Kvadratikus felület modellezése\n\n\nPython kód megjelenítése\nimport numpy as np\n\nA = np.array([[3, 1], [1, 2]])\nprint(\"Mátrix A:\\n\", A)\nprint(\"Inverze: \\n\", np.linalg.inv(A))\n\n\nMátrix A:\n [[3 1]\n [1 2]]\nInverze: \n [[ 0.4 -0.2]\n [-0.2  0.6]]"
+  }
+]

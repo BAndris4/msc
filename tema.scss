@@ -1,0 +1,678 @@
+/* =========================================================
+   QUARTO MSc JEGYZETEK – TÉMA (tema.scss)
+   Design: Cocoa Noir & Amber Lux (Warm Vintage Editorial)
+   Fontok: Calistoga (Címek) + Plus Jakarta Sans (Szöveg)
+   ========================================================= */
+
+/* =========================================================
+   1. BETŰTÍPUSOK IMPORTÁLÁSA (Google Fonts)
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Calistoga&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Shrikhand&display=swap");
+
+/* =========================================================
+   2. SCSS ALAPBEÁLLÍTÁSOK ÉS VÁLTOZÓK
+   ========================================================= */
+
+/*-- scss:defaults --*/
+
+$body-bg: #faf8f5;
+$body-color: #342721;
+$link-color: #8e5a23;
+
+$font-family-sans-serif:
+  "Plus Jakarta Sans",
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+$font-family-monospace: "JetBrains Mono", Consolas, monospace;
+
+/* =========================================================
+   3. DESKTOP TELJES SZÉLESSÉG (PÁR PIXEL SZÉLSŐ PADDING)
+   ========================================================= */
+
+/*-- scss:rules --*/
+
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: #faf8f5 !important;
+  color: #342721 !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15.5px !important;
+  line-height: 1.72 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Teljes szélességű konténer alig 6 pixel margóval (NEM 100px!) */
+#quarto-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 100px 100px !important;
+  box-sizing: border-box !important;
+}
+
+.page-columns,
+.container-fluid,
+.quarto-container {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+main.content,
+#quarto-document-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 4px 6px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* =========================================================
+   4. CÍMSOROK (SANS-SERIF TARTALÉK BETŰTÍPUS)
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.quarto-title .title {
+  font-family:
+    "Calistoga",
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif !important;
+  font-weight: 400 !important;
+  color: #342721 !important;
+  letter-spacing: -0.01em;
+}
+
+h1.unnumbered,
+.quarto-title .title {
+  font-size: 2.85rem !important;
+  line-height: 1.15 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.8rem !important;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid rgba(52, 39, 33, 0.14);
+}
+
+h1:not(.unnumbered) {
+  font-size: 2.15rem !important;
+  line-height: 1.22 !important;
+  margin-top: 2.2rem !important;
+  margin-bottom: 1.1rem !important;
+}
+
+h2 {
+  font-size: 1.7rem !important;
+  line-height: 1.28 !important;
+  margin-top: 34px !important;
+  margin-bottom: 0.8rem !important;
+}
+
+h3 {
+  font-size: 1.35rem !important;
+  margin-top: 24px !important;
+  margin-bottom: 0.6rem !important;
+}
+
+p {
+  line-height: 1.72rem !important;
+  margin-top: 0;
+  margin-bottom: 1.15rem;
+}
+
+a {
+  color: #8e5a23 !important;
+  font-weight: 600;
+  text-decoration: none !important;
+
+  &:hover {
+    color: #6c4013 !important;
+  }
+}
+
+hr {
+  border: 0 !important;
+  border-top: 1px solid #eae1d5 !important;
+  margin: 2em 0 !important;
+}
+
+/* =========================================================
+   VISSZA GOMB AZ ALOLDALAKON (.back-link) – KITŰNŐ PILL GOMB
+   ========================================================= */
+
+/* =========================================================
+   SZOLID, SZERKESZTŐI VISSZA GOMB (.back-link)
+   ========================================================= */
+
+/* =========================================================
+   KOHERENS, TIPOGRÁFIAI VISSZA GOMB (.back-link)
+   ========================================================= */
+
+.back-link {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 1.05rem !important; /* Nagyobb, kényelmesen olvasható méret */
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  /* Természetes tintaszín, mint a címek */
+  color: #342721 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 0 !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 1.6rem !important;
+  opacity: 0.82;
+  transition:
+    opacity 0.12s ease,
+    color 0.12s ease !important;
+
+  /* Nyíl: natív tipográfiai jel, nem ikon vagy emoji */
+  &::before {
+    content: "←";
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+    font-weight: 400 !important;
+    transform: translateY(-1px);
+  }
+
+  /* Szolid kiemelés rávitelkor: nem ugrik, csak megkapja a karamell fókuszt */
+  &:hover {
+    opacity: 1 !important;
+    color: #8e5a23 !important;
+  }
+}
+
+/* =========================================================
+   5. SZOLID, LEBEGŐ TARTALOMJEGYZÉK (TOC)
+   ========================================================= */
+
+#quarto-margin-sidebar {
+  position: fixed !important;
+  top: 14px !important;
+  right: 14px !important;
+  z-index: 1050 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  min-width: 180px !important;
+  max-width: 280px !important;
+  background: #faf8f5 !important;
+  border: 1px solid rgba(52, 39, 33, 0.12) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(52, 39, 33, 0.04) !important;
+}
+
+#TOC {
+  padding: 6px 8px !important;
+  border: none !important;
+  margin: 0 !important;
+
+  .toc-title {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    margin: 0 !important;
+    padding: 3px 6px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    color: #8c7b70 !important;
+
+    &::after {
+      content: "▾";
+      font-size: 0.75rem;
+      color: #b0a399;
+      transition: transform 0.15s ease;
+    }
+  }
+
+  ul {
+    margin: 4px 0 2px 0 !important;
+    padding-left: 0 !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+    list-style: none !important;
+
+    li {
+      margin: 1px 0 !important;
+    }
+
+    li.toc-h1 > a {
+      font-weight: 600 !important;
+    }
+
+    ul {
+      padding-left: 0.75rem !important;
+      margin: 1px 0 !important;
+
+      li.toc-h2 > a {
+        font-size: 0.8rem !important;
+        font-weight: 400 !important;
+        color: #736257 !important;
+      }
+    }
+
+    a {
+      display: block !important;
+      padding: 3px 6px !important;
+      border-radius: 4px !important;
+      color: #4a3b33 !important;
+      font-size: 0.84rem !important;
+      text-decoration: none !important;
+      transition:
+        background-color 0.12s ease,
+        color 0.12s ease !important;
+
+      &:hover {
+        color: #8e5a23 !important;
+        background-color: rgba(52, 39, 33, 0.05) !important;
+      }
+    }
+  }
+
+  &.toc-collapsed {
+    padding: 4px 6px !important;
+
+    ul {
+      display: none !important;
+    }
+
+    .toc-title::after {
+      transform: rotate(-90deg) !important;
+    }
+  }
+}
+
+/* =========================================================
+   6. KIEMELŐ DOBOZOK (CALLOUTS) – HEROICONS & NEM KÉK FEJLÉC
+   ========================================================= */
+
+.callout {
+  border-radius: 8px !important;
+  border: 1px solid rgba(52, 39, 33, 0.12) !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 1px 4px rgba(52, 39, 33, 0.03);
+  overflow: hidden;
+
+  .callout-header {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    padding: 0.65rem 0.95rem !important;
+    display: flex !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(52, 39, 33, 0.06);
+  }
+
+  .callout-title-container {
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .callout-icon-container {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 0.55rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .callout-icon {
+    display: inline-block !important;
+    width: 19px !important;
+    height: 19px !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: inherit !important;
+    background-color: currentColor !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
+
+    svg {
+      display: none !important;
+    }
+    &::before {
+      display: none !important;
+      content: "" !important;
+    }
+  }
+
+  .callout-body {
+    padding: 0.8rem 1rem 0.9rem 1rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.68 !important;
+
+    > :first-child {
+      margin-top: 0 !important;
+    }
+    > :last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+/* 1. Note / Definíció – NEM KÉK: Meleg karamell fejléc */
+.callout.callout-note,
+div.callout-note.callout-style-default {
+  border-left: 4px solid #8e5a23 !important;
+  background-color: #f7f1e6 !important;
+
+  .callout-header {
+    background-color: #eddcc6 !important;
+    color: #61360c !important;
+  }
+  .callout-icon {
+    color: #8e5a23 !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  }
+}
+
+/* 2. Tip / Tétel – Zsályazöld fejléc */
+.callout.callout-tip,
+div.callout-tip.callout-style-default {
+  border-left: 4px solid #4d7358 !important;
+  background-color: #edf4ec !important;
+
+  .callout-header {
+    background-color: #dbe8da !important;
+    color: #1e3a26 !important;
+  }
+  .callout-icon {
+    color: #4d7358 !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath d='M10 2a6 6 0 0 0-3.815 10.631C7.237 13.5 8 14.443 8 15.456v.044a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-.044c0-1.013.762-1.957 1.815-2.825A6 6 0 0 0 10 2ZM8.5 18.5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.5h-3v.5Z'/%3E%3C/svg%3E") !important;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath d='M10 2a6 6 0 0 0-3.815 10.631C7.237 13.5 8 14.443 8 15.456v.044a1.5 1.5 0 0 0 1.5-1.5v-.044c0-1.013.762-1.957 1.815-2.825A6 6 0 0 0 10 2ZM8.5 18.5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.5h-3v.5Z'/%3E%3C/svg%3E") !important;
+  }
+}
+
+/* 3. Warning / Feltétel – Meleg narancs fejléc */
+.callout.callout-warning,
+div.callout-warning.callout-style-default {
+  border-left: 4px solid #bf6426 !important;
+  background-color: #faf2e8 !important;
+
+  .callout-header {
+    background-color: #f5e0ce !important;
+    color: #703309 !important;
+  }
+  .callout-icon {
+    color: #bf6426 !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  }
+}
+
+/* 4. Important / Fontos – Terrakotta fejléc */
+.callout.callout-important,
+div.callout-important.callout-style-default {
+  border-left: 4px solid #a33a30 !important;
+  background-color: #faede8 !important;
+
+  .callout-header {
+    background-color: #f3d7d0 !important;
+    color: #631c15 !important;
+  }
+  .callout-icon {
+    color: #a33a30 !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  }
+}
+
+/* 5. Példa / Magyarázat (Caution) – Heroicon: document-text */
+.callout.callout-caution,
+div.callout-caution.callout-style-default {
+  border-left: 4px solid #5d6778 !important;
+  background-color: #f2f4f7 !important;
+
+  .callout-header {
+    background-color: #e2e6ed !important;
+    color: #273142 !important;
+  }
+  .callout-icon {
+    color: #5d6778 !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  }
+}
+
+/* =========================================================
+   7. VISSZAÁLLÍTVA: FŐOLDAL (.home-page) ÉS STÁTUSZ JELVÉNYEK
+   ========================================================= */
+
+.home-page {
+  padding: 1rem 0 3rem 0 !important;
+
+  .anchorjs-link {
+    display: none !important;
+  }
+
+  /* Kategória címek (Segédletek, 1. félév) */
+  .level1 > h1 {
+    font-size: 2.1rem !important;
+    color: #342721 !important;
+    margin-top: 2.8rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #342721;
+    display: block !important;
+  }
+
+  .level1:first-child > h1 {
+    margin-top: 0 !important;
+  }
+
+  /* Tantárgy-sorok: háttér nélküli tiszta lista */
+  .level2 {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(52, 39, 33, 0.12) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition:
+      padding-left 0.18s ease,
+      border-color 0.18s ease;
+
+    &:hover {
+      border-bottom-color: #8e5a23 !important;
+      padding-left: 8px !important;
+
+      h2 a {
+        color: #8e5a23 !important;
+      }
+    }
+  }
+
+  /* Listaelem szövege és linkje */
+  h2 {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    a {
+      font-family: "Plus Jakarta Sans", sans-serif !important;
+      font-size: 1.12rem !important;
+      font-weight: 600 !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0 !important;
+      color: #342721 !important;
+      text-decoration: none !important;
+      transition: color 0.15s ease;
+    }
+  }
+}
+
+/* Státusz badge-ek */
+.badge-ip,
+.badge-todo {
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.badge-ip {
+  background: #f4eada;
+  color: #7a4917;
+  border: 1px solid #ddc5a3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #8e5a23;
+    animation: pulse-dot 1.8s infinite;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+.badge-todo {
+  background: #ebe5dc;
+  color: #85786e;
+  border: 1px solid #d8cfc3;
+}
+
+/* =========================================================
+   8. KÓDBLOKKOK ÉS 50%-OS KÉPMÉRET
+   ========================================================= */
+
+code:not(pre code) {
+  color: #7a3906 !important;
+  background-color: #efe6d8 !important;
+  border: 1px solid #e0d3c1;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 0.85rem !important;
+  padding: 2px 6px !important;
+  border-radius: 4px;
+}
+
+pre {
+  background-color: #f2eae0 !important;
+  border: 1px solid #e2d6c5 !important;
+  border-radius: 8px !important;
+  padding: 1.1em 1.4em !important;
+  overflow-x: auto;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+pre code {
+  color: #342721 !important;
+  background: transparent !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 0.85rem !important;
+  line-height: 1.9em !important;
+}
+
+/* Matplotlib diagramok méretezése: 50% szélesség, középre igazítva */
+.cell-output-display,
+.quarto-figure {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 1.5rem 0 !important;
+
+  img {
+    max-width: 50% !important;
+    height: auto !important;
+    display: inline-block !important;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(52, 39, 33, 0.06);
+  }
+}
+
+blockquote {
+  border-left: 4px solid #342721 !important;
+  background: #f3ece2 !important;
+  color: #4f4038 !important;
+  padding: 0.85em 1.3em !important;
+  border-radius: 0 6px 6px 0;
+  margin: 1.5em 0 !important;
+}
+
+table {
+  border-collapse: collapse !important;
+  width: 100%;
+  margin: 1.6rem 0;
+}
+
+th,
+td {
+  border: 1px solid #e5dcd0 !important;
+  padding: 8px 14px !important;
+  text-align: left;
+}
+
+th {
+  background-color: #efe6da !important;
+  color: #342721 !important;
+  font-weight: 600;
+}
+
+tr:nth-child(2n) {
+  background-color: #f5efe6 !important;
+}
+
+/* =========================================================
+   9. GÖRGETŐSÁV
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8cca0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf8f5;
+}

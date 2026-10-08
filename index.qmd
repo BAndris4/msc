@@ -1,0 +1,25 @@
+---
+title: Mesterséges intelligencia informatikus MSc jegyzetek
+toc: false
+anchor-sections: false
+---
+
+::: {.home-page}
+
+# Segédletek
+
+## [Példa](pelda.qmd)
+## [Görög betűk kiejtése [TODO]{.badge-todo}](gorog-betuk.qmd)
+## [NumPy alapok [TODO]{.badge-todo}](numpy.qmd)
+## [Matplotlib alapok [TODO]{.badge-todo}](matplotlib.qmd)
+
+# 1. félév
+
+## [Haladó optimalizációs módszerek [In Progress]{.badge-ip}](optimalizalas.qmd)
+## [Fejlett gépi tanuló modellek [TODO]{.badge-todo}](fejlett-gepi-tanulas.qmd)
+## [Gépi tanulás [TODO]{.badge-todo}](gepi-tanulas.qmd)
+## [Mesterséges intelligencia statisztikai analízise [TODO]{.badge-todo}](statisztikai-analizis.qmd)
+## [Neurális hálók elmélete [TODO]{.badge-todo}](neuralis-halok.qmd)
+## [A mesterséges intelligencia matematikai alapjai [TODO]{.badge-todo}](ai-matek.qmd)
+
+:::
