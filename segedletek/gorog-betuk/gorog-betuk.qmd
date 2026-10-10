@@ -1,0 +1,78 @@
+---
+pagetitle: "Görög betűk kiejtése"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - ../../tema.scss
+    toc: false
+    anchor-sections: false
+    number-sections: false
+    smooth-scroll: true
+    code-copy: true
+    html-math-method: mathjax
+---
+
+<aside id="quarto-margin-sidebar">
+  <nav id="TOC">
+    <div class="toc-title">Tartalomjegyzék</div>
+    <ul id="custom-toc-list"></ul>
+  </nav>
+</aside>
+
+[Vissza](../../index.qmd){.back-link}
+
+# Görög betűk kiejtése {.unnumbered .unlisted}
+
+---
+
+::: {.callout-note title="Hamarosan"}
+Ez a tananyag jelenleg kidolgozás alatt áll.
+:::
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toc = document.getElementById("TOC");
+  const title = document.querySelector("#TOC .toc-title");
+  const list = document.getElementById("custom-toc-list");
+
+  if (title) {
+    title.addEventListener("click", function () {
+      toc.classList.toggle("toc-collapsed");
+    });
+  }
+
+  const headings = document.querySelectorAll("main.content h1:not(.unlisted), main.content h2");
+  let currentH1List = null;
+
+  headings.forEach((heading, idx) => {
+    if (!heading.id) {
+      heading.id = "sec-" + idx;
+    }
+
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + heading.id;
+    a.textContent = heading.innerText.trim();
+
+    if (heading.tagName === "H1") {
+      li.className = "toc-h1";
+      li.appendChild(a);
+      currentH1List = document.createElement("ul");
+      li.appendChild(currentH1List);
+      list.appendChild(li);
+    } else if (heading.tagName === "H2") {
+      li.className = "toc-h2";
+      li.appendChild(a);
+      if (currentH1List) {
+        currentH1List.appendChild(li);
+      } else {
+        list.appendChild(li);
+      }
+    }
+  });
+});
+</script>
+```

@@ -1,135 +1,212 @@
 [
   {
-    "objectID": "optimalizalas.html",
-    "href": "optimalizalas.html",
-    "title": "Haladó optimalizációs módszerek",
+    "objectID": "targyak/statisztikai-analizis/statisztikai-analizis.html",
+    "href": "targyak/statisztikai-analizis/statisztikai-analizis.html",
+    "title": "Mesterséges intelligencia statisztikai analízise",
     "section": "",
-    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nHaladó optimalizációs módszerek\n\n\n\nTartalom"
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nMesterséges intelligencia statisztikai analízise\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
   },
   {
-    "objectID": "optimalizalas.html#bevezetés",
-    "href": "optimalizalas.html#bevezetés",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "0.1 Bevezetés",
-    "text": "0.1 Bevezetés\nA feltétel nélküli optimalizálás alapfeladata:\n\\[\n\\min_{x \\in \\mathbb{R}^n} f(x)\n\\]"
+    "objectID": "targyak/neuralis-halok/neuralis-halok.html",
+    "href": "targyak/neuralis-halok/neuralis-halok.html",
+    "title": "Neurális hálók elmélete",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nNeurális hálók elmélete\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
   },
   {
-    "objectID": "optimalizalas.html#példa-gradiens-módszer-visszalépéses-lépésközválasztással",
-    "href": "optimalizalas.html#példa-gradiens-módszer-visszalépéses-lépésközválasztással",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Példa – Gradiens módszer visszalépéses lépésközválasztással",
-    "text": "Példa – Gradiens módszer visszalépéses lépésközválasztással"
+    "objectID": "targyak/fejlett-gepi-tanulas/fejlett-gepi-tanulas.html",
+    "href": "targyak/fejlett-gepi-tanulas/fejlett-gepi-tanulas.html",
+    "title": "Fejlett gépi tanuló modellek",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nFejlett gépi tanuló modellek\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
   },
   {
-    "objectID": "optimalizalas.html#másod",
-    "href": "optimalizalas.html#másod",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Másod",
-    "text": "Másod\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "optimalizalas.html#elsődrendű-szimuláció",
-    "href": "optimalizalas.html#elsődrendű-szimuláció",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Elsődrendű szimuláció",
-    "text": "Elsődrendű szimuláció\nBlablabalsdlaldsaldald sdald aslda dsa daldas dla"
-  },
-  {
-    "objectID": "optimalizalas.html#másodrendű",
-    "href": "optimalizalas.html#másodrendű",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "másodrendű",
-    "text": "másodrendű\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "optimalizalas.html#konvexitási-feltételek",
-    "href": "optimalizalas.html#konvexitási-feltételek",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Konvexitási feltételek",
-    "text": "Konvexitási feltételek\n\n\n\n\n\n\nNoteDefiníció – Konvexitás\n\n\n\nEgy \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvény konvex, ha tetszőleges \\(x, y \\in \\text{dom}(f)\\) és \\(\\lambda \\in [0, 1]\\) esetén: \\[\nf(\\lambda x + (1 - \\lambda)y) \\le \\lambda f(x) + (1 - \\lambda)f(y)\n\\]"
-  },
-  {
-    "objectID": "optimalizalas.html#optimumkritériumok",
-    "href": "optimalizalas.html#optimumkritériumok",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Optimumkritériumok",
-    "text": "Optimumkritériumok\n\n\n\n\n\n\nTipTétel – Elsőrendű optimumfeltétel\n\n\n\nLegyen \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) folytonosan differenciálható. Ha \\(x^*\\) lokális minimumhely, akkor a gradiens zérus: \\[\n\\nabla f(x^*) = 0\n\\]\n\n\n\n\n\n\n\n\nTipBizonyítás – Elsőrendű optimumfeltétel\n\n\n\n\n\nTetszőleges \\(d \\in \\mathbb{R}^n\\) irány mentén tekintsük a \\(\\phi(\\alpha) = f(x^* + \\alpha d)\\) függvényt. Mivel \\(x^*\\) lokális minimum, \\(\\alpha &gt; 0\\) mellett: \\[\n\\phi'(0) = \\nabla f(x^*)^T d \\ge 0\n\\] Mivel ez \\(d\\)-re és \\(-d\\)-re is teljesül, ezért \\(\\nabla f(x^*) = 0\\)."
-  },
-  {
-    "objectID": "optimalizalas.html#armijo-szabály-és-visszalépéses-keresés",
-    "href": "optimalizalas.html#armijo-szabály-és-visszalépéses-keresés",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Armijo-szabály és visszalépéses keresés",
-    "text": "Armijo-szabály és visszalépéses keresés\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
-  },
-  {
-    "objectID": "optimalizalas.html#számítási-példa",
-    "href": "optimalizalas.html#számítási-példa",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Számítási példa",
-    "text": "Számítási példa\n\n\n\n\n\n\nCautionPélda – Manuális gradiens lépés és levezetés\n\n\n\n\n\nTegyük fel, hogy \\(f(x_1, x_2) = 1.5 x_1^2 + x_2^2 + x_1 x_2 - 2x_1 + x_2\\) és a kezdőpont \\(x_0 = (0, 0)^T\\).\n\nGradiens meghatározása: \\(\\nabla f(0, 0) = (-2, 1)^T\\).\nKeresési irány: \\(d_0 = -\\nabla f(0, 0) = (2, -1)^T\\).\nÚj pont számítása: \\(\\alpha_0 = 0.5\\) esetén \\(x_1 = x_0 + \\alpha_0 d_0 = (1.0, -0.5)^T\\)."
-  },
-  {
-    "objectID": "optimalizalas.html#kvadratikus-felület-modellezése",
-    "href": "optimalizalas.html#kvadratikus-felület-modellezése",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Kvadratikus felület modellezése",
-    "text": "Kvadratikus felület modellezése\n\n\nPython kód megjelenítése\nimport numpy as np\n\nA = np.array([[3, 1], [1, 2]])\nprint(\"Mátrix A:\\n\", A)\nprint(\"Inverze: \\n\", np.linalg.inv(A))\n\n\nMátrix A:\n [[3 1]\n [1 2]]\nInverze: \n [[ 0.4 -0.2]\n [-0.2  0.6]]"
-  },
-  {
-    "objectID": "optimalizalas.html#armijo-szabály-és-visszalépéses-kereséss",
-    "href": "optimalizalas.html#armijo-szabály-és-visszalépéses-kereséss",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "Armijo-szabály és visszalépéses kereséss",
-    "text": "Armijo-szabály és visszalépéses kereséss\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
-  },
-  {
-    "objectID": "optimalizalas.html#másodrendű-szimuláció",
-    "href": "optimalizalas.html#másodrendű-szimuláció",
-    "title": "Haladó optimalizációs módszerek",
-    "section": "másodrendű szimuláció",
-    "text": "másodrendű szimuláció\n\n\nPython kód megjelenítése\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Tesztfüggvény és gradiens\nA = np.array([[3.0, 1.0], [1.0, 2.0]])\nb = np.array([2.0, -1.0])\n\ndef objective(x):\n    return 0.5 * x.T @ A @ x - b.T @ x\n\ndef gradient(x):\n    return A @ x - b\n\n# 2. Visszalépéses lépésközválasztás\ndef gradient_descent_armijo(x0, max_iter=50, tol=1e-5, c1=1e-4, rho=0.7):\n    x = x0.copy()\n    trajectory = [x.copy()]\n    for _ in range(max_iter):\n        grad = gradient(x)\n        if np.linalg.norm(grad) &lt; tol:\n            break\n        direction = -grad\n        alpha = 1.0\n        while objective(x + alpha * direction) &gt; objective(x) + c1 * alpha * np.dot(grad, direction):\n            alpha *= rho\n            if alpha &lt; 1e-12:\n                break\n        x = x + alpha * direction\n        trajectory.append(x.copy())\n    return x, np.array(trajectory)\n\nx_init = np.array([-3.5, 3.5])\nx_opt, path = gradient_descent_armijo(x_init)\nanalitikus_opt = np.linalg.solve(A, b)\n\n# 3. Szintvonalak rajzolása\nx1 = np.linspace(-4, 4, 300)\nx2 = np.linspace(-4, 4, 300)\nX1, X2 = np.meshgrid(x1, x2)\nZ = 0.5 * (A[0, 0] * X1**2 + 2 * A[0, 1] * X1 * X2 + A[1, 1] * X2**2) - (b[0] * X1 + b[1] * X2)\n\nplt.figure(figsize=(7, 5))\nplt.contour(X1, X2, Z, levels=25, cmap=\"YlOrBr\")\nplt.plot(path[:, 0], path[:, 1], \"o-\", color=\"#bf6426\", label=\"Optimalizálási út\", markersize=4)\nplt.scatter(x_init[0], x_init[1], color=\"#a33a30\", s=70, label=\"Kezdőpont\")\nplt.scatter(analitikus_opt[0], analitikus_opt[1], color=\"#4d7358\", s=100, marker=\"*\", label=\"Optimum\")\nplt.title(\"Gradiens módszer konvergenciája\", fontsize=11, fontweight=\"bold\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$x_2$\")\nplt.legend(frameon=True, facecolor=\"#faf8f5\")\nplt.grid(True, linestyle=\":\", alpha=0.5)\nplt.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "pelda.html",
-    "href": "pelda.html",
+    "objectID": "segedletek/pelda/pelda.html",
+    "href": "segedletek/pelda/pelda.html",
     "title": "Példa",
     "section": "",
     "text": "Tartalomjegyzék\nVissza"
   },
   {
-    "objectID": "pelda.html#konvexitási-feltételek",
-    "href": "pelda.html#konvexitási-feltételek",
+    "objectID": "segedletek/pelda/pelda.html#konvexitási-feltételek",
+    "href": "segedletek/pelda/pelda.html#konvexitási-feltételek",
     "title": "Példa",
     "section": "Konvexitási feltételek",
     "text": "Konvexitási feltételek\n\n\n\n\n\n\nNoteDefiníció – Konvexitás\n\n\n\nEgy \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvény konvex, ha tetszőleges \\(x, y \\in \\text{dom}(f)\\) és \\(\\lambda \\in [0, 1]\\) esetén: \\[\nf(\\lambda x + (1 - \\lambda)y) \\le \\lambda f(x) + (1 - \\lambda)f(y)\n\\]"
   },
   {
-    "objectID": "pelda.html#optimumkritériumok",
-    "href": "pelda.html#optimumkritériumok",
+    "objectID": "segedletek/pelda/pelda.html#optimumkritériumok",
+    "href": "segedletek/pelda/pelda.html#optimumkritériumok",
     "title": "Példa",
     "section": "Optimumkritériumok",
     "text": "Optimumkritériumok\n\n\n\n\n\n\nTipTétel – Elsőrendű optimumfeltétel\n\n\n\nLegyen \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) folytonosan differenciálható. Ha \\(x^*\\) lokális minimumhely, akkor a gradiens zérus: \\[\n\\nabla f(x^*) = 0\n\\]\n\n\n\n\n\n\n\n\nTipBizonyítás – Elsőrendű optimumfeltétel\n\n\n\n\n\nTetszőleges \\(d \\in \\mathbb{R}^n\\) irány mentén tekintsük a \\(\\phi(\\alpha) = f(x^* + \\alpha d)\\) függvényt. Mivel \\(x^*\\) lokális minimum, \\(\\alpha &gt; 0\\) mellett: \\[\n\\phi'(0) = \\nabla f(x^*)^T d \\ge 0\n\\] Mivel ez \\(d\\)-re és \\(-d\\)-re is teljesül, ezért \\(\\nabla f(x^*) = 0\\)."
   },
   {
-    "objectID": "pelda.html#armijo-szabály-és-visszalépéses-keresés",
-    "href": "pelda.html#armijo-szabály-és-visszalépéses-keresés",
+    "objectID": "segedletek/pelda/pelda.html#armijo-szabály-és-visszalépéses-keresés",
+    "href": "segedletek/pelda/pelda.html#armijo-szabály-és-visszalépéses-keresés",
     "title": "Példa",
     "section": "Armijo-szabály és visszalépéses keresés",
     "text": "Armijo-szabály és visszalépéses keresés\n\n\n\n\n\n\nWarningFeltétel – Armijo-szabály\n\n\n\nAz \\(\\alpha_k\\) lépésköz kielégíti az elégséges csökkenés feltételét, ha: \\[\nf(x_k + \\alpha_k d_k) \\le f(x_k) + c_1 \\alpha_k \\nabla f(x_k)^T d_k \\quad (0 &lt; c_1 &lt; 1)\n\\]\n\n\n\n\n\n\n\n\nImportantFontos – Konvergencia kritérium\n\n\n\nA ciklus leáll, ha a gradiens euklideszi normája a megadott tolerancia alá esik: \\(\\|\\nabla f(x_k)\\| &lt; \\varepsilon\\)."
   },
   {
-    "objectID": "pelda.html#számítási-példa",
-    "href": "pelda.html#számítási-példa",
+    "objectID": "segedletek/pelda/pelda.html#számítási-példa",
+    "href": "segedletek/pelda/pelda.html#számítási-példa",
     "title": "Példa",
     "section": "Számítási példa",
     "text": "Számítási példa\n\n\n\n\n\n\nCautionPélda – Manuális gradiens lépés és levezetés\n\n\n\n\n\nTegyük fel, hogy \\(f(x_1, x_2) = 1.5 x_1^2 + x_2^2 + x_1 x_2 - 2x_1 + x_2\\) és a kezdőpont \\(x_0 = (0, 0)^T\\).\n\nGradiens meghatározása: \\(\\nabla f(0, 0) = (-2, 1)^T\\).\nKeresési irány: \\(d_0 = -\\nabla f(0, 0) = (2, -1)^T\\).\nÚj pont számítása: \\(\\alpha_0 = 0.5\\) esetén \\(x_1 = x_0 + \\alpha_0 d_0 = (1.0, -0.5)^T\\)."
   },
   {
-    "objectID": "pelda.html#kvadratikus-felület-modellezése",
-    "href": "pelda.html#kvadratikus-felület-modellezése",
+    "objectID": "segedletek/pelda/pelda.html#kvadratikus-felület-modellezése",
+    "href": "segedletek/pelda/pelda.html#kvadratikus-felület-modellezése",
     "title": "Példa",
     "section": "Kvadratikus felület modellezése",
     "text": "Kvadratikus felület modellezése\n\n\nPython kód megjelenítése\nimport numpy as np\n\nA = np.array([[3, 1], [1, 2]])\nprint(\"Mátrix A:\\n\", A)\nprint(\"Inverze: \\n\", np.linalg.inv(A))\n\n\nMátrix A:\n [[3 1]\n [1 2]]\nInverze: \n [[ 0.4 -0.2]\n [-0.2  0.6]]"
+  },
+  {
+    "objectID": "segedletek/matplotlib/matplotlib.html",
+    "href": "segedletek/matplotlib/matplotlib.html",
+    "title": "Matplotlib alapok",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nMatplotlib alapok\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
+  },
+  {
+    "objectID": "segedletek/gorog-betuk/gorog-betuk.html",
+    "href": "segedletek/gorog-betuk/gorog-betuk.html",
+    "title": "Görög betűk kiejtése",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nGörög betűk kiejtése\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
+  },
+  {
+    "objectID": "segedletek/numpy/numpy.html",
+    "href": "segedletek/numpy/numpy.html",
+    "title": "NumPy alapok",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nNumPy alapok\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
+  },
+  {
+    "objectID": "targyak/ai-matek/ai-matek.html",
+    "href": "targyak/ai-matek/ai-matek.html",
+    "title": "A mesterséges intelligencia matematikai alapjai",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nA mesterséges intelligencia matematikai alapjai\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
+  },
+  {
+    "objectID": "targyak/gepi-tanulas/gepi-tanulas.html",
+    "href": "targyak/gepi-tanulas/gepi-tanulas.html",
+    "title": "Gépi tanulás",
+    "section": "",
+    "text": "Tartalomjegyzék\n\n\n\n\n\nVissza\n\nGépi tanulás\n\n\n\n\n\n\n\nNoteHamarosan\n\n\n\nEz a tananyag jelenleg kidolgozás alatt áll."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html",
+    "href": "targyak/optimalizalas/optimalizalas.html",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "",
+    "text": "Tartalomjegyzék\nVissza"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#szélsőértékek-és-deriváltak",
+    "href": "targyak/optimalizalas/optimalizalas.html#szélsőértékek-és-deriváltak",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Szélsőértékek és deriváltak",
+    "text": "Szélsőértékek és deriváltak\n\\(f'(x_0)\\): a \\(x_0\\)-beli érintő meredeksége.\n\n\n\n\n\n\nNoteMonotonitás\n\n\n\nHa \\(f'(x_0) &gt; 0\\), akkor a függvény szigorúan monoton növekvő \\(x_0\\)-ban.\nHa \\(f'(x_0) &lt; 0\\), akkor a függvény szigorúan monoton csökkenő \\(x_0\\)-ban.\nHa \\(x_0\\) lokális szélsőérték, akkor \\(f'(x_0) = 0\\), viszont ez fordítva nem igaz.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteKonvexitás és szélsőértékek\n\n\n\nHa az \\(f : \\mathbb{R} \\rightarrow \\mathbb{R}\\) kétszer differenciálható és \\(f'(x_0) = 0\\), azaz stacionárius pont, akkor:\n\n\\(f''(x_0) &gt; 0\\): a függvény \\(x_0\\) pontban konvex, azaz lokális minimumot vesz fel.\n\\(f''(x_0) &lt; 0\\): a függvény \\(x_0\\) pontban konkáv, azaz lokális maximumot vesz fel."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#minimumhely-közelítése",
+    "href": "targyak/optimalizalas/optimalizalas.html#minimumhely-közelítése",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Minimumhely közelítése",
+    "text": "Minimumhely közelítése\n\n\n\n\n\n\nNoteGradiens módszer\n\n\n\nEgy \\(x_0\\) pontból indulva, \\(k = 1, 2, 3, \\ldots\\) esetén\n\\[x_{k+1} = x_k - \\alpha f'(x_k)\\]\n, ahol \\(a &gt; 0\\) a lépéshossz (tanulási paraméter, learning rate).\n\n\n\n\n\n\n\n\nCautionMagyarul\n\n\n\n\n\nÚgy keressük meg a minimumhelyet, hogy lederiváljuk az aktuális pontban a függvényt, majd abba az irányba megyünk valamennyit.\nPéldául: \\(x^2\\) függvény esetén a minimumhely \\(x = 0\\), és ha \\(x_0 = 1\\)-ből indulunk, akkor a derivált \\(f'(1) = 2\\), vagyis pozitív irányba megyünk. Ha a lépéshossz \\(\\alpha = 0.1\\), akkor \\(x_1 = 1 - 0.1 \\cdot 2 = 0.8\\) lesz az új pont, majd onnan folytatjuk a keresést."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#függvényelemzés-és-ábrázolás",
+    "href": "targyak/optimalizalas/optimalizalas.html#függvényelemzés-és-ábrázolás",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Függvényelemzés és ábrázolás",
+    "text": "Függvényelemzés és ábrázolás\nA függvény első és második deriváltja:\n\\[f'(x) = x^3 + x^2 - 2x = x(x^2 + x - 2) = x(x+2)(x-1)\\]\n\\[f''(x) = 3x^2 + 2x - 2\\]\nA stacionárius pontok ott találhatók, ahol \\(f'(x) = 0\\):\n\n\\(x = -2\\): \\(f(-2) = -\\frac{5}{3} \\approx -1.667\\), \\(f''(-2) = 6 &gt; 0 \\implies\\) globális minimumhely.\n\\(x = 0\\): \\(f(0) = 1\\), \\(f''(0) = -2 &lt; 0 \\implies\\) lokális maximumhely.\n\\(x = 1\\): \\(f(1) = \\frac{7}{12} \\approx 0.583\\), \\(f''(1) = 3 &gt; 0 \\implies\\) lokális minimumhely.\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nf = lambda x: 0.25 * x**4 + (1.0 / 3.0) * x**3 - x**2 + 1.0\ndf = lambda x: x**3 + x**2 - 2.0 * x\n\nxs = np.linspace(-3.0, 2.0, 500)\nys = f(xs)\n\nplt.figure(figsize=(8, 4.2))\nplt.plot(xs, ys, color=\"#2563eb\", lw=2.2, label=r\"$f(x) = \\frac{x^4}{4} + \\frac{x^3}{3} - x^2 + 1$\")\nplt.axhline(0, color=\"#9ca3af\", lw=0.8, ls=\"--\")\n\n# Stacionárius pontok jelölése\nplt.plot(-2, f(-2), marker=\"o\", markersize=7, color=\"#16a34a\", label=\"Globális min: $x=-2$\")\nplt.plot(0, f(0), marker=\"o\", markersize=7, color=\"#dc2626\", label=\"Lokális max: $x=0$\")\nplt.plot(1, f(1), marker=\"o\", markersize=7, color=\"#d97706\", label=\"Lokális min: $x=1$\")\n\nplt.title(r\"$f(x)$ lefutása a $[-3, 2]$ intervallumon\", fontsize=12, fontweight=\"bold\", pad=10)\nplt.xlabel(\"$x$\", fontsize=10)\nplt.ylabel(\"$f(x)$\", fontsize=10)\nplt.xlim(-3.1, 2.1)\nplt.ylim(-2.2, 5.5)\nplt.grid(True, ls=\":\", alpha=0.6)\nplt.legend(framealpha=0.9, loc=\"upper right\")\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#leállási-feltétel-és-elméleti-háttér",
+    "href": "targyak/optimalizalas/optimalizalas.html#leállási-feltétel-és-elméleti-háttér",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Leállási feltétel és elméleti háttér",
+    "text": "Leállási feltétel és elméleti háttér\n\n\n\n\n\n\nNoteMiért álljon le az iteráció \\(|f'(x_k)| &lt; 10^{-3}\\) esetén?\n\n\n\n1. Elsőrendű szükséges feltétel: Differenciálható függvények lokális szélsőértékeiben a gradiens eltűnik, azaz \\(f'(x^*) = 0\\).\n2. Aszimptotikus közelítés és gépi lebegőpontos pontosság: A gradiens módszer léptetése \\(x_{k+1} = x_k - \\alpha f'(x_k)\\). Ahogy a pont közeledik a minimumhoz, a felület ellaposodik (\\(f'(x_k) \\to 0\\)), a lépések mérete pedig aszimptotikusan nullához tart. Véges lebegőpontos gépi ábrázolás mellett pontosan \\(0\\) deriváltat szinte sosem érünk el, a pont végtelen sokáig vánszorogna a szélsőérték közvetlen szomszédságában.\n3. Számítási hatékonyság és stabilitás: Amikor \\(|f'(x_k)| &lt; 10^{-3}\\), a pont már egy mikroszkopikus környezetében van az optimumnak. A további iterációk elhanyagolható mértékben javítanák a függvényértéket, miközben feleslegesen növelnék a futási időt és felerősítenék a numerikus kerekítési hibákat. Ezért a \\(10^{-3}\\) (vagy finomabb feladatoknál \\(10^{-5}\\)) kiváló leállási tolerancia.\n4. Védelem a végtelen ciklusok ellen: A megengedett maximális lépésszám (\\(n\\)) korlátja biztosítja, hogy amennyiben az algoritmus a túl nagy lépéshossz miatt oszcillál vagy felrobban (divergál), a számítás véges időn belül mindenképp leálljon.\n\n\n\n\n\n\n\n\nWarningMi okozza az oszcillációt és a gradiens kilövést?\n\n\n\nA gradiens módszer dinamikáját a választott lépéshossz (\\(\\alpha\\)) és a függvény helyi görbülete (a második derivált, \\(f''(x)\\), illetve több dimenzióban a Hesse-mátrix legnagyobb sajátértéke, \\(L \\approx \\max |f''(x)|\\)) határozza meg:\n\nOszcilláció (Túllövés / Ping-pong effektus a völgy falai között): Ha a lépéshossz túl nagy az adott völgy görbületéhez képest (\\(\\frac{1}{L} &lt; \\alpha &lt; \\frac{2}{L}\\)), az algoritmus a völgy alja felé lépve átugrik a mélyponton, és a szemközti oldalon köt ki. Bár az elmozdulás iránya jó volt, a mértéke túlzott. A következő lépésben a másik oldalról ugrik vissza. Ha \\(\\alpha\\) éppen a stabilitási határ környékén van (például \\(x_0 = -2.4, \\alpha = 0.5\\) esetén), egy stabil 2-ciklus / határciklus jön létre: a pontok periodikusan ide-oda pattognak a két fal között anélkül, hogy valaha leérnének a minimumba.\nGradiens kilövés / Divergencia (\\(\\alpha &gt; \\frac{2}{L}\\)): Ha \\(\\alpha &gt; \\frac{2}{L}\\), az átugrás után a pont egy még meredekebb szakaszra érkezik, mint ahol előzőleg állt: \\(|f'(x_{k+1})| &gt; |f'(x_k)|\\). Emiatt a következő lépésben a korábbinál is hatalmasabbat ugrik. Ez egy öngerjesztő exponenciális lavinát indít el: a pont koordinátája elszabadul (\\(|x_k| \\to \\infty\\)), a gradiens pedig azonnal “kilő” a végtelenbe (lebegőpontos túlcsordulást okozva). Például \\(x_0 = -2.4, \\alpha = 1.2\\) esetén már az 5. lépésben \\(|f'| \\approx 1.4 \\times 10^{10}\\)!"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#gradiens-módszer-animáció-a-lépéshossz-hatása",
+    "href": "targyak/optimalizalas/optimalizalas.html#gradiens-módszer-animáció-a-lépéshossz-hatása",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Gradiens módszer animáció: a lépéshossz hatása",
+    "text": "Gradiens módszer animáció: a lépéshossz hatása\nAz alábbi animáció a megadott függvényen szemlélteti a három tipikus dinamikát \\(x_0 = -2.4\\) kezdőpontból: 1. \\(\\alpha = 0.1\\): Stabil, gyors konvergencia a globális minimumhoz (\\(x = -2\\)). 2. \\(\\alpha = 0.5\\): Oszcilláció / Határciklus a völgy két fala között. 3. \\(\\alpha = 1.2\\): Divergencia / Gradiens kilövés, ahol a pont elszabadul."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#tesztesetek-futtatása-és-eredmények-elemzése",
+    "href": "targyak/optimalizalas/optimalizalas.html#tesztesetek-futtatása-és-eredmények-elemzése",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Tesztesetek futtatása és eredmények elemzése",
+    "text": "Tesztesetek futtatása és eredmények elemzése\nAz alábbi kód megvalósítja a gradiens módszert a kért \\(|f'(x_k)| &lt; 10^{-3}\\) leállási feltétellel, és lefuttatja mind a 10 tesztesetet:\n\nfrom IPython.display import display, Markdown\n\ndef f(x):\n    return 0.25 * x**4 + (1.0 / 3.0) * x**3 - x**2 + 1.0\n\ndef df(x):\n    return x**3 + x**2 - 2.0 * x\n\ndef gradiens_modszer(x0, alpha, n, tol=1e-3):\n    xk = x0\n    lepesek = 0\n    for k in range(n):\n        grad = df(xk)\n        if abs(grad) &lt; tol:\n            break\n        if abs(xk) &gt; 1e4:  # túlcsordulás elleni védelem (kilövés)\n            lepesek = k + 1\n            xk = xk - alpha * grad\n            break\n        xk = xk - alpha * grad\n        lepesek = k + 1\n        \n    final_grad = df(xk)\n    return {\n        \"x0\": x0,\n        \"alpha\": alpha,\n        \"n_max\": n,\n        \"lepesek\": lepesek,\n        \"xk\": xk,\n        \"fx\": f(xk) if abs(xk) &lt; 1e3 else float(\"inf\"),\n        \"dfx\": final_grad,\n        \"konvergalt\": abs(final_grad) &lt; tol,\n        \"kilott\": abs(xk) &gt; 1e3\n    }\n\ntesztek = [\n    # 1. Rész: Alap tesztelés\n    {\"x0\": -2.4, \"n\": 5, \"alpha\": 1.2},\n    {\"x0\": -2.4, \"n\": 45, \"alpha\": 0.8},\n    # 2. Rész: Toleranciás leállás (n = 400)\n    {\"x0\": -2.4, \"n\": 400, \"alpha\": 0.6},\n    {\"x0\": -2.4, \"n\": 400, \"alpha\": 0.5},\n    {\"x0\": -2.4, \"n\": 400, \"alpha\": 0.3},\n    {\"x0\": -2.4, \"n\": 400, \"alpha\": 0.1},\n    {\"x0\": -2.4, \"n\": 400, \"alpha\": 0.01},\n    {\"x0\": 1.8, \"n\": 400, \"alpha\": 0.5},\n    {\"x0\": 1.8, \"n\": 400, \"alpha\": 0.1},\n    {\"x0\": 1.8, \"n\": 400, \"alpha\": 0.01},\n]\n\neredmenyek = [gradiens_modszer(t[\"x0\"], t[\"alpha\"], t[\"n\"], tol=1e-3) for t in tesztek]\n\n# Eredmények formázása Markdown táblázatként\nsorok = [\n    \"| $x_0$ | $\\\\alpha$ | $n_{\\\\max}$ | Megtett lépés | Végső $x_k$ | $|f'(x_k)|$ | Viselkedés / Állapot |\",\n    \"|:---:|:---:|:---:|:---:|:---:|:---:|:---|\"\n]\n\nfor r in eredmenyek:\n    if r[\"kilott\"]:\n        allapot = \"💥 **Divergál (Gradiens kilőtt)**\"\n        df_str = f\"{abs(r['dfx']):.1e}\"\n        x_str = f\"{r['xk']:.1f}\"\n    elif r[\"konvergalt\"]:\n        allapot = f\"✅ **Konvergált** ($x^* \\\\approx {round(r['xk'])}$)\"\n        df_str = f\"{abs(r['dfx']):.4e}\"\n        x_str = f\"{r['xk']:.4f}\"\n    else:\n        allapot = \"⚠️ **Oszcilláció / Nem állt le** (elérte $n$-t)\"\n        df_str = f\"{abs(r['dfx']):.4f}\"\n        x_str = f\"{r['xk']:.4f}\"\n        \n    sorok.append(f\"| {r['x0']} | {r['alpha']} | {r['n_max']} | **{r['lepesek']}** | `{x_str}` | `{df_str}` | {allapot} |\")\n\ndisplay(Markdown(\"\\n\".join(sorok)))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x_0\\)\n\\(\\alpha\\)\n\\(n_{\\max}\\)\nMegtett lépés\nVégső \\(x_k\\)\n\\(|f'(x_k)|\\)\nViselkedés / Állapot\n\n\n\n\n-2.4\n1.2\n5\n5\n-2410.7\n1.4e+10\n💥 Divergál (Gradiens kilőtt)\n\n\n-2.4\n0.8\n45\n45\n1.1547\n0.5635\n⚠️ Oszcilláció / Nem állt le (elérte \\(n\\)-t)\n\n\n-2.4\n0.6\n400\n32\n0.9997\n8.1349e-04\n✅ Konvergált (\\(x^* \\approx 1\\))\n\n\n-2.4\n0.5\n400\n400\n-1.8680\n0.7070\n⚠️ Oszcilláció / Nem állt le (elérte \\(n\\)-t)\n\n\n-2.4\n0.3\n400\n24\n-2.0001\n8.2994e-04\n✅ Konvergált (\\(x^* \\approx -2\\))\n\n\n-2.4\n0.1\n400\n8\n-2.0001\n6.2068e-04\n✅ Konvergált (\\(x^* \\approx -2\\))\n\n\n-2.4\n0.01\n400\n121\n-2.0002\n9.8073e-04\n✅ Konvergált (\\(x^* \\approx -2\\))\n\n\n1.8\n0.5\n400\n400\n-2.3709\n2.9638\n⚠️ Oszcilláció / Nem állt le (elérte \\(n\\)-t)\n\n\n1.8\n0.1\n400\n19\n1.0003\n8.0076e-04\n✅ Konvergált (\\(x^* \\approx 1\\))\n\n\n1.8\n0.01\n400\n230\n1.0003\n9.9026e-04\n✅ Konvergált (\\(x^* \\approx 1\\))\n\n\n\n\n\n\nEredmények részletes kiértékelése\n\n\\(x_0 = -2.4, \\alpha = 1.2, n = 5\\) (Gradiens kilövés):\n\nA kezdeti pontban \\(f''(-2.4) \\approx 10.5\\), így a stabilitási feltétel \\(\\alpha &lt; \\frac{2}{L} \\approx 0.19\\).\nAz \\(\\alpha = 1.2\\) nagyságrenddel túllépi ezt: a 3. lépéstől kezdve a pont elszabadul, az 5. lépésben már \\(x_5 \\approx -2410\\) és \\(|f'| \\approx 1.4 \\times 10^{10}\\).\n\n\\(x_0 = -2.4, \\alpha = 0.8, n = 45\\) (Túllövés más völgybe):\n\nAz első ugrás átlövi a pontot a jobb oldali völgybe (\\(x &gt; 0\\)), ahol a meredekség miatt oszcillál, majd nem éri el a megadott toleranciát \\(n=45\\) lépésen belül.\n\n\\(x_0 = -2.4, \\alpha = 0.6, n = 400\\) (Lokális minimumba ugrás):\n\nBár \\(x_0 = -2.4\\)-ből indultunk, a nagy lépéshossz miatt a pont átugrik a közbenső lokális maximum (\\(x = 0\\)) felett a jobb oldali völgybe, és ott \\(32\\) lépés alatt konvergál a helyi minimumhoz (\\(x^* = 1\\)).\n\n\\(x_0 = -2.4, \\alpha = 0.5\\) és \\(x_0 = 1.8, \\alpha = 0.5\\) (Stabil oszcilláció):\n\nA pont beragad egy 2-ciklusú határciklusba: a völgy két oldala között ugrál fel-alá, de a megállási toleranciát sosem éri el, így mind a \\(400\\) engedélyezett lépést felhasználja.\n\n\\(\\alpha = 0.3\\) és \\(\\alpha = 0.1\\) (Gyors, optimális konvergencia):\n\n\\(x_0 = -2.4\\) esetén \\(\\alpha = 0.1\\)-gyel mindössze \\(8\\) lépés alatt eléri a globális minimumot (\\(x^* = -2\\)).\n\\(x_0 = 1.8\\) esetén \\(\\alpha = 0.1\\)-gyel \\(19\\) lépés alatt eléri a lokális minimumot (\\(x^* = 1\\)).\n\n\\(\\alpha = 0.01\\) (Lassú vánszorgás):\n\nBár stabil, a nagyon kicsi lépések miatt sokkal több lépésre van szükség: \\(x_0 = -2.4\\)-nél \\(121\\) lépés, \\(x_0 = 1.8\\)-nál pedig \\(230\\) lépés szükséges a \\(10^{-3}\\)-as tolerancia eléréséhez."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#a-lépéshossz-hatása",
+    "href": "targyak/optimalizalas/optimalizalas.html#a-lépéshossz-hatása",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "A lépéshossz hatása",
+    "text": "A lépéshossz hatása\nTekintsük az \\(f(x) = \\frac{x^4}{4} + \\frac{x^3}{3} - x^2 + 1\\) függvényt a \\([-3, 2]\\) intervallumon, ahol \\(x_0 = -2.4\\)-ből indulunk.\n\n\n\n\n\n\nTipLeállási feltétel és stabilitás\n\n\n\n\nMiért \\(|f'(x_k)| &lt; 10^{-3}\\) esetén állunk le? Lokális szélsőértékben a derivált nulla. Mivel a lépésekkel egyre lassabban haladunk, véges gépi pontossággal ritkán érünk el pontosan \\(0\\)-t. Ha \\(|f'(x_k)| &lt; 10^{-3}\\), a felület már lapos, a minimum közvetlen környezetében vagyunk, a további lépések feleslegesek.\nOszcilláció: Túl nagy lépéshossz esetén átugorjuk a völgy alját, és a szemközti falon kötünk ki. A pont ide-oda kezd pattogni a völgy két oldala között.\nGradiens kilövés: Ha a lépéshossz nagyon nagy, minden ugrás után még meredekebb szakaszra érkezünk, így a lépések exponenciálisan nőnek, és a gradiens pillanatok alatt a végtelenbe lő ki.\n\n\n\nA 3 tipikus viselkedés \\(x_0 = -2.4\\)-ből indítva:\n\n\\(\\alpha = 0.1\\) (Konvergens): Stabilan és gyorsan bekonvergál a globális minimumba.\n\\(\\alpha = 0.5\\) (Oszcilláció): Átugorja a minimumot, és a két fal között pattog ide-oda.\n\\(\\alpha = 1.2\\) (Kilövés): Azonnal kiszabadul a tartományból, a gradiens kilő a végtelenbe."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#lépéshossz-választási-módszerek",
+    "href": "targyak/optimalizalas/optimalizalas.html#lépéshossz-választási-módszerek",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Lépéshossz választási módszerek",
+    "text": "Lépéshossz választási módszerek\n\n\n\n\n\n\nTipKonstans lépéshossz\n\n\n\nAz iterációszám függvényében csökkenő lépéshossz, például:\n- \\(\\alpha_k = \\alpha_0 \\cdot c^{k}\\), ahol \\(c &lt; 1\\)\n- \\(\\alpha_k = \\alpha_0e^{-c \\cdot k}\\)\n- \\(\\alpha_k = \\frac{\\alpha_0}{1 + c \\cdot k}\\)\nItt a \\(c\\) egy pozitív konstans, amely a csökkenés mértékét szabályozza. Minél nagyobb \\(c\\), annál gyorsabban csökken a lépéshossz, így a gradiens módszer stabilabb lesz, de lassabban konvergál.\n\n\n\n\n\n\n\n\nTipDinamikus lépéshossz\n\n\n\nA célfüggvény értékétől függően, adaptívan változó lépéshossz, például:\n\\(\\alpha_{k+1} = \\alpha_k \\cdot 1.05\\), ha \\(f(x_{k+1}) &lt; f(x_k)\\), míg romló függvényérték esetén újraszámoljuk a lépéshosszt, például \\(\\alpha_{k+1} = \\frac{\\alpha_k}{2}\\). Vagyis ha a függvényérték csökken, növeljük a lépéshosszt, ha nő, csökkentjük.\n\n\n\n\n\n\n\n\nImportantCélfüggvény\n\n\n\nA célfüggvény az a függvény amelynek a minimumát keressük. Mesterséges intelligencia alkalmazásokban a célfüggvény gyakran a veszteségfüggvény (loss function), amely a modell teljesítményét méri. A gradiens módszer célja, hogy a célfüggvény értékét minimalizálja az iterációk során."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#gradiens-és-hesse-mátrix",
+    "href": "targyak/optimalizalas/optimalizalas.html#gradiens-és-hesse-mátrix",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Gradiens és hesse-mátrix",
+    "text": "Gradiens és hesse-mátrix\n\n\n\n\n\n\nTipTöbbváltozós függvény\n\n\n\nOlyan függvény, amelynek több bemeneti változója van, például:\n\\(f(x, y) = x^2 + y^2\\) egy kétváltozós függvény, ahol a bemeneti változók \\(x\\) és \\(y\\). Kétváltozós függvény egy felületet ír le a háromdimenziós térben, ahol a függvényérték a \\(z\\) tengelyen jelenik meg.\n\n\n\n\n\n\n\n\nNoteGradiens vektor\n\n\n\nAz \\(f: \\mathbb{R}^n \\rightarrow \\mathbb{R}\\) függvény esetén minimumhelyet keresve a gradiens vektorral az irányt határozzuk meg, amelyben a függvény leggyorsabban nő. A gradiens vektor komponensei a függvény parciális deriváltjai az egyes változók szerint:\n\\[\\nabla f(x) = \\left[\\begin{array}{ccc}\n\\frac{\\partial f}{\\partial x_1}(x) \\\\\n\\vdots \\\\\n\\frac{\\partial f}{\\partial x_n}(x)\n\\end{array}\\right]\\]\n\n\n\n\n\n\n\n\nCautionPélda a gradiens vektorra\n\n\n\n\n\nLegyen az \\(f(x, y) = x^2 + y^2\\) függvény. A gradienst úgy számoljuk ki, hogy a függvényt lederiváljuk egyszer az \\(x\\) és egyszer a \\(y\\) változó szerint. Ilyenkor a másik változót konstansnak tekintjük:\n\\[\\frac{\\partial f}{\\partial x} = 2x + 0 = 2x\\]\n\\[\\frac{\\partial f}{\\partial y} = 0 + 2y = 2y\\]\nIlyenkor a gradiens vektor: \\(\\nabla f(x, y) = \\left[\\begin{array}{c} 2x \\\\ 2y \\end{array}\\right]\\)\nTehát a felületen \\((1, 1)\\) pontban a gradiens vektor: \\(\\nabla f(1, 1) = \\left[\\begin{array}{c} 2 \\\\ 2 \\end{array}\\right]\\), ami az \\((1, 1)\\) pontból a \\((2, 2)\\) irányába mutat. Ez azt jelenti, hogy a függvény leggyorsabban ebbe az irányba nő.\n\n\n\n\n\n\n\n\n\nNoteHesse-mátrix\n\n\n\nA Hesse-mátrix a függvény második deriváltjainak mátrixa, amely a függvény görbületét írja le. Egyváltozósan ez egyszerűen a második derivált, többváltozós függvény esetén a Hesse-mátrix a parciális második deriváltakból áll:\n\\[\\nabla^2f(x) = \\left(\\frac{\\partial^2 f}{\\partial x_i \\partial x_j}(x)\\right)_{i,j} \\in \\mathbb{R}^{n \\times n}\\]"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#gradiens-vektor-és-hesse-mátrix",
+    "href": "targyak/optimalizalas/optimalizalas.html#gradiens-vektor-és-hesse-mátrix",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Gradiens vektor és Hesse-mátrix",
+    "text": "Gradiens vektor és Hesse-mátrix\n\n\n\n\n\n\nTipTöbbváltozós függvény\n\n\n\nOlyan függvény, amelynek több bemeneti változója van, például:\n\\(f(x, y) = x^2 + y^2\\) egy kétváltozós függvény, ahol a bemeneti változók \\(x\\) és \\(y\\). Kétváltozós függvény egy felületet ír le a háromdimenziós térben, ahol a függvényérték a \\(z\\) tengelyen jelenik meg.\n\n\n\n\n\n\n\n\nNoteGradiens vektor\n\n\n\nAz \\(f: \\mathbb{R}^n \\rightarrow \\mathbb{R}\\) függvény esetén minimumhelyet keresve a gradiens vektorral az irányt határozzuk meg, amelyben a függvény leggyorsabban nő. A gradiens vektor komponensei a függvény parciális deriváltjai az egyes változók szerint:\n\\[\\nabla f(x) = \\left[\\begin{array}{ccc}\n\\frac{\\partial f}{\\partial x_1}(x) \\\\\n\\vdots \\\\\n\\frac{\\partial f}{\\partial x_n}(x)\n\\end{array}\\right]\\]\n\n\n\n\n\n\n\n\nCautionPélda a gradiens vektorra\n\n\n\n\n\nLegyen az \\(f(x, y) = x^2 + y^2\\) függvény. A gradienst úgy számoljuk ki, hogy a függvényt lederiváljuk egyszer az \\(x\\) és egyszer a \\(y\\) változó szerint. Ilyenkor a másik változót konstansnak tekintjük:\n\\[\\frac{\\partial f}{\\partial x} = 2x + 0 = 2x\\]\n\\[\\frac{\\partial f}{\\partial y} = 0 + 2y = 2y\\]\nIlyenkor a gradiens vektor: \\(\\nabla f(x, y) = \\left[\\begin{array}{c} 2x \\\\ 2y \\end{array}\\right]\\)\nTehát a felületen \\((1, 1)\\) pontban a gradiens vektor: \\(\\nabla f(1, 1) = \\left[\\begin{array}{c} 2 \\\\ 2 \\end{array}\\right]\\), ami az \\((1, 1)\\) pontból a \\((2, 2)\\) irányába mutat. Ez azt jelenti, hogy a függvény leggyorsabban ebbe az irányba nő.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteHesse-mátrix\n\n\n\nA Hesse-mátrix a függvény második deriváltjainak mátrixa, amely a függvény görbületét írja le. Egyváltozósan ez egyszerűen a második derivált, többváltozós függvény esetén a Hesse-mátrix a parciális második deriváltakból áll:\n\\[\\nabla^2f(x) = \\left(\\frac{\\partial^2 f}{\\partial x_i \\partial x_j}(x)\\right)_{i,j} \\in \\mathbb{R}^{n \\times n}\\]\n\n\n\n\n\n\n\n\nCautionPélda a Hesse-mátrixra\n\n\n\n\n\nLegyen az \\(f(x, y) = x^2 + y^2\\) függvény. Ilyenkor a Hesse-mátrix egy 2x2-es mátrix, amelynek elemei a függvény második parciális deriváltjai: \\[\n\\nabla^2f(x, y) = \\begin{pmatrix}\n\\frac{\\partial^2 f}{\\partial x^2}(x, y) & \\frac{\\partial^2 f}{\\partial x \\partial y}(x, y) \\\\\n\\frac{\\partial^2 f}{\\partial y \\partial x}(x, y) & \\frac{\\partial^2 f}{\\partial y^2}(x, y)\n\\end{pmatrix}\n\\]\nElsődrendű deriváltak:\n- \\(\\frac{\\partial f}{\\partial x} = 2x\\)\n- \\(\\frac{\\partial f}{\\partial y} = 2y\\)\nMásodrendű deriváltak:\n- \\(\\frac{\\partial^2 f}{\\partial x^2} = 2\\) - Vagyis kétszer az \\(x\\) szerinti deriváltja.\n- \\(\\frac{\\partial^2 f}{\\partial y^2} = 2\\) - Vagyis kétszer az \\(y\\) szerinti deriváltja.\n- \\(\\frac{\\partial^2 f}{\\partial x \\partial y} = 0\\) - Először az \\(x\\) szerinti deriváltat vesszük, majd a \\(y\\) szerinti deriváltat, ami nulla, mivel nincs \\(y\\)-t tartalmazó tag az első deriváltban.\n- \\(\\frac{\\partial^2 f}{\\partial y \\partial x} = 0\\) - Hasonlóan, először az \\(y\\) szerinti deriváltat vesszük, majd az \\(x\\) szerinti deriváltat, ami szintén nulla.\nÍgy a végleges Hesse-mátrix: \\[\n\\nabla^2f(x, y) = \\begin{pmatrix}\n2 & 0 \\\\\n0 & 2\n\\end{pmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipGradiens használata többváltozós függvényeknél\n\n\n\nMinimalizálásnál negatív gradiens vektor irányba lépünk, mivel a gradiens a legmeredekebb növekedés irányát mutatja. Negatív gradiens mező így néz ki a \\(f(x) = \\frac{x_1^4}{4} + \\frac{x_2^4}{4} + \\frac{x_1^3}{3} + \\frac{x_2^3}{3} - x_1^2 - x_2^2 + 2 \\space\\) függvény esetén."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#elsődrendű-deriváltak",
+    "href": "targyak/optimalizalas/optimalizalas.html#elsődrendű-deriváltak",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Elsődrendű deriváltak:",
+    "text": "Elsődrendű deriváltak:"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#lokális-szélsőérték-feltételek",
+    "href": "targyak/optimalizalas/optimalizalas.html#lokális-szélsőérték-feltételek",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Lokális szélsőérték feltételek",
+    "text": "Lokális szélsőérték feltételek\n\n\n\n\n\n\nNoteElsőrendű szükséges feltétel\n\n\n\nHa \\(x^*\\) egy lokális szélsőérték, és a \\(f\\) függvény folytonosan differenciálható az \\(x^*\\) nyílt környezetében (vagyis a \\(f\\) függvény deriváltja létezik az \\(x^*\\) pontban), akkor a \\(\\nabla f(x^*) = 0\\).\n\n\n\n\n\n\n\n\nNoteStacionárius pont\n\n\n\nHa \\(\\nabla f(x^*) = 0\\), akkor az \\(x^*\\) pontot stacionárius pontnak nevezzük. A stacionárius pont lehet lokális minimum, lokális maximum vagy nyeregpont, amely se nem minimum, se nem maximum.\n\n\n\n\n\n\n\n\nTipPélda nyeregpontra\n\n\n\nAz alábbi ábrán a \\(f(x_1, x_2) = x_1^2 - x_2^2\\) függvény stacionárius pontja a \\((0, 0)\\) pont, amely egy nyeregpont. A gradiens vektorok a stacionárius pontban nullvektorok, azaz \\(\\nabla f(0, 0) = (0, 0)\\)."
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#kvadratikus-alak",
+    "href": "targyak/optimalizalas/optimalizalas.html#kvadratikus-alak",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Kvadratikus alak",
+    "text": "Kvadratikus alak"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#kvadratikus-függvény",
+    "href": "targyak/optimalizalas/optimalizalas.html#kvadratikus-függvény",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Kvadratikus függvény",
+    "text": "Kvadratikus függvény\n\n\n\n\n\n\nNoteKvadratikus függvény\n\n\n\nAz \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvényt kvadratikus függvénynek nevezzük, ha:\n\\[f(x) = \\frac{1}{2} x^T A x + b^T x + c\\]\nalakba írható, ahol \\(A \\in \\mathbb{R}^{n \\times n}\\) egy szimmetrikus mátrix, \\(b \\in \\mathbb{R}^n\\) egy vektor, és \\(c \\in \\mathbb{R}\\) egy skalár.\n\n\n\n\n\n\n\n\nCautionPélda kvadratikus függvényre\n\n\n\n\n\nLegyen az\n\\[f(x_1, x_2) = x_1^2 + 2x_2^2 + 2x_1 x_2 - 4x_1 + 6x_2 + 5\\]\nEkkor \\(x = \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix}\\), és a mátrixos alak:\n\\[f(x) = \\frac{1}{2} \\begin{pmatrix} x_1 & x_2 \\end{pmatrix} \\begin{pmatrix} 2 & 2 \\\\ 2 & 4 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} + \\begin{pmatrix} -4 & 6 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} + 5\\]\nAhol az együtthatók:\n\n\\(A = \\begin{pmatrix} 2 & 2 \\\\ 2 & 4 \\end{pmatrix}\\) (szimmetrikus mátrix, a főátlón kívüli elemek összege adja a vegyes tagot: \\(\\frac{1}{2}(2 + 2) = 2\\))\n\\(b = \\begin{pmatrix} -4 \\\\ 6 \\end{pmatrix}\\) (lineáris tagok együtthatói)\n\\(c = 5\\) (konstans tag)\n\n\n\n\n\n\n\n\n\n\nTipKvadratikus függvény gradiens és Hesse-mátrix\n\n\n\nIlyenkor a gradiens és a Hesse-mátrix a következőképpen alakul:\n\\[\\nabla f(x) = A x + b \\qquad \\nabla^2 f(x) = A\\]\nEz azért jó, mert nem kell minden iterációban újra számolni a Hesse-mátrixot, mivel az állandó, a gradiens pedig lineárisan függ a változóktól, és ez kev"
+  },
+  {
+    "objectID": "targyak/optimalizalas/optimalizalas.html#kvadratikus-függvény-és-taylor-approximáció",
+    "href": "targyak/optimalizalas/optimalizalas.html#kvadratikus-függvény-és-taylor-approximáció",
+    "title": "Haladó optimalizációs módszerek",
+    "section": "Kvadratikus függvény és Taylor-approximáció",
+    "text": "Kvadratikus függvény és Taylor-approximáció\n\n\n\n\n\n\nNoteKvadratikus függvény\n\n\n\nAz \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) függvényt kvadratikus függvénynek nevezzük, ha:\n\\[f(x) = \\frac{1}{2} x^T A x + b^T x + c\\]\nalakba írható, ahol \\(A \\in \\mathbb{R}^{n \\times n}\\) egy szimmetrikus mátrix, \\(b \\in \\mathbb{R}^n\\) egy vektor, és \\(c \\in \\mathbb{R}\\) egy skalár.\n\n\n\n\n\n\n\n\nCautionPélda kvadratikus függvényre\n\n\n\n\n\nLegyen az\n\\[f(x_1, x_2) = x_1^2 + 2x_2^2 + 2x_1 x_2 - 4x_1 + 6x_2 + 5\\]\nEkkor \\(x = \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix}\\), és a mátrixos alak:\n\\[f(x) = \\frac{1}{2} \\begin{pmatrix} x_1 & x_2 \\end{pmatrix} \\begin{pmatrix} 2 & 2 \\\\ 2 & 4 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} + \\begin{pmatrix} -4 & 6 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} + 5\\]\nAhol az együtthatók:\n\n\\(A = \\begin{pmatrix} 2 & 2 \\\\ 2 & 4 \\end{pmatrix}\\) (szimmetrikus mátrix, a főátlón kívüli elemek összege adja a vegyes tagot: \\(\\frac{1}{2}(2 + 2) = 2\\))\n\\(b = \\begin{pmatrix} -4 \\\\ 6 \\end{pmatrix}\\) (lineáris tagok együtthatói)\n\\(c = 5\\) (konstans tag)\n\n\n\n\n\n\n\n\n\n\nTipKvadratikus függvény gradiens és Hesse-mátrix\n\n\n\nIlyenkor a gradiens és a Hesse-mátrix a következőképpen alakul:\n\\[\\nabla f(x) = A x + b \\qquad \\nabla^2 f(x) = A\\]\nEz azért jó, mert nem kell minden iterációban újra számolni a Hesse-mátrixot, mivel az állandó, a gradiens pedig lineárisan függ a változóktól, és ez kevésbé számításigényes, mint egy általános függvény esetén.\n\n\n\n\n\n\n\n\nNoteTaylor-approximáció\n\n\n\nLegyen \\(f: \\mathbb{R}^n \\to \\mathbb{R}\\) egy elegendően sokszor differenciálható függvény, ilyenkor:\n\\[f(x_0 + \\delta x) \\approx f(x_0) + \\nabla f(x_0)^T \\cdot \\delta x \\]\nilletve\n\\[f(x_0 + \\delta x) \\approx f(x_0) + \\nabla f(x_0)^T \\cdot \\delta x + \\frac{1}{2} \\delta x^T \\nabla^2 f(x_0) \\cdot \\delta x\\]\n\n\n\n\n\n\n\n\nCautionMagyarul\n\n\n\n\n\nAz első egyenlet a lineáris Taylor-approximáció: az \\(x_0\\) pontbeli érintősíkkal közelíti a felületet. A \\(\\delta x\\) a tetszőleges irányú elmozdulás, és a gradiensvektorral vett skaláris szorzata (\\(\\nabla f(x_0)^T \\delta x\\)) adja meg, hogy a meredekség alapján mennyit változik a függvényérték. Pontosan ugyanaz, mint egyváltozós esetben a gradiens módszer, csak itt több dimenzióban dolgozunk.\nA második egyenlet a kvadratikus Taylor-approximáció: a sík helyett már egy másodrendű paraboloid felületet illeszt a pontra. Nemcsak a meredekséget, hanem a felület görbületét is figyelembe veszi a Hesse-mátrix (\\(\\nabla^2 f(x_0)\\)) segítségével, így sokkal pontosabb képet ad a függvény alakjáról egy völgyben vagy nyeregben.\n\n\n\n\n\n\n\n\n\nNoteStacionárius pont és Hesse-mátrix\n\n\n\nHa \\(x_0\\) stacionárius pont (\\(\\nabla f(x_0) = 0\\)), akkor\n\\[f(x_0 + \\delta x) \\approx f(x_0) + \\frac{1}{2} \\delta x^T \\nabla^2 f(x_0) \\cdot \\delta x\\]\nvagyis a Hesse-mátrix adhatja meg, hogy a stacionárius pont lokális minimum, maximum vagy nyeregpont. A Hesse-mátrix sajátértékei alapján dönthetünk:\n\nha \\(x^T \\cdot \\nabla^2f(x_0) \\cdot x &gt; 0\\), akkor a stacionárius pont lokális minimum (a Hesse-mátrix pozitív definit, minden sajátértéke pozitív)\nha \\(x^T \\cdot \\nabla^2f(x_0) \\cdot x &lt; 0\\), akkor a stacionárius pont lokális maximum (a Hesse-mátrix negatív definit, minden sajátértéke negatív)"
   }
 ]

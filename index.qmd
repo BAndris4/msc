@@ -8,18 +8,18 @@ anchor-sections: false
 
 # Segédletek
 
-## [Példa](pelda.qmd)
-## [Görög betűk kiejtése [TODO]{.badge-todo}](gorog-betuk.qmd)
-## [NumPy alapok [TODO]{.badge-todo}](numpy.qmd)
-## [Matplotlib alapok [TODO]{.badge-todo}](matplotlib.qmd)
+## [Példa](segedletek/pelda/pelda.qmd)
+## [Görög betűk kiejtése [TODO]{.badge-todo}](segedletek/gorog-betuk/gorog-betuk.qmd)
+## [NumPy alapok [TODO]{.badge-todo}](segedletek/numpy/numpy.qmd)
+## [Matplotlib alapok [TODO]{.badge-todo}](segedletek/matplotlib/matplotlib.qmd)
 
 # 1. félév
 
-## [Haladó optimalizációs módszerek [In Progress]{.badge-ip}](optimalizalas.qmd)
-## [Fejlett gépi tanuló modellek [TODO]{.badge-todo}](fejlett-gepi-tanulas.qmd)
-## [Gépi tanulás [TODO]{.badge-todo}](gepi-tanulas.qmd)
-## [Mesterséges intelligencia statisztikai analízise [TODO]{.badge-todo}](statisztikai-analizis.qmd)
-## [Neurális hálók elmélete [TODO]{.badge-todo}](neuralis-halok.qmd)
-## [A mesterséges intelligencia matematikai alapjai [TODO]{.badge-todo}](ai-matek.qmd)
+## [Haladó optimalizációs módszerek [In Progress]{.badge-ip}](targyak/optimalizalas/optimalizalas.qmd)
+## [Fejlett gépi tanuló modellek [TODO]{.badge-todo}](targyak/fejlett-gepi-tanulas/fejlett-gepi-tanulas.qmd)
+## [Gépi tanulás [TODO]{.badge-todo}](targyak/gepi-tanulas/gepi-tanulas.qmd)
+## [Mesterséges intelligencia statisztikai analízise [TODO]{.badge-todo}](targyak/statisztikai-analizis/statisztikai-analizis.qmd)
+## [Neurális hálók elmélete [TODO]{.badge-todo}](targyak/neuralis-halok/neuralis-halok.qmd)
+## [A mesterséges intelligencia matematikai alapjai [TODO]{.badge-todo}](targyak/ai-matek/ai-matek.qmd)
 
 :::

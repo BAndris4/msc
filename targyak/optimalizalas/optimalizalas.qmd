@@ -1,0 +1,1458 @@
+---
+pagetitle: "Haladó optimalizációs módszerek"
+jupyter: python3
+
+format:
+  html:
+    theme:
+      - cosmo
+      - ../../tema.scss
+    toc: false
+    anchor-sections: false
+    number-sections: false
+    smooth-scroll: true
+    code-copy: true
+    html-math-method: mathjax
+resources:
+  - "animacio_derivalt.html"
+  - "animacio_gradiens.html"
+  - "animacio_masodrendu.html"
+  - "animacio_lepeshossz.html"
+  - "animacio_3d_forgas.html"
+  - "animacio_hesse_3d.html"
+---
+
+<aside id="quarto-margin-sidebar">
+  <nav id="TOC">
+    <div class="toc-title">Tartalomjegyzék</div>
+    <ul id="custom-toc-list"></ul>
+  </nav>
+</aside>
+
+[Vissza](../../index.qmd){.back-link}
+
+# Haladó optimalizációs módszerek {.unnumbered .unlisted}
+
+---
+
+# Bevezetés
+
+## Szélsőértékek és deriváltak
+
+$f'(x_0)$: a $x_0$-beli érintő meredeksége. 
+
+::: {.callout-note title="Monotonitás"}
+
+Ha $f'(x_0) > 0$, akkor a függvény **szigorúan monoton növekvő** $x_0$-ban.
+
+Ha $f'(x_0) < 0$, akkor a függvény **szigorúan monoton csökkenő** $x_0$-ban.
+
+Ha $x_0$ lokális szélsőérték, akkor $f'(x_0) = 0$, viszont **ez fordítva nem igaz**.
+
+:::
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+f = lambda x: np.sin(2 * x) + np.cos(x)
+df = lambda x: 2 * np.cos(2 * x) - np.sin(x)
+
+x_vals = np.linspace(-3.2, 3.2, 500)
+frames = 120
+x0_frames = np.linspace(-2.8, 2.8, frames)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.2))
+
+ax1.plot(x_vals, f(x_vals), color="#1f77b4", lw=2, label=r"$f(x) = \sin(2x) + \cos(x)$")
+ax1.set_xlim(-3.2, 3.2)
+ax1.set_ylim(-2.5, 2.5)
+ax1.axhline(0, color="gray", lw=0.7, ls="--", alpha=0.6)
+ax1.grid(True, alpha=0.3)
+ax1.set_xlabel("x")
+ax1.set_ylabel("f(x)")
+
+(tangent_line,) = ax1.plot([], [], color="#d62728", lw=2, label="Érintő")
+(f_point,) = ax1.plot([], [], marker="o", color="#d62728", markersize=6)
+slope_text = ax1.text(0.04, 0.88, "", transform=ax1.transAxes, fontsize=10,
+                      bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="gray", alpha=0.85))
+ax1.legend(loc="lower right")
+
+ax2.plot(x_vals, df(x_vals), color="#2ca02c", lw=2, ls="--", alpha=0.7,
+         label=r"$f'(x) = 2\cos(2x) - \sin(x)$")
+ax2.axhline(0, color="black", lw=0.9, ls="-", alpha=0.4)
+ax2.set_xlim(-3.2, 3.2)
+ax2.set_ylim(-3.5, 3.5)
+ax2.grid(True, alpha=0.3)
+ax2.set_xlabel("x")
+ax2.set_ylabel("f'(x)")
+
+(df_point,) = ax2.plot([], [], marker="o", color="#d62728", markersize=6, label="Aktuális m")
+ax2.legend(loc="lower right")
+
+plt.tight_layout()
+
+def update(frame):
+    x0 = x0_frames[frame]
+    y0 = f(x0)
+    m = df(x0)
+    
+    span = 0.7
+    x_tan = np.linspace(x0 - span, x0 + span, 30)
+    y_tan = m * (x_tan - x0) + y0
+    
+    tangent_line.set_data(x_tan, y_tan)
+    f_point.set_data([x0], [y0])
+    df_point.set_data([x0], [m])
+    slope_text.set_text(f"$x_0 = {x0:.2f}$\n$m = {m:.2f}$")
+    
+    return tangent_line, f_point, df_point, slope_text
+
+ani = animation.FuncAnimation(fig, update, frames=frames, interval=40, blit=True, repeat=True)
+plt.close(fig)
+
+custom_ui = """
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_derivalt.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_derivalt.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:980px;"></iframe>')
+```
+
+::: {.callout-note title="Konvexitás és szélsőértékek"}
+
+Ha az $f : \mathbb{R} \rightarrow \mathbb{R}$ kétszer differenciálható és $f'(x_0) = 0$, azaz **stacionárius pont**, akkor: 
+
+- $f''(x_0) > 0$: a függvény $x_0$ pontban **konvex**, azaz **lokális minimumot** vesz fel.
+- $f''(x_0) < 0$: a függvény $x_0$ pontban **konkáv**, azaz **lokális maximumot** vesz fel.
+
+:::
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# 1. Függvények és deriváltak
+f = lambda x: x**3 - 3 * x
+df = lambda x: 3 * x**2 - 3
+ddf = lambda x: 6 * x
+
+x_vals = np.linspace(-2.2, 2.2, 500)
+frames = 100
+x0_frames = np.linspace(-1.8, 1.8, frames)
+
+# 2. Ábra előkészítése
+fig, ax = plt.subplots(figsize=(8, 4.6))
+
+ax.plot(x_vals, f(x_vals), color="#1f77b4", lw=2.2)
+ax.axhline(0, color="gray", lw=0.7, ls="--", alpha=0.5)
+
+# Stacionárius pontok diszkrét jelölése
+ax.axvline(-1.0, color="#8c7b70", ls=":", lw=1.2, alpha=0.6)
+ax.axvline(1.0, color="#8c7b70", ls=":", lw=1.2, alpha=0.6)
+ax.plot([-1.0, 1.0], [f(-1.0), f(1.0)], "o", color="#736257", markersize=5.5, alpha=0.8)
+
+ax.set_xlim(-2.2, 2.2)
+ax.set_ylim(-3.8, 3.8)
+ax.set_xlabel("x")
+ax.set_ylabel("f(x)")
+ax.grid(True, alpha=0.25)
+
+(tangent_line,) = ax.plot([], [], color="#342721", lw=1.8, ls="--", label="Elsőrendű derivált")
+(parabola_line,) = ax.plot([], [], color="#d62728", lw=2, label="Másodrendű derivált")
+(pt_f,) = ax.plot([], [], marker="o", color="#342721", markersize=6.5)
+
+ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
+
+# Bal alsó sarokban megjelenő, kizárólag az értékeket mutató doboz
+status_box = ax.text(0.04, 0.06, "", transform=ax.transAxes, fontsize=9.5,
+                     bbox=dict(boxstyle="round,pad=0.4", fc="white", ec="#c2b4a3", alpha=0.92))
+
+plt.tight_layout()
+
+# 3. Képkockák generálása
+def update(frame):
+    x0 = x0_frames[frame]
+    y0 = f(x0)
+    m = df(x0)
+    curv = ddf(x0)
+    
+    span = 0.65
+    xs = np.linspace(x0 - span, x0 + span, 40)
+    y_tan = y0 + m * (xs - x0)
+    y_parab = y0 + m * (xs - x0) + 0.5 * curv * (xs - x0)**2
+    
+    tangent_line.set_data(xs, y_tan)
+    parabola_line.set_data(xs, y_parab)
+    pt_f.set_data([x0], [y0])
+    
+    # Kizárólag a nyers numerikus értékek
+    status_box.set_text(
+        f"$x_0 = {x0:+.2f}$\n"
+        f"$f'(x_0) = {m:+.2f}$\n"
+        f"$f''(x_0) = {curv:+.2f}$"
+    )
+    return tangent_line, parabola_line, pt_f, status_box
+
+ani = animation.FuncAnimation(fig, update, frames=frames, interval=45, blit=True, repeat=True)
+plt.close(fig)
+
+# 4. Egyszerűsített UI, középre igazítás és autoplay loop
+custom_ui = """
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_masodrendu.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_masodrendu.html" width="100%" height="520" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>')
+```
+
+## Minimumhely közelítése
+
+::: {.callout-note title="Gradiens módszer"}
+
+Egy $x_0$ pontból indulva, $k = 1, 2, 3, \ldots$ esetén
+
+$$x_{k+1} = x_k - \alpha f'(x_k)$$
+
+, ahol $a > 0$ a **lépéshossz** (tanulási paraméter, learning rate).
+
+:::
+
+::: {.callout-caution title="Magyarul" collapse="true"}
+Úgy keressük meg a minimumhelyet, hogy lederiváljuk az aktuális pontban a függvényt, majd abba az irányba megyünk valamennyit.
+
+**Például**: $x^2$ függvény esetén a minimumhely $x = 0$, és ha $x_0 = 1$-ből indulunk, akkor a derivált $f'(1) = 2$, vagyis pozitív irányba megyünk. Ha a lépéshossz $\alpha = 0.1$, akkor $x_1 = 1 - 0.1 \cdot 2 = 0.8$ lesz az új pont, majd onnan folytatjuk a keresést.
+:::
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# 1. Függvény és gradiens módszer számítása
+f = lambda x: x**2
+df = lambda x: 2 * x
+
+alpha = 0.20
+x0_start = 2.1
+n_steps = 12
+
+trajectory = [x0_start]
+curr = x0_start
+for _ in range(n_steps):
+    curr = curr - alpha * df(curr)
+    trajectory.append(curr)
+trajectory = np.array(trajectory)
+
+# 2. Ábra előkészítése
+x_vals = np.linspace(-2.5, 2.5, 600)
+fig, ax = plt.subplots(figsize=(8, 4.3))
+
+ax.plot(x_vals, f(x_vals), color="#1f77b4", lw=2.2, label=r"$f(x)$")
+ax.axhline(0, color="gray", lw=0.8, ls="-", alpha=0.5)
+ax.axvline(0, color="#4d7358", ls=":", lw=1.2, alpha=0.7)
+ax.plot(0, 0, marker="*", color="#4d7358", markersize=9)
+
+# Dinamikus elemek
+(path_line,) = ax.plot([], [], color="#a33a30", lw=2.0, marker="o", markersize=5.0)
+(tangent_line,) = ax.plot([], [], color="#342721", lw=1.6, ls="--", label=r"$f'(x)$")
+(proj_v1,) = ax.plot([], [], color="#8c7b70", lw=1.1, ls=":")
+(proj_v2,) = ax.plot([], [], color="#8c7b70", lw=1.1, ls=":")
+(curr_pt,) = ax.plot([], [], marker="o", color="#d62728", markersize=7.5, label=r"$x_k$")
+
+# Bal alsó doboz: kizárólag értékek
+status_box = ax.text(
+    0.04, 0.06, "", transform=ax.transAxes, fontsize=9.5,
+    bbox=dict(boxstyle="round,pad=0.4", fc="white", ec="#c2b4a3", alpha=0.92)
+)
+
+ax.legend(loc="upper right", fontsize=9.5, framealpha=0.9)
+plt.tight_layout()
+
+dynamic_artists = []
+total_frames = len(trajectory) + 3
+
+xlim_wide = np.array([-2.4, 2.4])
+ylim_wide = np.array([-0.5, 5.5])
+xlim_zoom = np.array([-0.25, 0.35])
+ylim_zoom = np.array([-0.02, 0.16])
+
+# 3. Képkockák generálása
+def update(frame):
+    while dynamic_artists:
+        dynamic_artists.pop().remove()
+
+    idx = min(frame, len(trajectory) - 1)
+    xk = trajectory[idx]
+    yk = f(xk)
+    gk = df(xk)
+    step = -alpha * gk
+    x_next = xk + step
+    y_next = f(x_next)
+
+    # Dinamikus zoom
+    if idx <= 2:
+        t = 0.0
+    elif idx <= 7:
+        t = (idx - 2) / 5.0
+    else:
+        t = 1.0
+
+    cur_xlim = (1.0 - t) * xlim_wide + t * xlim_zoom
+    cur_ylim = (1.0 - t) * ylim_wide + t * ylim_zoom
+    ax.set_xlim(cur_xlim)
+    ax.set_ylim(cur_ylim)
+
+    path_line.set_data(trajectory[: idx + 1], f(trajectory[: idx + 1]))
+    curr_pt.set_data([xk], [yk])
+
+    dx = (cur_xlim[1] - cur_xlim[0]) * 0.03
+    dy = (cur_ylim[1] - cur_ylim[0]) * 0.04
+    for i in range(idx + 1):
+        if cur_xlim[0] <= trajectory[i] <= cur_xlim[1]:
+            txt = ax.text(
+                trajectory[i] + dx, f(trajectory[i]) + dy,
+                f"$x_{i}$", fontsize=8.2, color="#a33a30", weight="bold"
+            )
+            dynamic_artists.append(txt)
+
+    if idx < len(trajectory) - 1:
+        span = (cur_xlim[1] - cur_xlim[0]) * 0.18
+        xs_tan = np.linspace(xk - span, xk + span, 30)
+        ys_tan = yk + gk * (xs_tan - xk)
+        tangent_line.set_data(xs_tan, ys_tan)
+
+        proj_v1.set_data([xk, xk], [0, yk])
+        proj_v2.set_data([x_next, x_next], [0, y_next])
+
+        step_arr = ax.annotate(
+            "",
+            xy=(x_next, 0),
+            xytext=(xk, 0),
+            arrowprops=dict(arrowstyle="->", color="#a33a30", lw=1.8),
+        )
+        dynamic_artists.append(step_arr)
+
+        jump_arr = ax.annotate(
+            "",
+            xy=(x_next, y_next),
+            xytext=(xk, yk),
+            arrowprops=dict(arrowstyle="->", color="#342721", lw=1.4, ls="-"),
+        )
+        dynamic_artists.append(jump_arr)
+
+        status_box.set_text(
+            f"$k = {idx}$\n"
+            f"$x_k = {xk:+.3f}$\n"
+            f"$f'(x_k) = {gk:+.3f}$\n"
+            f"$x_{{k+1}} = {x_next:+.3f}$"
+        )
+    else:
+        tangent_line.set_data([], [])
+        proj_v1.set_data([], [])
+        proj_v2.set_data([], [])
+        status_box.set_text(
+            f"$k = {idx}$\n"
+            f"$x_k = {xk:+.3f}$\n"
+            f"$f'(x_k) = {gk:+.3f}$"
+        )
+
+    return path_line, tangent_line, proj_v1, proj_v2, curr_pt, status_box
+
+ani = animation.FuncAnimation(
+    fig, update, frames=total_frames, interval=750, blit=False, repeat=True
+)
+plt.close(fig)
+
+# 4. Teljesen letiltott görgetés (overflow: hidden), középre zárt megjelenítés és loop
+custom_ui = """
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_gradiens.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_gradiens.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>')
+```
+
+## A lépéshossz hatása
+
+Tekintsük az $f(x) = \frac{x^4}{4} + \frac{x^3}{3} - x^2 + 1$ függvényt a $[-3, 2]$ intervallumon, ahol $x_0 = -2.4$-ből indulunk.
+
+::: {.callout-tip title="Leállási feltétel és stabilitás"}
+- **Miért $|f'(x_k)| < 10^{-3}$ esetén állunk le?** Lokális szélsőértékben a derivált nulla. Mivel a lépésekkel egyre lassabban haladunk, véges gépi pontossággal ritkán érünk el pontosan $0$-t. Ha $|f'(x_k)| < 10^{-3}$, a felület már lapos, a minimum közvetlen környezetében vagyunk, a további lépések feleslegesek.
+- **Oszcilláció:** Túl nagy lépéshossz esetén átugorjuk a völgy alját, és a szemközti falon kötünk ki. A pont ide-oda kezd pattogni a völgy két oldala között.
+- **Gradiens kilövés:** Ha a lépéshossz nagyon nagy, minden ugrás után még meredekebb szakaszra érkezünk, így a lépések exponenciálisan nőnek, és a gradiens pillanatok alatt a végtelenbe lő ki. 
+:::
+
+A 3 tipikus viselkedés $x_0 = -2.4$-ből indítva:
+
+1. **$\alpha = 0.1$ (Konvergens):** Stabilan és gyorsan bekonvergál a globális minimumba.
+2. **$\alpha = 0.5$ (Oszcilláció):** Átugorja a minimumot, és a két fal között pattog ide-oda.
+3. **$\alpha = 1.2$ (Kilövés):** Azonnal kiszabadul a tartományból, a gradiens kilő a végtelenbe.
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+f = lambda x: 0.25 * x**4 + (1.0 / 3.0) * x**3 - x**2 + 1.0
+df = lambda x: x**3 + x**2 - 2.0 * x
+
+x0 = -2.4
+alphas = [0.1, 0.5, 1.2]
+titles = [r"$\alpha = 0.1$ (Konvergens)", r"$\alpha = 0.5$ (Oszcilláció)", r"$\alpha = 1.2$ (Kilövés)"]
+colors = ["#16a34a", "#d97706", "#dc2626"]
+n_steps = 10
+
+trajectories = []
+for alpha in alphas:
+    traj = [x0]
+    curr = x0
+    for _ in range(n_steps):
+        grad = df(curr)
+        if abs(curr) > 10:
+            traj.append(curr)
+            break
+        curr = curr - alpha * grad
+        traj.append(curr)
+    trajectories.append(traj)
+
+fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.8), sharey=True)
+fig.patch.set_facecolor('#ffffff')
+
+x_plot = np.linspace(-3.0, 2.2, 400)
+y_plot = f(x_plot)
+
+lines = []
+dots = []
+texts = []
+
+for i, ax in enumerate(axes):
+    ax.set_facecolor('#faf8f5')
+    ax.plot(x_plot, y_plot, color="#5a4d41", lw=1.8, label=r"$f(x)$")
+    ax.axhline(0, color="#d3c7be", lw=0.8, ls="--")
+    ax.plot([-2, 1], [f(-2), f(1)], 'o', color="#8c7b70", markersize=4, alpha=0.6)
+    ax.set_xlim(-3.1, 2.3)
+    ax.set_ylim(-2.2, 5.5)
+    ax.set_title(titles[i], fontsize=10.5, fontweight="bold", color=colors[i], pad=8)
+    ax.set_xlabel("$x$", fontsize=9.5)
+    if i == 0:
+        ax.set_ylabel("$f(x)$", fontsize=9.5)
+    ax.grid(True, ls=":", color="#e2d9d0", alpha=0.7)
+    
+    (line,) = ax.plot([], [], color=colors[i], lw=1.8, ls="-", alpha=0.7)
+    (dot,) = ax.plot([], [], marker="o", color=colors[i], markersize=7)
+    txt = ax.text(0.05, 0.82, "", transform=ax.transAxes, fontsize=8.5,
+                  bbox=dict(boxstyle="round,pad=0.35", fc="white", ec="#c2b4a3", alpha=0.92))
+    lines.append(line)
+    dots.append(dot)
+    texts.append(txt)
+
+plt.tight_layout()
+
+dynamic_annotations = []
+
+def update(frame):
+    while dynamic_annotations:
+        dynamic_annotations.pop().remove()
+        
+    for i in range(3):
+        traj = trajectories[i]
+        idx = min(frame, len(traj) - 1)
+        curr_x = traj[idx]
+        curr_y = f(curr_x) if abs(curr_x) < 5 else 6.0
+        
+        hist_x = [x for x in traj[:idx + 1] if abs(x) <= 3.2]
+        hist_y = [f(x) for x in hist_x]
+        lines[i].set_data(hist_x, hist_y)
+        
+        if abs(curr_x) <= 3.1:
+            dots[i].set_data([curr_x], [curr_y])
+        else:
+            dots[i].set_data([], [])
+            
+        grad = df(curr_x)
+        if abs(curr_x) > 3.0:
+            status_str = f"$k = {idx}$\n$x_k = {curr_x:+.2f}$ (KILŐTT!)\n$|f'| = {abs(grad):.1e}$"
+            warn = axes[i].text(0.5, 0.5, "KILŐTT!\n$|f'| \\to \\infty$", transform=axes[i].transAxes,
+                               ha="center", va="center", color="#dc2626", fontsize=11, fontweight="bold",
+                               bbox=dict(boxstyle="round,pad=0.4", fc="#fee2e2", ec="#ef4444", lw=1.5))
+            dynamic_annotations.append(warn)
+        else:
+            status_str = f"$k = {idx}$\n$x_k = {curr_x:+.3f}$\n$|f'(x_k)| = {abs(grad):.3f}$"
+            
+        texts[i].set_text(status_str)
+        
+    return lines + dots + texts
+
+total_frames = n_steps + 3
+ani = animation.FuncAnimation(fig, update, frames=total_frames, interval=800, blit=False, repeat=True)
+plt.close(fig)
+
+custom_ui = r"""
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_lepeshossz.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_lepeshossz.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>')
+```
+
+
+## Lépéshossz választási módszerek
+::: {.callout-tip title="Konstans lépéshossz"}
+
+Az iterációszám függvényében csökkenő lépéshossz, például:  
+- $\alpha_k = \alpha_0 \cdot c^{k}$, ahol $c < 1$  
+- $\alpha_k = \alpha_0e^{-c \cdot k}$  
+- $\alpha_k = \frac{\alpha_0}{1 + c \cdot k}$  
+
+Itt a $c$ egy pozitív konstans, amely a csökkenés mértékét szabályozza. Minél nagyobb $c$, annál gyorsabban csökken a lépéshossz, így a gradiens módszer stabilabb lesz, de lassabban konvergál.
+
+:::
+
+::: {.callout-tip title="Dinamikus lépéshossz"}
+
+A célfüggvény értékétől függően, adaptívan változó lépéshossz, például:  
+$\alpha_{k+1} = \alpha_k \cdot 1.05$, ha $f(x_{k+1}) < f(x_k)$, míg romló függvényérték esetén újraszámoljuk a lépéshosszt, például $\alpha_{k+1} = \frac{\alpha_k}{2}$. Vagyis ha a függvényérték csökken, növeljük a lépéshosszt, ha nő, csökkentjük.
+
+:::
+
+::: {.callout-important title="Célfüggvény"}
+
+A célfüggvény az a függvény amelynek a minimumát keressük. Mesterséges intelligencia alkalmazásokban a célfüggvény gyakran a **veszteségfüggvény** (loss function), amely a modell teljesítményét méri. A gradiens módszer célja, hogy a célfüggvény értékét minimalizálja az iterációk során.
+
+:::
+
+
+# Többváltozós függvények
+
+## Gradiens vektor és Hesse-mátrix
+
+::: {.callout-tip title="Többváltozós függvény"}
+Olyan függvény, amelynek több bemeneti változója van, például:  
+$f(x, y) = x^2 + y^2$ egy kétváltozós függvény, ahol a bemeneti változók $x$ és $y$. Kétváltozós függvény egy felületet ír le a háromdimenziós térben, ahol a függvényérték a $z$ tengelyen jelenik meg.
+:::
+
+::: {.callout-note title="Gradiens vektor"}
+
+Az $f: \mathbb{R}^n \rightarrow \mathbb{R}$ függvény esetén minimumhelyet keresve a **gradiens vektorral** az irányt határozzuk meg, amelyben a függvény leggyorsabban nő. A gradiens vektor komponensei a függvény **parciális deriváltjai** az egyes változók szerint:
+
+$$\nabla f(x) = \left[\begin{array}{ccc}
+\frac{\partial f}{\partial x_1}(x) \\
+\vdots \\
+\frac{\partial f}{\partial x_n}(x)
+\end{array}\right]$$
+
+:::
+
+::: {.callout-caution title="Példa a gradiens vektorra" collapse="true"}
+
+Legyen az $f(x, y) = x^2 + y^2$ függvény. A gradienst úgy számoljuk ki, hogy a függvényt lederiváljuk egyszer az $x$ és egyszer a $y$ változó szerint. Ilyenkor a másik változót konstansnak tekintjük:
+
+$$\frac{\partial f}{\partial x} = 2x + 0 = 2x$$
+
+$$\frac{\partial f}{\partial y} = 0 + 2y = 2y$$
+
+Ilyenkor a gradiens vektor: $\nabla f(x, y) = \left[\begin{array}{c} 2x \\ 2y \end{array}\right]$
+
+Tehát a felületen $(1, 1)$ pontban a gradiens vektor: $\nabla f(1, 1) = \left[\begin{array}{c} 2 \\ 2 \end{array}\right]$, ami az $(1, 1)$ pontból a $(2, 2)$ irányába mutat. Ez azt jelenti, hogy a függvény leggyorsabban ebbe az irányba nő.
+
+
+
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# 1. Háló és felület adatai
+x = np.linspace(-2.5, 2.5, 80)
+y = np.linspace(-2.5, 2.5, 80)
+X, Y = np.meshgrid(x, y)
+Z = X**2 + Y**2
+
+# 2. Ábra előkészítése
+fig = plt.figure(figsize=(9.8, 4.4))
+
+# --- BAL OLDAL: 3D FORGÓ FELÜLET ---
+ax1 = fig.add_subplot(121, projection="3d")
+surf = ax1.plot_surface(X, Y, Z, alpha=0.5, cmap="viridis")
+ax1.plot([1], [1], [2], "ro", markersize=8)
+
+# Gradiens vektor a felület pontjából a meredekség irányába (dz = 2x*dx + 2y*dy)
+ax1.quiver(1, 1, 2, 1, 1, 4, color="red", lw=2.8, arrow_length_ratio=0.25)
+
+ax1.set_xlim(-2.5, 2.5)
+ax1.set_ylim(-2.5, 2.5)
+ax1.set_zlim(0, 13)
+ax1.set_xlabel("x")
+ax1.set_ylabel("y")
+ax1.set_zlabel("z")
+ax1.set_title(r"$f(x, y) = x^2 + y^2$")
+
+# --- JOBB OLDAL: 2D SZINTVONALAK (ALAP CONTOUR) ---
+ax2 = fig.add_subplot(122)
+ax2.contour(X, Y, Z, levels=20)
+ax2.plot(1, 1, "ro", markersize=8)
+ax2.arrow(1, 1, 0.8, 0.8, head_width=0.15, head_length=0.15, fc="r", ec="r", lw=2.2)
+
+ax2.set_xlim(-2.5, 2.5)
+ax2.set_ylim(-2.5, 2.5)
+ax2.set_aspect("equal")
+ax2.set_xlabel("x")
+ax2.set_ylabel("y")
+ax2.set_title("Szintvonalak")
+
+plt.tight_layout()
+
+# 3. Körbeforgatás (360 fok 60 képkockában)
+frames = 60
+
+def update(frame):
+    azim = frame * (360.0 / frames)
+    ax1.view_init(elev=26, azim=azim)
+    return []
+
+ani = animation.FuncAnimation(
+    fig, update, frames=frames, interval=50, blit=False, repeat=True
+)
+plt.close(fig)
+
+# 4. Letisztult felület, görgetéstiltás és loop
+custom_ui = r"""
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_3d_forgas.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_3d_forgas.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>')
+```
+
+:::
+
+::: {.callout-note title="Hesse-mátrix"}
+A Hesse-mátrix a függvény **második deriváltjainak mátrixa**, amely a függvény görbületét írja le. Egyváltozósan ez egyszerűen a második derivált, többváltozós függvény esetén a Hesse-mátrix a **parciális második deriváltakból** áll:
+
+$$\nabla^2f(x) = \left(\frac{\partial^2 f}{\partial x_i \partial x_j}(x)\right)_{i,j} \in \mathbb{R}^{n \times n}$$
+
+:::
+
+::: {.callout-caution title="Példa a Hesse-mátrixra" collapse="true"}
+Legyen az $f(x, y) = x^2 + y^2$ függvény. Ilyenkor a Hesse-mátrix egy 2x2-es mátrix, amelynek elemei a függvény második parciális deriváltjai:
+$$
+\nabla^2f(x, y) = \begin{pmatrix}
+\frac{\partial^2 f}{\partial x^2}(x, y) & \frac{\partial^2 f}{\partial x \partial y}(x, y) \\
+\frac{\partial^2 f}{\partial y \partial x}(x, y) & \frac{\partial^2 f}{\partial y^2}(x, y)
+\end{pmatrix}
+$$
+
+**Elsődrendű deriváltak:**  
+- $\frac{\partial f}{\partial x} = 2x$  
+- $\frac{\partial f}{\partial y} = 2y$
+
+**Másodrendű deriváltak:**  
+- $\frac{\partial^2 f}{\partial x^2} = 2$ - Vagyis kétszer az $x$ szerinti deriváltja.  
+- $\frac{\partial^2 f}{\partial y^2} = 2$ - Vagyis kétszer az $y$ szerinti deriváltja.  
+- $\frac{\partial^2 f}{\partial x \partial y} = 0$ - Először az $x$ szerinti deriváltat vesszük, majd a $y$ szerinti deriváltat, ami nulla, mivel nincs $y$-t tartalmazó tag az első deriváltban.  
+- $\frac{\partial^2 f}{\partial y \partial x} = 0$ - Hasonlóan, először az $y$ szerinti deriváltat vesszük, majd az $x$ szerinti deriváltat, ami szintén nulla.  
+
+Így a végleges Hesse-mátrix:
+$$
+\nabla^2f(x, y) = \begin{pmatrix}
+2 & 0 \\
+0 & 2
+\end{pmatrix}
+$$
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# 1. Háló és felület adatai
+x = np.linspace(-2.5, 2.5, 80)
+y = np.linspace(-2.5, 2.5, 80)
+X, Y = np.meshgrid(x, y)
+Z = X**2 + Y**2
+
+x0, y0 = 1.0, 1.0
+z0 = x0**2 + y0**2  # 2.0
+
+# 2. Ábra előkészítése
+fig = plt.figure(figsize=(9.8, 4.4))
+
+# --- BAL OLDAL: 3D FORGÓ FELÜLET ---
+ax1 = fig.add_subplot(121, projection="3d")
+surf = ax1.plot_surface(X, Y, Z, alpha=0.45, cmap="viridis")
+ax1.plot([x0], [y0], [z0], "ro", markersize=8)
+
+# 1. x-irányú metszetgörbe (y = y0 konstans): z = x^2 + y0^2 (görbület f_xx = 2)
+xs = np.linspace(-2.2, 2.2, 50)
+ys_const = np.full_like(xs, y0)
+zs_x = xs**2 + ys_const**2
+ax1.plot(xs, ys_const, zs_x, color="#dc2626", lw=2.8, label=r"$\partial^2 f / \partial x^2 = 2$")
+
+# 2. y-irányú metszetgörbe (x = x0 konstans): z = x0^2 + y^2 (görbület f_yy = 2)
+ys = np.linspace(-2.2, 2.2, 50)
+xs_const = np.full_like(ys, x0)
+zs_y = xs_const**2 + ys**2
+ax1.plot(xs_const, ys, zs_y, color="#2563eb", lw=2.8, label=r"$\partial^2 f / \partial y^2 = 2$")
+
+ax1.set_xlim(-2.5, 2.5)
+ax1.set_ylim(-2.5, 2.5)
+ax1.set_zlim(0, 13)
+ax1.set_xlabel("x")
+ax1.set_ylabel("y")
+ax1.set_zlabel("z")
+ax1.set_title(r"3D: Görbületek ($H_{11}=2, H_{22}=2$)")
+ax1.legend(loc="upper right", fontsize=8.5)
+
+# --- JOBB OLDAL: 2D SZINTVONALAK (ALAP CONTOUR) ---
+ax2 = fig.add_subplot(122)
+ax2.contour(X, Y, Z, levels=20)
+ax2.plot(x0, y0, "ro", markersize=8)
+
+# x és y irányú metszetvonalak a 2D síkban
+ax2.axhline(y0, color="#dc2626", lw=2, ls="--", label=r"$x$-metszet ($f_{xx}=2$)")
+ax2.axvline(x0, color="#2563eb", lw=2, ls="--", label=r"$y$-metszet ($f_{yy}=2$)")
+
+ax2.set_xlim(-2.5, 2.5)
+ax2.set_ylim(-2.5, 2.5)
+ax2.set_aspect("equal")
+ax2.set_xlabel("x")
+ax2.set_ylabel("y")
+ax2.set_title("Szintvonalak és főirányok")
+ax2.legend(loc="lower right", fontsize=8.5)
+
+plt.tight_layout()
+
+# 3. Körbeforgatás (360 fok 60 képkockában)
+frames = 60
+
+def update(frame):
+    azim = frame * (360.0 / frames)
+    ax1.view_init(elev=26, azim=azim)
+    return []
+
+ani = animation.FuncAnimation(
+    fig, update, frames=frames, interval=50, blit=False, repeat=True
+)
+plt.close(fig)
+
+# 4. Letisztult felület, görgetéstiltás és loop
+custom_ui = r"""
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_hesse_3d.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_hesse_3d.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>')
+```
+:::
+
+::: {.callout-tip title="Gradiens használata többváltozós függvényeknél"}
+
+Minimalizálásnál negatív gradiens vektor irányba lépünk, mivel a gradiens a legmeredekebb növekedés irányát mutatja. Negatív gradiens mező így néz ki a $f(x) = \frac{x_1^4}{4} + \frac{x_2^4}{4} + \frac{x_1^3}{3} + \frac{x_2^3}{3} - x_1^2 - x_2^2 + 2 \space$ függvény esetén.
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Finomabb rács a szintvonalakhoz (100x100)
+x = np.linspace(-3, 2, 100)
+y = np.linspace(-3, 2, 100)
+X, Y = np.meshgrid(x, y)
+Z = (X**4)/4 + (Y**4)/4 + (X**3)/3 + (Y**3)/3 - X**2 - Y**2 + 2
+
+# 2. Sűrűbb rács a gradiensvektorokhoz (21x21)
+dx = np.linspace(-3, 2, 21)
+dy = np.linspace(-3, 2, 21)
+DX, DY = np.meshgrid(dx, dy)
+
+# Pozitív gradiens komponensek: parciális deriváltak
+U = DX**3 + DX**2 - 2 * DX
+V = DY**3 + DY**2 - 2 * DY
+
+# 3. Két paneles ábrázolás egymás mellett
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.5))
+
+# --- BAL OLDAL: Pozitív gradiens (+grad f, legmeredekebb emelkedés) ---
+ax1.contour(X, Y, Z, levels=30, cmap='viridis')
+ax1.quiver(DX, DY, U, V, color='black', scale=85, pivot='tail')
+ax1.set_title(r'Pozitív gradiens mező ($\nabla f$)', fontsize=11)
+ax1.set_xlabel('$x_1$')
+ax1.set_ylabel('$x_2$')
+ax1.set_aspect('equal')
+
+# --- JOBB OLDAL: Negatív gradiens (-grad f, legmeredekebb csökkenés) ---
+ax2.contour(X, Y, Z, levels=30, cmap='viridis')
+ax2.quiver(DX, DY, -U, -V, color='black', scale=85, pivot='tail')
+ax2.set_title(r'Negatív gradiens mező ($-\nabla f$)', fontsize=11)
+ax2.set_xlabel('$x_1$')
+ax2.set_ylabel('$x_2$')
+ax2.set_aspect('equal')
+
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+## Lokális szélsőérték feltételek
+
+::: {.callout-note title="Elsőrendű szükséges feltétel"}
+
+Ha $x^*$ egy lokális szélsőérték, és a $f$ függvény folytonosan differenciálható az $x^*$ nyílt környezetében (vagyis a $f$ függvény deriváltja létezik az $x^*$ pontban), akkor a $\nabla f(x^*) = 0$.
+
+:::
+
+::: {.callout-note title="Stacionárius pont"}
+
+Ha $\nabla f(x^*) = 0$, akkor az $x^*$ pontot **stacionárius pontnak** nevezzük. A stacionárius pont lehet lokális minimum, lokális maximum vagy nyeregpont, amely se nem minimum, se nem maximum.
+
+:::
+
+::: {.callout-tip title="Példa nyeregpontra"}
+
+Az alábbi ábrán a $f(x_1, x_2) = x_1^2 - x_2^2$ függvény stacionárius pontja a $(0, 0)$ pont, amely egy nyeregpont. A gradiens vektorok a stacionárius pontban nullvektorok, azaz $\nabla f(0, 0) = (0, 0)$.
+
+:::
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-3, 3, 100)
+y = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(x, y)
+Z = X**2 - Y**2
+
+fig = plt.figure(figsize=(8, 7))
+ax = fig.add_subplot(111, projection='3d')
+
+# Kikapcsolja a hibás 3D mélységszámítást, így a zorder szabályozza a rétegeket
+ax.computed_zorder = False
+
+# Felület a háttérben
+ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.7, edgecolor='none', zorder=1)
+
+# Pont az abszolút előtérben (nem fedi be a felület alpha rétege)
+ax.scatter([0], [0], [0], color='#d62728', s=50, depthshade=False, zorder=10)
+
+ax.set_xlabel('$x_1$')
+ax.set_ylabel('$x_2$')
+ax.set_zlabel('$f(x_1, x_2)$')
+ax.view_init(elev=24, azim=-55)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Kvadratikus függvény és Taylor-approximáció
+
+::: {.callout-note title="Kvadratikus függvény"}
+
+Az $f: \mathbb{R}^n \to \mathbb{R}$ függvényt **kvadratikus függvénynek** nevezzük, ha: 
+
+$$f(x) = \frac{1}{2} x^T A x + b^T x + c$$
+
+alakba írható, ahol $A \in \mathbb{R}^{n \times n}$ egy szimmetrikus mátrix, $b \in \mathbb{R}^n$ egy vektor, és $c \in \mathbb{R}$ egy skalár.
+
+:::
+
+::: {.callout-caution title="Példa kvadratikus függvényre" collapse="true"}
+Legyen az 
+
+$$f(x_1, x_2) = x_1^2 + 2x_2^2 + 2x_1 x_2 - 4x_1 + 6x_2 + 5$$
+
+Ekkor $x = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}$, és a mátrixos alak:
+
+$$f(x) = \frac{1}{2} \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} 2 & 2 \\ 2 & 4 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} + \begin{pmatrix} -4 & 6 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} + 5$$
+
+Ahol az együtthatók:
+
+- $A = \begin{pmatrix} 2 & 2 \\ 2 & 4 \end{pmatrix}$ (szimmetrikus mátrix, a főátlón kívüli elemek összege adja a vegyes tagot: $\frac{1}{2}(2 + 2) = 2$)
+- $b = \begin{pmatrix} -4 \\ 6 \end{pmatrix}$ (lineáris tagok együtthatói)
+- $c = 5$ (konstans tag)
+:::
+
+::: {.callout-tip title="Kvadratikus függvény gradiens és Hesse-mátrix"}
+
+Ilyenkor a gradiens és a Hesse-mátrix a következőképpen alakul:
+
+$$\nabla f(x) = A x + b \qquad \nabla^2 f(x) = A$$
+
+Ez azért jó, mert nem kell minden iterációban újra számolni a Hesse-mátrixot, mivel az állandó, a gradiens pedig lineárisan függ a változóktól, és ez kevésbé számításigényes, mint egy általános függvény esetén.
+:::
+
+::: {.callout-note title="Taylor-approximáció"}
+
+Legyen $f: \mathbb{R}^n \to \mathbb{R}$ egy elegendően sokszor differenciálható függvény, ilyenkor:
+
+$$f(x_0 + \delta x) \approx f(x_0) + \nabla f(x_0)^T \cdot \delta x $$
+
+illetve
+
+$$f(x_0 + \delta x) \approx f(x_0) + \nabla f(x_0)^T \cdot \delta x + \frac{1}{2} \delta x^T \nabla^2 f(x_0) \cdot \delta x$$
+
+:::
+
+
+::: {.callout-caution title="Magyarul" collapse="true"}
+Az első egyenlet a **lineáris Taylor-approximáció**: az $x_0$ pontbeli **érintősíkkal** közelíti a felületet. A $\delta x$ a tetszőleges irányú elmozdulás, és a gradiensvektorral vett skaláris szorzata ($\nabla f(x_0)^T \delta x$) adja meg, hogy a meredekség alapján mennyit változik a függvényérték. Pontosan ugyanaz, mint egyváltozós esetben a gradiens módszer, csak itt több dimenzióban dolgozunk.
+
+A második egyenlet a **kvadratikus Taylor-approximáció**: a sík helyett már egy **másodrendű paraboloid felületet** illeszt a pontra. Nemcsak a meredekséget, hanem a felület görbületét is figyelembe veszi a Hesse-mátrix ($\nabla^2 f(x_0)$) segítségével, így sokkal pontosabb képet ad a függvény alakjáról egy völgyben vagy nyeregben.
+:::
+
+::: {.callout-note title="Stacionárius pont és Hesse-mátrix"}
+
+Ha $x_0$ stacionárius pont ($\nabla f(x_0) = 0$), akkor
+
+$$f(x_0 + \delta x) \approx f(x_0) + \frac{1}{2} \delta x^T \nabla^2 f(x_0) \cdot \delta x$$
+
+vagyis a Hesse-mátrix adhatja meg, hogy a stacionárius pont lokális minimum, maximum vagy nyeregpont. A Hesse-mátrix **sajátértékei** alapján dönthetünk:
+
+- ha $x^T \cdot \nabla^2f(x_0) \cdot x > 0$, akkor a stacionárius pont **lokális minimum** (a Hesse-mátrix **pozitív definit**, minden sajátértéke pozitív)
+- ha $x^T \cdot \nabla^2f(x_0) \cdot x < 0$, akkor a stacionárius pont **lokális maximum** (a Hesse-mátrix **negatív definit**, minden sajátértéke negatív)
+:::
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-align: center
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Tartomány
+x = np.linspace(-2.2, 2.2, 50)
+y = np.linspace(-2.2, 2.2, 50)
+X, Y = np.meshgrid(x, y)
+
+Z_min = X**2 + Y**2
+Z_max = -(X**2 + Y**2)
+
+fig = plt.figure(figsize=(10, 4.6))
+
+t = np.linspace(-2.2, 2.2, 100)
+zeros = np.zeros_like(t)
+
+# --- BAL OLDAL: LOKÁLIS MINIMUM ---
+ax1 = fig.add_subplot(121, projection="3d")
+ax1.plot_surface(X, Y, Z_min, cmap="viridis", alpha=0.35, edgecolor="none")
+ax1.plot([0], [0], [0], "ko", markersize=6, zorder=5)
+
+# Görbületek a Hesse-mátrix szerint
+ax1.plot(t, zeros, t**2, color="#e11d48", lw=2.5, label=r"$\partial^2 f / \partial x_1^2 = 2 > 0$")
+ax1.plot(zeros, t, t**2, color="#2563eb", lw=2.5, label=r"$\partial^2 f / \partial x_2^2 = 2 > 0$")
+
+ax1.set_xlim(-2.2, 2.2)
+ax1.set_ylim(-2.2, 2.2)
+ax1.set_zlim(0, 10)
+ax1.set_xlabel("$x_1$", labelpad=-4, fontsize=9)
+ax1.set_ylabel("$x_2$", labelpad=-4, fontsize=9)
+ax1.set_zlabel("$f(x_1, x_2)$", labelpad=-4, fontsize=9)
+ax1.view_init(elev=24, azim=45)
+ax1.set_title("Lokális minimum", fontsize=11)
+ax1.legend(loc="upper right", fontsize=8)
+
+# --- JOBB OLDAL: LOKÁLIS MAXIMUM ---
+ax2 = fig.add_subplot(122, projection="3d")
+ax2.plot_surface(X, Y, Z_max, cmap="viridis_r", alpha=0.35, edgecolor="none")
+ax2.plot([0], [0], [0], "ko", markersize=6, zorder=5)
+
+# Görbületek a Hesse-mátrix szerint
+ax2.plot(t, zeros, -(t**2), color="#e11d48", lw=2.5, label=r"$\partial^2 f / \partial x_1^2 = -2 < 0$")
+ax2.plot(zeros, t, -(t**2), color="#2563eb", lw=2.5, label=r"$\partial^2 f / \partial x_2^2 = -2 < 0$")
+
+ax2.set_xlim(-2.2, 2.2)
+ax2.set_ylim(-2.2, 2.2)
+ax2.set_zlim(-10, 0)
+ax2.set_xlabel("$x_1$", labelpad=-4, fontsize=9)
+ax2.set_ylabel("$x_2$", labelpad=-4, fontsize=9)
+ax2.set_zlabel("$f(x_1, x_2)$", labelpad=-4, fontsize=9)
+ax2.view_init(elev=24, azim=45)
+ax2.set_title("Lokális maximum", fontsize=11)
+ax2.legend(loc="upper right", fontsize=8)
+
+plt.tight_layout()
+plt.show()
+```
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toc = document.getElementById("TOC");
+  const title = document.querySelector("#TOC .toc-title");
+  const list = document.getElementById("custom-toc-list");
+
+  if (title) {
+    title.addEventListener("click", function () {
+      toc.classList.toggle("toc-collapsed");
+    });
+  }
+
+  const headings = document.querySelectorAll("main.content h1:not(.unlisted), main.content h2");
+  let currentH1List = null;
+
+  headings.forEach((heading, idx) => {
+    if (!heading.id) {
+      heading.id = "sec-" + idx;
+    }
+
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + heading.id;
+    a.textContent = heading.innerText.trim();
+
+    if (heading.tagName === "H1") {
+      li.className = "toc-h1";
+      li.appendChild(a);
+      currentH1List = document.createElement("ul");
+      li.appendChild(currentH1List);
+      list.appendChild(li);
+    } else if (heading.tagName === "H2") {
+      li.className = "toc-h2";
+      li.appendChild(a);
+      if (currentH1List) {
+        currentH1List.appendChild(li);
+      } else {
+        list.appendChild(li);
+      }
+    }
+  });
+});
+</script>
+```
