@@ -15,7 +15,7 @@ format:
 ---
 
 <aside id="quarto-margin-sidebar">
-  <nav id="TOC">
+  <nav id="TOC" class="toc-collapsed">
     <div class="toc-title">Tartalomjegyzék</div>
     <ul id="custom-toc-list"></ul>
   </nav>

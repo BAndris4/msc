@@ -20,10 +20,11 @@ resources:
   - "animacio_lepeshossz.html"
   - "animacio_3d_forgas.html"
   - "animacio_hesse_3d.html"
+  - "animacio_linearis_regresszio.html"
 ---
 
 <aside id="quarto-margin-sidebar">
-  <nav id="TOC">
+  <nav id="TOC" class="toc-collapsed">
     <div class="toc-title">Tartalomjegyzék</div>
     <ul id="custom-toc-list"></ul>
   </nav>
@@ -821,7 +822,8 @@ $$\nabla f(x) = \left[\begin{array}{ccc}
 \frac{\partial f}{\partial x_1}(x) \\
 \vdots \\
 \frac{\partial f}{\partial x_n}(x)
-\end{array}\right]$$
+\end{array}\right]
+$$
 
 :::
 
@@ -1410,6 +1412,293 @@ ax2.legend(loc="upper right", fontsize=8)
 plt.tight_layout()
 plt.show()
 ```
+
+## Lineáris regresszió és a kvadratikus függvény
+
+::: {.callout-note title="Lineáris regresszió"}
+
+Adottak az $(x^{(i)}, y^{(i)} )$ adatok, ahol:  
+
+- $x^{(i)} = [x_1^{(i)}, \ldots, x_d^{(i)}] \in \mathbb{R}^d$ jellemzővektorok (sorvektorok),  
+- $y^{(i)} \in \mathbb{R}$ a célváltozók.
+
+Olyan $w_1, \ldots, w_d \in \mathbb{R}$ súlyokat keresünk, melyekkel:
+
+$$y^{(i)} \approx w_1 x_1^{(i)} + \cdots + w_d x_d^{(i)} = x^{(i)} \cdot w$$
+
+ahol $w$ a súlyok oszlopvektora. A súlyokat az 
+
+$$f(w) = \frac{1}{2}\sum_{i=1}^n (x^{(i)}w - y^{(i)})^2 = \frac{1}{2}\|Xw - y\|_{2}^2$$ 
+
+függvény minimlizálásával találjuk meg, ahol $X$ a jellemzők mátrixa, $y$ pedig a célváltozók vektora.
+
+:::
+
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+
+Az $x^{(i)}w$ kifejezéssel a modelünk által becsült értéket kapjuk az $y^{(i)}$ értékhez. A $(x^{(i)}w - y^{(i)})^2$ kifejezés a becsült és a tényleges érték közötti négyzetes hibát adja meg. A $\frac{1}{2}\|Xw - y\|_{2}^2$ kifejezés a hibát összegzi az összes adatponton.
+
+$$\|a\|_{2} = \sqrt{a_1^2 + \cdots + a_n^2}$$
+
+:::
+
+::: {.callout-note title="Kvadratikus függvény a lineáris regresszióban"}
+$$f(w) = \frac{1}{2}\|Xw - y\|_{2}^2 = \frac{1}{2}(Xw - y)^T (Xw - y) = $$
+$$= \frac{1}{2}w^T X^T X w - w^T X^T y + \frac{1}{2}y^T y$$
+
+ami egy kvadratikus függvény. Ha $X$ oszlopai lineárisan függetlenek, akkor a Hesse-mátrix $X^TX$ pozitív definit, így a függvény konvex, és egyértelmű minimuma van.
+
+A $\nabla f(w) = 0$ feltételből a Gauss-féle normálegyenletet kapjuk:
+$$X^T X w = X^T y$$
+
+Ha $X$ oszlopai nem függetlenek, akkor a minimumhely nem egyértelmű.
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+
+$(Xw-y)^T (Xw-y)$ kifejezés azért egyenértékű a $\|Xw - y\|_{2}^2$ kifejezéssel, mert a vektorok négyzetes normája megegyezik a vektor transzponáltjával vett skaláris szorzattal:
+$$\|a\|_2^2 = a^T a$$
+
+Pl. ha $a = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$, akkor:
+$$\|a\|_2^2 = a_1^2 + a_2^2 + a_3^2 = \begin{pmatrix} a_1 & a_2 & a_3 \end{pmatrix} \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix} = a^T a$$
+
+
+Innen úgy kapjuk a kvadratikus alakot, hogy kifejtjük a $(Xw - y)^T (Xw - y)$ szorzatot:
+$$(Xw - y)^T (Xw - y) = (Xw)^T (Xw) - (Xw)^T y - y^T (Xw) + y^T y =$$
+$$= w^T X^T X w - 2 w^T X^T y + y^T y$$
+
+Ha figyeljük a kvadratikus függvény általános alakját ($\frac{1}{2} w^T A w + b^T w + c$), akkor láthatjuk, hogy:  
+- $A = X^T X$ (szimmetrikus mátrix)  
+- $b = -X^T y$ (lineáris tag)  
+- $c = \frac{1}{2}y^T y$ (állandó tag)  
+
+Ha lederiváljuk a kvadratikus függvényt, akkor a gradiens:
+$$\nabla f(w) = X^T X w - X^T y$$
+
+Ha a gradiens nullvektor, akkor a Gauss-féle normálegyenletet kapjuk:
+$$X^T X w = X^T y$$
+
+ami azt jelenti, hogy a lineáris regresszió optimális súlyait a normálegyenlet megoldásával találjuk meg.
+:::
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# 1. Szintetikus adathalmaz generálása
+np.random.seed(42)
+x_data = np.linspace(-2.0, 2.5, 12)
+y_data = 1.4 * x_data + 0.6 + np.random.normal(0, 0.75, size=len(x_data))
+
+# Tervezési mátrix [1, x] az eltolás (w0) és meredekség (w1) becsléséhez
+X_mat = np.column_stack([np.ones_like(x_data), x_data])
+
+# Egzakt optimális súlyok a Gauss-féle normálegyenletből: w* = (X^T X)^(-1) X^T y
+w_opt = np.linalg.inv(X_mat.T @ X_mat) @ (X_mat.T @ y_data)
+
+# 2. Veszteségfüggvény felülete a paramétertérben: f(w) = 1/2 ||Xw - y||^2
+w0_grid = np.linspace(-1.8, 2.4, 70)
+w1_grid = np.linspace(-0.8, 3.2, 70)
+W0, W1 = np.meshgrid(w0_grid, w1_grid)
+
+# Veszteség kiszámítása a rács minden pontjára
+Loss = np.zeros_like(W0)
+for i in range(W0.shape[0]):
+    for j in range(W0.shape[1]):
+        w_vec = np.array([W0[i, j], W1[i, j]])
+        res = X_mat @ w_vec - y_data
+        Loss[i, j] = 0.5 * np.sum(res**2)
+
+# 3. Gradiens módszer trajektória előszámítása
+w_current = np.array([-1.2, -0.3])  # Kezdeti becslés (távol az optimumtól)
+alpha = 0.016                       # Lépésköz (learning rate)
+n_steps = 38
+
+traj_w = [w_current.copy()]
+for _ in range(n_steps):
+    grad = X_mat.T @ (X_mat @ w_current - y_data)
+    w_current = w_current - alpha * grad
+    traj_w.append(w_current.copy())
+traj_w = np.array(traj_w)
+
+# 4. Ábra előkészítése (Adattér + Paramétertér)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.0, 4.4))
+
+# --- BAL OLDAL: Adattér ---
+ax1.scatter(x_data, y_data, color="#1f77b4", edgecolor="#0b3c61", s=45, zorder=4)
+x_line = np.linspace(-2.4, 2.9, 100)
+ax1.set_xlim(-2.4, 2.9)
+ax1.set_ylim(-3.5, 5.5)
+ax1.set_xlabel("$x$")
+ax1.set_ylabel("$y$")
+ax1.set_title(r"Adattér: $\hat{y} = w_0 + w_1 x$", fontsize=11)
+ax1.grid(True, alpha=0.25)
+
+# --- JOBB OLDAL: Paramétertér és Veszteségfelület ---
+contours = ax2.contour(W0, W1, Loss, levels=24, cmap="viridis", alpha=0.65)
+ax2.scatter(w_opt[0], w_opt[1], marker="*", color="#d62728", s=180, zorder=6)
+ax2.text(w_opt[0] + 0.12, w_opt[1] - 0.05, "$w^*$", color="#d62728", fontsize=10.5, weight="bold")
+ax2.set_xlim(-1.8, 2.4)
+ax2.set_ylim(-0.8, 3.2)
+ax2.set_xlabel("$w_0$")
+ax2.set_ylabel("$w_1$")
+ax2.set_title(r"Paramétertér: $f(w)$", fontsize=11)
+ax2.grid(True, alpha=0.25)
+
+# Telemetria doboz a tiszta felső részen
+status_box = ax1.text(
+    0.04, 0.86, "", transform=ax1.transAxes, fontsize=9.2,
+    bbox=dict(boxstyle="round,pad=0.4", fc="white", ec="#c2b4a3", alpha=0.92)
+)
+
+plt.tight_layout()
+
+dynamic_artists = []
+
+# 5. Képkockák animálása
+def update(frame):
+    while dynamic_artists:
+        dynamic_artists.pop().remove()
+
+    wk = traj_w[frame]
+    y_pred_line = wk[0] + wk[1] * x_line
+    y_pred_pts = wk[0] + wk[1] * x_data
+    loss_val = 0.5 * np.sum((y_pred_pts - y_data)**2)
+
+    # 1. Regressziós egyenes az adattérben
+    line_art = ax1.plot(x_line, y_pred_line, color="#342721", lw=2.2, zorder=3)[0]
+    dynamic_artists.append(line_art)
+
+    # 2. Reziduálisok (függőleges hibaszakaszok a pontok és egyenes között)
+    res_lines = ax1.vlines(x_data, y_data, y_pred_pts, colors="#d62728", linestyles="--", lw=1.2, alpha=0.8, zorder=2)
+    dynamic_artists.append(res_lines)
+
+    # 3. Trajektória és aktuális pont a paramétertérben
+    traj_path = ax2.plot(traj_w[:frame+1, 0], traj_w[:frame+1, 1], color="#d62728", lw=1.8, alpha=0.85, zorder=4)[0]
+    curr_pt = ax2.plot(wk[0], wk[1], marker="o", color="#d62728", markersize=7.5, zorder=5)[0]
+    dynamic_artists.extend([traj_path, curr_pt])
+
+    status_box.set_text(
+        f"$w_0 = {wk[0]:+.2f}, \\quad w_1 = {wk[1]:+.2f}$\n"
+        f"$f(w) = {loss_val:.2f}$"
+    )
+
+    return status_box,
+
+ani = animation.FuncAnimation(
+    fig, update, frames=len(traj_w), interval=110, blit=False, repeat=True
+)
+plt.close(fig)
+
+# 6. Görgetésmentes UI és iframe exportálás
+custom_ui = """
+<style>
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: transparent;
+  text-align: center;
+}
+.anim-controls button:not([title*="Play"]):not([title*="Pause"]) { display: none !important; }
+.anim-controls input[type="range"] { display: none !important; }
+.anim-controls select { display: none !important; }
+.anim-controls form { display: none !important; }
+.anim-controls label { display: none !important; }
+.anim-controls { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.animation {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+.animation img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+table.anim-table { margin: 0 auto !important; }
+</style>
+
+<script>
+(function startAnimationLoop() {
+  function tryPlay() {
+    const playBtn = document.querySelector('.anim-controls button[title="Play"]') ||
+                    document.querySelector('.anim-controls button[aria-label="Play"]') ||
+                    document.querySelector('.anim-controls button[title*="Play"]');
+    if (!playBtn) {
+      setTimeout(tryPlay, 50);
+      return;
+    }
+
+    const onclickStr = playBtn.getAttribute('onclick') || '';
+    const match = onclickStr.match(/([a-zA-Z0-9_]+)\.play_animation/);
+    const varName = match ? match[1] : null;
+
+    if (varName && window[varName] && typeof window[varName].play_animation === 'function') {
+      window[varName].play_animation();
+      if (window[varName].direction === 1) {
+        return;
+      }
+    }
+
+    setTimeout(tryPlay, 50);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(tryPlay, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(tryPlay, 50));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryPlay, 50));
+  }
+})();
+</script>
+"""
+
+html_content = custom_ui + ani.to_jshtml(default_mode="loop")
+with open("animacio_linearis_regresszio.html", "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+HTML('<iframe src="animacio_linearis_regresszio.html" width="100%" height="470" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>')
+```
+
+# Optimalizációs algoritmusok többváltozós függvényekre
+
+## Gradiens módszer
+
+::: {.callout-note title="Gradiens"}
+
+Az $f: \mathbb{R}^n \to \mathbb{R}$ minimumhelyét keressük. Ehhez egy közelítősorozatot definiálunk.
+
+$x_0$-ból $(x_0 + \alpha \cdot p)$-be lépünk, ahol $p$ a lépés iránya, $\alpha$ pedig a lépéshossz.
+
+$$f(x_0 + \alpha p) \approx f(x_0) + \alpha \nabla f(x_0)^T \cdot p$$
+
+Ha $\nabla f(x_0)^T \cdot p < 0$, akkor a függvény csökken.  
+$p = -\nabla f(x_0)$ az $x_0$-beli legmeredekebb csökkenés iránya  
+$p = \nabla f(x_0)$ az $x_0$-beli legmeredekebb emelkedés iránya  
+
+:::
+
+::: {.callout-tip title="Gradiens módszer"}
+
+$x_0$ kezdővektor, $\alpha > 0$
+
+$$x_{k+1} = x_k - \alpha \nabla f(x_k)$$
+
+Fontos a jó lépésköz kiválasztása, mert ha túl nagy, akkor a minimumtól távolodhatunk, ha túl kicsi, akkor lassan konvergálunk. **Választási módszerek:** iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az $\alpha$-t úgy választjuk, hogy $- \nabla f(x_k)$ irányban az optimális lépést találjuk).
+:::
+
+
 
 ```{=html}
 <script>
