@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -43,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-09444deb2702fdccc09d834c5d53f2e0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b098854469676d222b0cbcb59026526d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4ddb7f04b931016884c3dacbb9606b75.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -159,7 +194,7 @@ Tartalomjegyzék
 <p>Ha <span class="math inline">\(x_0\)</span> lokális szélsőérték, akkor <span class="math inline">\(f'(x_0) = 0\)</span>, viszont <strong>ez fordítva nem igaz</strong>.</p>
 </div>
 </div>
-<div id="725525f3" class="cell" data-cache="true" data-message="false" data-execution_count="1">
+<div id="82623c76" class="cell" data-cache="true" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <iframe src="animacio_derivalt.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:980px;"></iframe>
 </div>
@@ -181,7 +216,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div id="c9263fa4" class="cell" data-cache="true" data-message="false" data-execution_count="2">
+<div id="0d327413" class="cell" data-cache="true" data-message="false" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <iframe src="animacio_masodrendu.html" width="100%" height="520" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>
 </div>
@@ -221,7 +256,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div id="d13f7e87" class="cell" data-cache="true" data-message="false" data-execution_count="3">
+<div id="ac5829d3" class="cell" data-cache="true" data-message="false" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <iframe src="animacio_gradiens.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>
 </div>
@@ -253,7 +288,7 @@ Tartalomjegyzék
 <li><strong><span class="math inline">\(\alpha = 0.5\)</span> (Oszcilláció):</strong> Átugorja a minimumot, és a két fal között pattog ide-oda.</li>
 <li><strong><span class="math inline">\(\alpha = 1.2\)</span> (Kilövés):</strong> Azonnal kiszabadul a tartományból, a gradiens kilő a végtelenbe.</li>
 </ol>
-<div id="f66d56c7" class="cell" data-cache="true" data-message="false" data-execution_count="4">
+<div id="2c6a47cc" class="cell" data-cache="true" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <iframe src="animacio_lepeshossz.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>
 </div>
@@ -361,7 +396,7 @@ Tartalomjegyzék
 <p><span class="math display">\[\frac{\partial f}{\partial y} = 0 + 2y = 2y\]</span></p>
 <p>Ilyenkor a gradiens vektor: <span class="math inline">\(\nabla f(x, y) = \left[\begin{array}{c} 2x \\ 2y \end{array}\right]\)</span></p>
 <p>Tehát a felületen <span class="math inline">\((1, 1)\)</span> pontban a gradiens vektor: <span class="math inline">\(\nabla f(1, 1) = \left[\begin{array}{c} 2 \\ 2 \end{array}\right]\)</span>, ami az <span class="math inline">\((1, 1)\)</span> pontból a <span class="math inline">\((2, 2)\)</span> irányába mutat. Ez azt jelenti, hogy a függvény leggyorsabban ebbe az irányba nő.</p>
-<div id="8ab4cdab" class="cell" data-cache="true" data-message="false" data-execution_count="5">
+<div id="11271823" class="cell" data-cache="true" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <iframe src="animacio_3d_forgas.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>
 </div>
@@ -415,7 +450,7 @@ Tartalomjegyzék
 0 &amp; 2
 \end{pmatrix}
 \]</span></p>
-<div id="7a5982a7" class="cell" data-cache="true" data-message="false" data-execution_count="6">
+<div id="e3cba327" class="cell" data-cache="true" data-message="false" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 <iframe src="animacio_hesse_3d.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>
 </div>
@@ -434,7 +469,7 @@ Tartalomjegyzék
 </div>
 <div class="callout-body-container callout-body">
 <p>Minimalizálásnál negatív gradiens vektor irányba lépünk, mivel a gradiens a legmeredekebb növekedés irányát mutatja. Negatív gradiens mező így néz ki a <span class="math inline">\(f(x) = \frac{x_1^4}{4} + \frac{x_2^4}{4} + \frac{x_1^3}{3} + \frac{x_2^3}{3} - x_1^2 - x_2^2 + 2 \space\)</span> függvény esetén.</p>
-<div id="d9545dd1" class="cell" data-cache="true" data-message="false" data-execution_count="7">
+<div id="0c905300" class="cell" data-cache="true" data-message="false" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -487,7 +522,7 @@ Tartalomjegyzék
 <p>Az alábbi ábrán a <span class="math inline">\(f(x_1, x_2) = x_1^2 - x_2^2\)</span> függvény stacionárius pontja a <span class="math inline">\((0, 0)\)</span> pont, amely egy nyeregpont. A gradiens vektorok a stacionárius pontban nullvektorok, azaz <span class="math inline">\(\nabla f(0, 0) = (0, 0)\)</span>.</p>
 </div>
 </div>
-<div id="a66a7ba4" class="cell" data-cache="true" data-message="false" data-execution_count="8">
+<div id="288f6014" class="cell" data-cache="true" data-message="false" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -606,7 +641,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div id="074f6200" class="cell" data-cache="true" data-message="false" data-execution_count="9">
+<div id="45426561" class="cell" data-cache="true" data-message="false" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -699,17 +734,15 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div id="20ae2dad" class="cell" data-cache="true" data-message="false" data-execution_count="10">
+<div id="c3313781" class="cell" data-cache="true" data-message="false" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <iframe src="animacio_linearis_regresszio.html" width="100%" height="470" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>
 </div>
 </div>
 </section>
 </section>
-<section id="optimalizációs-algoritmusok-többváltozós-függvényekre" class="level1">
-<h1>Optimalizációs algoritmusok többváltozós függvényekre</h1>
-<section id="gradiens-módszer" class="level2">
-<h2 data-anchor-id="gradiens-módszer">Gradiens módszer</h2>
+<section id="gradiens-módszer" class="level1">
+<h1>Gradiens módszer</h1>
 <div class="callout callout-style-default callout-note callout-titled" title="Gradiens">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -738,9 +771,786 @@ Tartalomjegyzék
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="math inline">\(x_0\)</span> kezdővektor, <span class="math inline">\(\alpha &gt; 0\)</span></p>
-<p><span class="math display">\[x_{k+1} = x_k - \alpha \nabla f(x_k)\]</span></p>
-<p>Fontos a jó lépésköz kiválasztása, mert ha túl nagy, akkor a minimumtól távolodhatunk, ha túl kicsi, akkor lassan konvergálunk. <strong>Választási módszerek:</strong> iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az <span class="math inline">\(\alpha\)</span>-t úgy választjuk, hogy <span class="math inline">\(- \nabla f(x_k)\)</span> irányban az optimális lépést találjuk).</p>
+<p><span class="math inline">\(x_0\)</span> kezdővektor, <span class="math inline">\(\alpha &gt; 0\)</span>,</p>
+<p><span class="math display">\[x_{k+1} = x_k - \alpha \nabla f(x_k)\]</span> Ilyenkor az <span class="math inline">\(x_k\)</span> sorozat közelít a minimumhoz, mivel a negatív gradiens irányba lépünk.</p>
+<p>Fontos a jó lépésköz kiválasztása, mert ha túl nagy, akkor a minimumtól távolodhatunk, ha túl kicsi, akkor lassan konvergálunk.<br>
+<strong>Választási módszerek:</strong> iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az <span class="math inline">\(\alpha\)</span>-t úgy választjuk, hogy <span class="math inline">\(- \nabla f(x_k)\)</span> irányban az optimális lépést találjuk).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Kétváltozós függvényeknél a gradiens módszer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Kétváltozós függvényeknél a gradiens módszer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az <span class="math inline">\(\frac{x^4}{4} + \frac{x^3}{3} - x^2 + 1 + \frac{y^4}{4} + \frac{y^3}{3} - y^2 + 1\)</span> függvény és a gradiensének definiálása:</p>
+<p><span class="math inline">\(\nabla f(x, y) = \begin{pmatrix} x^3 + x^2 - 2x \\ y^3 + y^2 - 2y \end{pmatrix}\)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x, y):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">**</span><span class="dv">4</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">-</span> x<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">4</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">3</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fvgrad(x, y):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([(x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> x), y<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> y])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>fv1 <span class="op">=</span> <span class="kw">lambda</span> x: fv(x[<span class="dv">0</span>], x[<span class="dv">1</span>])      <span class="co"># Átdobja egyváltozós függvénybe, hogy a gradiens módszerhez használható legyen</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> <span class="kw">lambda</span> x: fvgrad(x[<span class="dv">0</span>], x[<span class="dv">1</span>])   <span class="co"># Same here, meg lehet csinálni már a függvényt egyváltozósként is x[:, 0], x[:, 1] vektorokkal.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A gradiens módszer <strong>implementációja</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   fun: a celfuggveny</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   fund: a celfuggveny gradiense</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   x0: kezdovektor</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   alfa: lepeshossz</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   n: maximalis lepesszam</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   tol: tolerancia a leallasi feltetelhez</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># output:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   pontok: a bejart pontok</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   fval: a fuggveny erteke a bejart pontokban</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   k: az elvegzett lepesek szama</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradm(fun, fund, x0, alfa, n, tol):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    pontok <span class="op">=</span> np.zeros((n <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(x0)))               <span class="co"># n + 1 sor, len(x0) oszlop</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    fval <span class="op">=</span> np.zeros(n <span class="op">+</span> <span class="dv">1</span>)                            <span class="co"># n + 1 sor, 1 oszlop</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    pontok[<span class="dv">0</span>] <span class="op">=</span> x0</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    fval[<span class="dv">0</span>] <span class="op">=</span> fun(x0)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> fund(pontok[<span class="dv">0</span>])</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> k <span class="op">&lt;</span> n <span class="kw">and</span> np.linalg.norm(grad) <span class="op">&gt;=</span> tol:      <span class="co"># Feltétel: a lépésszám kisebb, mint a maximum, és a gradiens normája nagyobb, mint a tolerancia (sqrt(x**2 + y**2 + ...) &lt; tol nál megáll)</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        pontok[k <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> pontok[k] <span class="op">-</span> alfa <span class="op">*</span> grad       <span class="co"># A következő pont a jelenlegi pont mínusz a gradiens irányába lépve, a lépéshosszal szorozva</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        fval[k <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> fun(pontok[k <span class="op">+</span> <span class="dv">1</span>])              <span class="co"># A függvény értéke a következő pontban</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        k <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> fund(pontok[k])</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontok[:k <span class="op">+</span> <span class="dv">1</span>], fval[:k <span class="op">+</span> <span class="dv">1</span>], k            <span class="co"># Csak a bejárt pontokat adjuk vissza, sima tömbös módszernél nem kell ilyen csak idk hogy kell használni a numpyt xd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Kirajzolás</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p, f, m <span class="op">=</span> gradm(fv1, g1, np.array([<span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.8</span>]), <span class="fl">0.01</span>, <span class="dv">400</span>, <span class="fl">1e-3</span>)       <span class="co"># Megadjuk a kezdőpontot, lépéshosszt, maximális iterációt és toleranciát</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>xx <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> xx.copy()                                                          <span class="co"># -3 és 3 között 100 pontot generálunk mindkét tengelyre</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>xmatrix, ymatrix <span class="op">=</span> np.meshgrid(xx, yy)                                  <span class="co"># Létrehozunk egy hálót a két tengely mentén</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>zmatrix <span class="op">=</span> fv(xmatrix, ymatrix)                                          <span class="co"># A függvény értékeit kiszámítjuk a háló minden pontjára</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.contour(xmatrix, ymatrix, zmatrix, levels<span class="op">=</span>np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">15</span>))   <span class="co"># Kontúrokat rajzolunk a függvény értékei alapján, 15 szinttel -3 és 3 között</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)                                                       <span class="co"># Az x és y tengelyek arányát egyenlővé tesszük, hogy a kontúrok ne torzuljanak</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.plot(p[:, <span class="dv">0</span>], p[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">"r"</span>)                                       <span class="co"># A gradiens módszer által bejárt pontokat piros vonallal rajzoljuk ki</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9902517f" class="cell" data-cache="true" data-message="false" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-12-output-1.png" width="474" height="468" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Gradiens módszer problémák">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Gradiens módszer problémák
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>A negatív gradiens az adott pontbeli legmeredekebb csökkenés irányába mutat, ami <strong>nem feltétlenül a (lokális) minimumhely iránya</strong>.</p></li>
+<li><p>Ha a célfüggvénynek <strong>hosszú, elnyújtott, lapos völgyei vannak</strong>, akkor ott a módszer lelassul.</p></li>
+<li><p>Hirtelen, meredekebben változó résekben a <strong>gradiens túl nagy</strong>, “túllépünk” a minimumhelyen (divergencia, oszcilláció).</p></li>
+<li><p>Az iteráció <strong>beragadhat</strong> egy lokális minimumhelybe.</p></li>
+<li><p>Ha a célfüggvény <strong>nem mindenhol differenciálható</strong>.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Példa">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Példa
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[f(x, y) = x^2 + 20y^2\]</span></p>
+<p><span class="math display">\[\nabla f(x, y) = \begin{pmatrix} 2x \\ 40y \end{pmatrix}\]</span></p>
+<div id="a8f65479" class="cell" data-cache="true" data-message="false" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> x[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>], <span class="dv">40</span> <span class="op">*</span> x[<span class="dv">1</span>]])</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_meth(f, g, x0, alfa, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x0</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    pontok <span class="op">=</span> [x.copy()]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x)) <span class="op">&gt;</span> tol <span class="kw">and</span> n <span class="op">&lt;</span> maxit:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">-=</span> alfa <span class="op">*</span> g(x)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        pontok.append(x.copy())</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(pontok)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>xm <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ym <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(xm, ym)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> fv(np.array([X, Y]))</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>xmatrix <span class="op">=</span> grad_meth(fv, grad, np.array([<span class="op">-</span><span class="dv">3</span>, <span class="fl">0.8</span>]), <span class="fl">0.04</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-13-output-1.png" width="574" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="momentum-módszer" class="level2">
+<h2 data-anchor-id="momentum-módszer">Momentum módszer</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Momentum módszer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Momentum módszer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Alapötlet</strong>: őrizzük meg valamennyit az előző lépés lendületéből, csökkentve a cikk-cakk mozágsokat.</p>
+<p>Az aktuális lépés az előző lépés és az aktuális gradiens lineáris kombinációja:</p>
+<p><span class="math display">\[v = \beta v - \alpha \nabla f(x_k)\]</span> <span class="math display">\[x = x + v\]</span></p>
+<p>Itt <span class="math inline">\(v\)</span> a momentum vektor, a <span class="math inline">\(\beta\)</span> pedig megmondja, hogy mennyire őrizzük meg az előző lépés lendületét. A 0 azt jelenti, hogy nem őrizzük meg a lendületet, míg az 1 azt jelenti, hogy teljesen megtartjuk az előző lépést.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Például, ha a <span class="math inline">\(\nabla f(x_0) = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\)</span>, és <span class="math inline">\(\nabla f(x_1) = \begin{pmatrix} 4 \\ -5 \end{pmatrix}\)</span>, akkor a momentum módszer:</p>
+<p><span class="math inline">\(v_0 = \alpha \begin{pmatrix} 2 \\ 1 \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(v_1 = \beta (\alpha \begin{pmatrix} 2 \\ 1 \end{pmatrix}) - \alpha \begin{pmatrix} 4 \\ -5 \end{pmatrix}\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> x[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>], <span class="dv">40</span> <span class="op">*</span> x[<span class="dv">1</span>]])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> momentum_m(f, g, x0, beta, alfa, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    x_matrix <span class="op">=</span> [x0]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x0)) <span class="op">&gt;</span> tol <span class="kw">and</span> n <span class="op">&lt;</span> maxit:</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> beta <span class="op">*</span> v <span class="op">-</span> alfa <span class="op">*</span> g(x0)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">+=</span> v</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        x_matrix <span class="op">=</span> np.append(x_matrix, [x0], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0, n, x_matrix</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>xmin, step, xmatrix <span class="op">=</span> momentum_m(fv, grad, [<span class="op">-</span><span class="dv">3</span>, <span class="fl">0.8</span>], <span class="fl">0.5</span>, <span class="fl">0.03</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>xm <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>ym <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(xm, ym)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> fv(np.array([X, Y]))</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="truead" class="level2">
+<h2 data-anchor-id="truead">truead</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="AdaGrad">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>AdaGrad
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Alapötlet:</strong> ha a gradiensvektor koordinátái nagyon különöbző nagyságrendűek, akkor a kisebbek irányában alig mozdul az iteráicó. Kényszerítsük az algoritmust, hogy ezeket az irányokat valamivel nagyobb súllyal vegye figyelembe.</p>
+<p>Az algoritmus: <span class="math display">\[s_0 = 0\]</span> <span class="math display">\[s_t = s_{t-1} + \nabla f(x)^2\]</span> <span class="math display">\[x_t = x_{t-1} - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-37" class="callout-37-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A lényege az egésznek, hogy az <span class="math inline">\(s_t\)</span> a korábbi gradiensvektorok négyzetösszegét tartalmazza, ezáltal a kisebb koordináták irányában a lépések nagyobbak lesznek, míg a nagyobb koordináták irányában kisebbek.</p>
+<p>Például, ha a gradiensvektor koordinátái <span class="math inline">\([0.1, 10]\)</span>, akkor az AdaGrad módszer a második koordináta irányában kisebb lépéseket fog tenni, míg az első koordináta irányában nagyobbakat. Ezzel smoothabbá válik a konvergencia.</p>
+<p>Maga az algoritmus nagyon lassan konvergál, de a gradiens módszerhez képest sokkal stabilabb lesz a viselkedése, különösen akkor, ha a függvény nagyon különböző nagyságrendű irányokban változik. Ezért nagyobb lépésközöket is lehet használni, mint a sima gradiens módszernél.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> x[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>], <span class="dv">40</span> <span class="op">*</span> x[<span class="dv">1</span>]])</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adagrad(f, g, x0, alfa, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    x_matrix <span class="op">=</span> [x0]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x0)) <span class="op">&gt;</span> tol <span class="kw">and</span> n <span class="op">&lt;</span> maxit:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> s <span class="op">+</span> g(x0) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">-=</span> alfa <span class="op">/</span> (np.sqrt(s) <span class="op">+</span> <span class="fl">10e-5</span>) <span class="op">*</span> g(x0)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        x_matrix <span class="op">=</span> np.append(x_matrix, [x0], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0, n, x_matrix</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>xmin, step, xmatrix <span class="op">=</span> adagrad(fv, grad, [<span class="op">-</span><span class="dv">3</span>, <span class="fl">0.8</span>], <span class="fl">0.4</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>xm <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ym <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(xm, ym)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> fv(np.array([X, Y]))</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="833fba86" class="cell" data-cache="true" data-message="false" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-15-output-1.png" width="1336" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="rmsprop" class="level2">
+<h2 data-anchor-id="rmsprop">RMSProp</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="RMSProp">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>RMSProp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Alapötlet</strong>: az adagrad módserben ne hagyjuk az s értékét nagyon megnőni (ezzel nagyon lelassítva a konvergenciát).</p>
+<p>Az algoritmus:</p>
+<p><span class="math display">\[s_0 = 0\]</span> <span class="math display">\[s_t = \beta s_{t-1} + (1 - \beta) \nabla f(x)^2\]</span> <span class="math display">\[x = x - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával, <span class="math inline">\(\beta\)</span> pedig a súlyozás mértékét adja, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Az AdaGrad módszerben az s értéke a korábbi gradiensvektorok négyzetösszegét tartalmazza.Ilyenkor nagyon kicsi lépéseket tesz az algoritmus, ami miatt nagyon lassan konvergál. A RMSProp módszerben az s értéket az előző s érték és az aktuális gradiensvektor négyzetének súlyozott átlaga adja, így az s értéke nem nőhet túl nagyra, és az algoritmus gyorsabban konvergál.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-41" class="callout-41-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[<span class="dv">0</span>] <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> x[<span class="dv">1</span>] <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>], <span class="dv">40</span> <span class="op">*</span> x[<span class="dv">1</span>]])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rmsprop(f, g, x0, beta, alfa, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    x_matrix <span class="op">=</span> [x0]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x0)) <span class="op">&gt;</span> tol <span class="kw">and</span> n <span class="op">&lt;</span> maxit:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> beta <span class="op">*</span> s <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta) <span class="op">*</span> g(x0) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">-=</span> alfa <span class="op">/</span> (np.sqrt(s) <span class="op">+</span> <span class="fl">10e-5</span>) <span class="op">*</span> g(x0)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        x_matrix <span class="op">=</span> np.append(x_matrix, [x0], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0, n, x_matrix</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>xmin, step, xmatrix <span class="op">=</span> rmsprop(fv, grad, [<span class="op">-</span><span class="dv">3</span>, <span class="fl">0.8</span>], <span class="fl">0.9</span>, <span class="fl">0.2</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>xm <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ym <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(xm, ym)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> fv(np.array([X, Y]))</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a096c573" class="cell" data-cache="true" data-message="false" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-16-output-1.png" width="1336" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="adam" class="level2">
+<h2 data-anchor-id="adam">Adam</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Adam">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Adam
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Alapötlet</strong>: kombináljuk a momentum és adagrad (RMSProp) módszerek ötleteit, azaz tartsunk meg valamennyit az előző lépés lendületéből és segítsük a lassabban változó irányban az elmozdulást.</p>
+<p>Az algoritmus:</p>
+<p><span class="math display">\[s_0 = 0, v_0 = 0\]</span> <span class="math display">\[v_t = \beta_1 v_{t-1} + (1 - \beta_1) \nabla f(x)\]</span> <span class="math display">\[s_t = \beta_2 s_{t-1} + (1 - \beta_2) \nabla f(x)^2\]</span></p>
+<p><span class="math display">\[\hat{v}_t = \frac{v_t}{1 - \beta_1^t}, \hat{s}_t = \frac{s_t}{1 - \beta_2^t}\]</span></p>
+<p><span class="math display">\[x = x - \frac{\alpha}{\sqrt{\hat{s}_t + c}} \hat{v}_t\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával, <span class="math inline">\(\beta_1\)</span> és <span class="math inline">\(\beta_2\)</span> pedig a súlyozás mértékét adják, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat. (0.9 és 0.999 a tipikus értékek)</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-43" class="callout-43-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A kettő módszer kombinációja miatt az Adam módszer gyorsan konvergál, és stabilabb, mint a sima gradiens módszer. A momentum rész segít a cikk-cakk mozgások csökkentésében, míg az adagrad rész segít a lassabban változó irányokban az elmozdulásban.</p>
+<p>A <span class="math inline">\(\hat{v}_t\)</span> és <span class="math inline">\(\hat{s}_t\)</span> értékek normalizálás miatt vannak, így a konvergencia stabilabb.</p>
+<p>A <span class="math inline">\(\beta_1^t\)</span> és <span class="math inline">\(\beta_2^t\)</span> nél a <span class="math inline">\(t\)</span> a lépések számát jelenti, így a normalizálás mértéke csökken a lépések számával, ami segít a konvergenciában.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-44" class="callout-44-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fv(x):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[<span class="dv">0</span>] <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> x[<span class="dv">1</span>] <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x):</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>], <span class="dv">40</span> <span class="op">*</span> x[<span class="dv">1</span>]])</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adam(f, g, x0, beta1, beta2, alfa, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    x_matrix <span class="op">=</span> [x0]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x0)) <span class="op">&gt;</span> tol <span class="kw">and</span> n <span class="op">&lt;</span> maxit:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> beta1 <span class="op">*</span> v <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta1) <span class="op">*</span> g(x0)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> beta2 <span class="op">*</span> s <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta2) <span class="op">*</span> g(x0) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        vkalap <span class="op">=</span> v <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> beta1 <span class="op">**</span> (n <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        skalap <span class="op">=</span> s <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> beta2 <span class="op">**</span> (n <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">-=</span> alfa <span class="op">*</span> vkalap <span class="op">/</span> (np.sqrt(skalap) <span class="op">+</span> <span class="fl">10e-5</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        x_matrix <span class="op">=</span> np.append(x_matrix, [x0], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0, n, x_matrix</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>xmin, step, xmatrix <span class="op">=</span> adam(fv, grad, [<span class="op">-</span><span class="dv">3</span>, <span class="fl">0.8</span>], <span class="fl">0.8</span>, <span class="fl">0.999</span>, <span class="fl">0.2</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>xm <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>ym <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(xm, ym)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> fv(np.array([X, Y]))</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3117bf2a" class="cell" data-cache="true" data-message="false" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-17-output-1.png" width="1336" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sgd" class="level1">
+<h1>SGD</h1>
+<div class="callout callout-style-default callout-note callout-titled" title="Optimalizáció a gépi tanulásban">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Optimalizáció a gépi tanulásban
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Felügyelt tanulás</strong>: <span class="math inline">\((x^{(1)}, y^{(1)}), \ldots, (x^{(n)}, y^{(n)})\)</span> tanuló adatok.</p>
+<p><span class="math inline">\(x^{(i)} \in \mathbb{R}^d\)</span>: <strong>jellemzővektor</strong> (feature vector), <span class="math inline">\(y^{(i)}\)</span>: <strong>elvárt kimenet</strong>.</p>
+<p><span class="math inline">\(\hat{y}^{(i)}\)</span>: az <span class="math inline">\(x^{(i)}\)</span>-ből <strong>predikált kimenet</strong>, ami függ egy <span class="math inline">\(w\)</span> súlyvektortól.</p>
+<p>A cél hogy olyan súlyvektort találjunk, melyre az elvárt és prediktált kimenetek <strong>közötti eltérés (loss) a lehető legkisebb</strong>.</p>
+<p>Ha <span class="math inline">\(f_i(w)\)</span> a <span class="math inline">\(i\)</span>-edik tanulóadatnak megfelelő <strong>veszteség</strong>, akkor a <strong>veszteségfüggvény</strong> (célfüggvény):</p>
+<p><span class="math display">\[f(w) = \frac{1}{n} \sum_{i=1}^n f_i(w)\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Példa">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Példa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Lineáris regresszió:</strong><br>
+<span class="math inline">\(\hat{y} = w_1x_1^{(i)} + \ldots + w_dx_d^{(i)} = (x^{(i)})^T w\)</span>, vagyis a feature vektor transzponáltja szorozva a súlyvektorral.<br>
+<span class="math inline">\(f(w) = \frac{1}{n}\sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})^2\)</span>, ami MSE vagyis átlagos négyzetes hiba.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Stochastic Gradient Descent (SGD)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Stochastic Gradient Descent (SGD)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Alapötlet</strong>: a gradiens helyett használjuk annak egy torzítatlan becslését, mivel a gradiens számítása nagyon költséges lehet, ha sok tanulóadatunk van.</p>
+<p><strong>Gradiens módszer</strong>: <span class="math display">\[w = w - \frac{\alpha}{n} \sum_{i=1}^n \nabla f_i(w)\]</span><br>
+<strong>SGD</strong>: <span class="math display">\[w = w - \alpha \nabla f_i(w)\]</span></p>
+<p><strong>1 epoch</strong>: amikor <span class="math inline">\(i\)</span> minden értéket felvesz (a tanulóadatokat mindig keverve).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-48" class="callout-48-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Az SGD képlete abban külnöbözik, hogy nem az összes tanulóadat gradiensét számítja ki, hanem csak egyet. Ezáltal a lépések gyorsabbak lesznek, de zajosabbak is. Az SGD gyakran gyorsabban konvergál, különösen nagy adathalmazok esetén, mivel nem kell minden adatot feldolgozni minden iterációban.</p>
+<p>Az epoch azt jelenti, hogy az összes tanulóadatot egyszer feldolgoztuk. Az SGD során minden epoch után a tanulóadatokat keverjük, hogy a gradiens becslés ne legyen torzított. Általában több epochot futtatunk, hogy a súlyvektor konvergáljon a minimumhoz.</p>
+</div>
+</div>
+</div>
+<section id="mini-batch-sgd" class="level2">
+<h2 data-anchor-id="mini-batch-sgd">Mini-batch SGD</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Mini-batch SGD">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mini-batch SGD
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az <span class="math inline">\(\{1, ..., N\}\)</span> indexhalmazt véletlenszerűen felosztjuk <span class="math inline">\(m\)</span> elemű <span class="math inline">\(N_1, ..., N_k\)</span> részhalmazokra, és</p>
+<p><span class="math display">\[w = w - \frac{\alpha}{m} \sum_{i \in N_j} \nabla f_i(w)\]</span></p>
+<p><strong>1 epoch:</strong> amikor <span class="math inline">\(j\)</span> minden értéket felvesz <span class="math inline">\(\{1, ..., K\}\)</span>-ból</p>
+<p><strong>Előny</strong>: kisebb memóriaigény<br>
+<strong>Hátrány</strong>: zajosabb célfüggvény</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-50" class="callout-50-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Az történik, hogy a teljes tanulóadat halmazt kisebb részhalmazokra bontjuk (kis csomagokra), és minden iterációban csak egy részhalmazt használunk a gradiens számításához.</p>
+<p>Például, ha 12 tanulóadatunk van, és 3 elemű mini-batch-eket használunk, akkor az első iterációban az első 3 adatot használjuk, a második iterációban a következő 3-at, és így tovább. Ezáltal a memóriaigény csökken, mivel nem kell az összes adatot egyszerre betölteni.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="órai-kód" class="level2">
+<h2 data-anchor-id="órai-kód">Órai kód</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Feladat">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Feladat
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Feladat:</strong> Olvassa be a pontok200E.txt fájlt. Ebben 200 térbeli pont koordinátái adottak, minden sor egy pont <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> és <span class="math inline">\(z\)</span> koordinátáit tartalmazza, ebben a sorrendben. Abrázolja a pontokat! Meg szeretnénk határozni a pontokat közelítő <span class="math display">\[p(w,x,y) = w_1 \sin(\pi x) e^{-w_2 x^2 - w_3 y^2}\]</span></p>
+<p>alakú függvényt, melyre</p>
+<p><span class="math display">\[F(w) = \frac{1}{N} \sum_{i=1}^{N} (p(w, x_i, y_i) - z_i)^2\]</span></p>
+<p>minimális, ahol N a pontok száma, (<span class="math inline">\(x_i\)</span>, <span class="math inline">\(y_i\)</span>, <span class="math inline">\(z_i\)</span>), <span class="math inline">\(i = 1, ..., N\)</span> a pontok koordinátái. Használjon mini-batch SGD módszert a paraméterek meghatározására. Kísérletezzen különböző lépéshosszakkal és batch méretekkel. Abrázolja a célfüggvény értékét az epoch szám függvényében</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Megoldás">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Megoldás
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-52" class="callout-52-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Előszőr is beolvassuk az adathalmazt, és kirajzoljuk a pontokat:</p>
+<div id="295498f7" class="cell" data-cache="true" data-message="false" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtxt(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pontok200E.txt"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    dtype<span class="op">=</span><span class="bu">float</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], data[:, <span class="dv">2</span>]) <span class="co"># X Y Z koordináták</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"A pontok (pontok200E.txt)"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-18-output-1.png" width="409" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Definiáljuk a modellt, a célfüggvényt és a gradiensét:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_p(w, x, y):                                                             <span class="co"># A p(w,x,y) függvény</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        w[<span class="dv">0</span>] <span class="op">*</span> np.sin(math.pi <span class="op">*</span> x) <span class="op">*</span> np.exp(<span class="op">-</span>w[<span class="dv">1</span>] <span class="op">*</span> np.square(x) <span class="op">-</span> w[<span class="dv">2</span>] <span class="op">*</span> np.square(y))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_m(w, d):                                                                <span class="co"># A célfüggvény, amit minimalizálni szeretnénk. w a súlyvektor, d a pontok koordinátái</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(np.square(fun_p(w, d[:, <span class="dv">0</span>], d[:, <span class="dv">1</span>]) <span class="op">-</span> d[:, <span class="dv">2</span>]))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_m_grad(w, d):                                                           <span class="co"># A célfüggvény gradiense</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (fun_p(w, d[:, <span class="dv">0</span>], d[:, <span class="dv">1</span>]) <span class="op">-</span> d[:, <span class="dv">2</span>])                              <span class="co"># Összetett függvény deriváltja, a láncszabály miatt</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    g1 <span class="op">=</span> (</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        c</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span> np.sin(math.pi <span class="op">*</span> d[:, <span class="dv">0</span>])</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span> np.exp(<span class="op">-</span>w[<span class="dv">1</span>] <span class="op">*</span> np.square(d[:, <span class="dv">0</span>]) <span class="op">-</span> w[<span class="dv">2</span>] <span class="op">*</span> np.square(d[:, <span class="dv">1</span>]))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    )                                                                           <span class="co"># x koordináta szerinti derivált</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    g2 <span class="op">=</span> c <span class="op">*</span> (<span class="op">-</span>np.square(d[:, <span class="dv">0</span>]) <span class="op">*</span> fun_p(w, d[:, <span class="dv">0</span>], d[:, <span class="dv">1</span>]))                 <span class="co"># y koordináta szerinti derivált</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    g3 <span class="op">=</span> c <span class="op">*</span> (<span class="op">-</span>np.square(d[:, <span class="dv">1</span>]) <span class="op">*</span> fun_p(w, d[:, <span class="dv">0</span>], d[:, <span class="dv">1</span>]))                 <span class="co"># z koordináta szerinti derivált</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([np.mean(g1), np.mean(g2), np.mean(g3)])</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>fun1 <span class="op">=</span> <span class="kw">lambda</span> w: fun_m(w, data)               <span class="co"># Átdobjuk egyváltozósra, a data változó adott</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>fun_1_g <span class="op">=</span> <span class="kw">lambda</span> w: fun_m_grad(w, data)       <span class="co"># Ugyanez</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mini-batch SGD implementációja:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> batch_sgd(data0, f, g, x0, eta, bs<span class="op">=</span><span class="dv">1</span>, tol<span class="op">=</span><span class="fl">1e-3</span>, maxit<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># data0: adattömb</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># f,g: a célfüggvény és a gradiense</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x0: kezdőpont</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># eta: lépéshossz</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># bs:  batch size (bs = 1 --&gt; SGD)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    epoch <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    f_matrix <span class="op">=</span> [f(x0, data0)]                                               <span class="co"># A célfüggvény értéke az epochok során</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    n_data <span class="op">=</span> data0.shape[<span class="dv">0</span>]                                                 <span class="co"># A pontok száma</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> n_data <span class="op">//</span> bs                                                        <span class="co"># A batch-ek száma</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    ind <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(n_data))                                               <span class="co"># Legenerálunk egy index listát a pontokhoz</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> np.linalg.norm(g(x0, data0)) <span class="op">&gt;</span> tol <span class="kw">and</span> epoch <span class="op">&lt;</span> maxit:             <span class="co"># Amíg a gradiens normája nagyobb, mint a tolerancia és az epochok száma kisebb, mint a maximum</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        random.shuffle(ind)                                                 <span class="co"># Megkeverjük az indexeket, hogy minden epochban más sorrendben vegyük a pontokat</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(m):                                                  <span class="co"># A batch-eken végigmegyünk</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            batch <span class="op">=</span> data0[ind[k <span class="op">*</span> bs : (k <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> bs], :]                    <span class="co"># Kiválasztjuk a batch-et az indexek alapján, k * bs-től (k+1)*bs-ig. Pl. bs=10, akkor k=0nál, 0-9, k=1nél 10-19, stb.</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            grad_val <span class="op">=</span> g(x0, batch)                                         <span class="co"># A batch-hez tartozó gradiens</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            x0 <span class="op">-=</span> eta <span class="op">*</span> grad_val                                            <span class="co"># A súlyvektor frissítése a gradiens és a lépéshossz alapján</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>            f_matrix <span class="op">=</span> np.append(f_matrix, [f(x0, data0)], axis<span class="op">=</span><span class="dv">0</span>)          <span class="co"># A célfüggvény értékének tárolása az epochok során</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        epoch <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0, epoch, f_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Kirajzolás:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>batch_s <span class="op">=</span> <span class="dv">8</span>                                                                   <span class="co"># 8as batch méret</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>wopt, n, f_matrix <span class="op">=</span> batch_sgd(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    data, fun_m, fun_m_grad, [<span class="fl">0.0</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>], eta<span class="op">=</span><span class="fl">0.1</span>, bs<span class="op">=</span>batch_s             <span class="co"># Lépéshossz 0.1, kezdőpont [0.0, 0.1, 0.1]</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"A parameterek becslese minibatch SGD eseten: </span><span class="sc">{</span>wopt<span class="sc">}</span><span class="ss">, amikor a batch size: </span><span class="sc">{</span>batch_s<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.plot(f_matrix)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"A celfuggveny, mini batch SGD, bs: </span><span class="sc">{</span>batch_s<span class="sc">}</span><span class="ss">, epochszam: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="97d4a22e" class="cell" data-cache="true" data-message="true" data-execution_count="18">
+<div class="cell-output cell-output-stdout">
+<pre><code>A parameterek becslese minibatch SGD eseten: [1.92830956 0.99937595 0.79366106], amikor a batch size: 8</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-19-output-2.png" width="579" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="A batch size és a learning rate kapcsolata a mérések alapján">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A batch size és a learning rate kapcsolata a mérések alapján
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>lépéshossz (<span class="math inline">\(\alpha\)</span>)</strong> határozza meg az ugrás mértékét (bal oldali ábra):</p>
+<ul>
+<li>Ha <strong>túl kicsi (<span class="math inline">\(\alpha = 0.1\)</span>, kék)</strong>, a modell csak <strong>vánszorog</strong>, 12 epoch alatt alig felezi a hibát.</li>
+<li>Ha <strong>ideális (<span class="math inline">\(\alpha = 2.0\)</span>, zöld)</strong>, pillanatok alatt beül a legmélyebb pontra (<span class="math inline">\(0.0386\)</span>).</li>
+<li>Ha <strong>túl nagy (<span class="math inline">\(\alpha = 10.0\)</span>, piros)</strong>, <strong>átugorjuk a völgyet</strong>, és a folyamatos oszcilláció miatt rángatózni kezd a görbe.</li>
+</ul>
+<p>A <strong>batch size (<span class="math inline">\(B\)</span>)</strong> a lépések számát és a számítási időt szabja meg (jobb oldali ábra):</p>
+<ul>
+<li><strong>Nagy batch (<span class="math inline">\(B = 4096\)</span>, kék):</strong> Mivel 1 epoch alatt alig lépünk párat, a modell szinte meg sem mozdul (<span class="math inline">\(0.1447\)</span>), a tanulás beragad.</li>
+<li><strong>Tiszta SGD (<span class="math inline">\(B = 1\)</span>, narancs):</strong> A mintánkénti frissítéssel fokozatosan csökken a hiba, de a rengeteg különálló művelet miatt <strong>lassú (<span class="math inline">\(0.173\text{ s}\)</span>)</strong>, és a zaj miatt kevésbé pontos (<span class="math inline">\(0.0555\)</span>).</li>
+<li><strong>Ideális Mini-batch (<span class="math inline">\(B = 64\)</span>, zöld):</strong> A kettő tökéletes ötvözete: a hardveres vektorizáció miatt <strong>villámgyors (<span class="math inline">\(0.004\text{ s}\)</span>)</strong>, miközben a legkisebb hibát éri el (<span class="math inline">\(0.0386\)</span>).</li>
+</ul>
+<p>Összességében a kettő <strong>egyenesen arányos egymással</strong>: kis batchnél a zaj miatt óvatosabb <span class="math inline">\(\alpha\)</span> kell, míg nagyobb batchnél a ritkább lépéseket nagyobb <span class="math inline">\(\alpha\)</span>-val kell kompenzálni.</p>
+<div id="fad3b0ce" class="cell" data-cache="true" data-message="false" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalizalas_files/figure-html/cell-20-output-1.png" width="1477" height="547" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 <script>

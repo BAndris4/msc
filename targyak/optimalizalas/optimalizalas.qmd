@@ -21,6 +21,10 @@ resources:
   - "animacio_3d_forgas.html"
   - "animacio_hesse_3d.html"
   - "animacio_linearis_regresszio.html"
+  - "animacio_gradvariansok.html"
+  - "animacio_newton_rosenbrock.html"
+  - "animacio_buntetofuggveny.html"
+  - "animacio_jel_simitas.html"
 ---
 
 <aside id="quarto-margin-sidebar">
@@ -1671,9 +1675,7 @@ with open("animacio_linearis_regresszio.html", "w", encoding="utf-8") as file:
 HTML('<iframe src="animacio_linearis_regresszio.html" width="100%" height="470" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>')
 ```
 
-# Optimalizációs algoritmusok többváltozós függvényekre
-
-## Gradiens módszer
+# Gradiens módszer
 
 ::: {.callout-note title="Gradiens"}
 
@@ -1691,14 +1693,1261 @@ $p = \nabla f(x_0)$ az $x_0$-beli legmeredekebb emelkedés iránya
 
 ::: {.callout-tip title="Gradiens módszer"}
 
-$x_0$ kezdővektor, $\alpha > 0$
+$x_0$ kezdővektor, $\alpha > 0$,
 
 $$x_{k+1} = x_k - \alpha \nabla f(x_k)$$
+Ilyenkor az $x_k$ sorozat közelít a minimumhoz, mivel a negatív gradiens irányba lépünk.
 
-Fontos a jó lépésköz kiválasztása, mert ha túl nagy, akkor a minimumtól távolodhatunk, ha túl kicsi, akkor lassan konvergálunk. **Választási módszerek:** iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az $\alpha$-t úgy választjuk, hogy $- \nabla f(x_k)$ irányban az optimális lépést találjuk).
+Fontos a jó lépésköz kiválasztása, mert ha túl nagy, akkor a minimumtól távolodhatunk, ha túl kicsi, akkor lassan konvergálunk.  
+**Választási módszerek:** iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az $\alpha$-t úgy választjuk, hogy $- \nabla f(x_k)$ irányban az optimális lépést találjuk).
+:::
+
+::: {.callout-caution title="Kétváltozós függvényeknél a gradiens módszer"}
+
+Az $\frac{x^4}{4} + \frac{x^3}{3} - x^2 + 1 + \frac{y^4}{4} + \frac{y^3}{3} - y^2 + 1$ függvény és a gradiensének definiálása:
+
+$\nabla f(x, y) = \begin{pmatrix} x^3 + x^2 - 2x \\ y^3 + y^2 - 2y \end{pmatrix}$
+
+```python
+import numpy as np
+
+def fv(x, y):
+    return (x**4 / 4 + x**3 / 3 - x**2) + 1 + y**4 / 4 + y**3 / 3 - y**2 + 1
+
+def fvgrad(x, y):
+    return np.array([(x**3 + x**2 - 2 * x), y**3 + y**2 - 2 * y])
+
+fv1 = lambda x: fv(x[0], x[1])      # Átdobja egyváltozós függvénybe, hogy a gradiens módszerhez használható legyen
+g1 = lambda x: fvgrad(x[0], x[1])   # Same here, meg lehet csinálni már a függvényt egyváltozósként is x[:, 0], x[:, 1] vektorokkal.
+```
+
+A gradiens módszer **implementációja**:
+```python
+# input:
+#   fun: a celfuggveny
+#   fund: a celfuggveny gradiense
+#   x0: kezdovektor
+#   alfa: lepeshossz
+#   n: maximalis lepesszam
+#   tol: tolerancia a leallasi feltetelhez
+# output:
+#   pontok: a bejart pontok
+#   fval: a fuggveny erteke a bejart pontokban
+#   k: az elvegzett lepesek szama
+
+def gradm(fun, fund, x0, alfa, n, tol):
+    pontok = np.zeros((n + 1, len(x0)))               # n + 1 sor, len(x0) oszlop
+    fval = np.zeros(n + 1)                            # n + 1 sor, 1 oszlop
+
+    pontok[0] = x0
+    fval[0] = fun(x0)
+
+    k = 0
+    grad = fund(pontok[0])
+
+    while k < n and np.linalg.norm(grad) >= tol:      # Feltétel: a lépésszám kisebb, mint a maximum, és a gradiens normája nagyobb, mint a tolerancia (sqrt(x**2 + y**2 + ...) < tol nál megáll)
+        pontok[k + 1] = pontok[k] - alfa * grad       # A következő pont a jelenlegi pont mínusz a gradiens irányába lépve, a lépéshosszal szorozva
+        fval[k + 1] = fun(pontok[k + 1])              # A függvény értéke a következő pontban
+
+        k += 1
+        grad = fund(pontok[k])
+
+    return pontok[:k + 1], fval[:k + 1], k            # Csak a bejárt pontokat adjuk vissza, sima tömbös módszernél nem kell ilyen csak idk hogy kell használni a numpyt xd
+```
+
+**Kirajzolás**:
+
+```python
+import matplotlib.pyplot as plt
+
+p, f, m = gradm(fv1, g1, np.array([-0.2, -0.8]), 0.01, 400, 1e-3)       # Megadjuk a kezdőpontot, lépéshosszt, maximális iterációt és toleranciát
+
+xx = np.linspace(-3, 3, 100)
+yy = xx.copy()                                                          # -3 és 3 között 100 pontot generálunk mindkét tengelyre
+
+xmatrix, ymatrix = np.meshgrid(xx, yy)                                  # Létrehozunk egy hálót a két tengely mentén
+
+zmatrix = fv(xmatrix, ymatrix)                                          # A függvény értékeit kiszámítjuk a háló minden pontjára
+plt.contour(xmatrix, ymatrix, zmatrix, levels=np.linspace(-3, 3, 15))   # Kontúrokat rajzolunk a függvény értékei alapján, 15 szinttel -3 és 3 között
+plt.axis("equal")                                                       # Az x és y tengelyek arányát egyenlővé tesszük, hogy a kontúrok ne torzuljanak
+plt.plot(p[:, 0], p[:, 1], c="r")                                       # A gradiens módszer által bejárt pontokat piros vonallal rajzoljuk ki
+plt.show()
+
+```
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+
+import numpy as np
+
+def fv(x, y):
+    return (x**4 / 4 + x**3 / 3 - x**2) + 1 + y**4 / 4 + y**3 / 3 - y**2 + 1
+
+def fvgrad(x, y):
+    return np.array([(x**3 + x**2 - 2 * x), y**3 + y**2 - 2 * y])
+
+fv1 = lambda x: fv(x[0], x[1])      # Átdobja egyváltozós függvénybe, hogy a gradiens módszerhez használható legyen
+g1 = lambda x: fvgrad(x[0], x[1])   # Same here, meg lehet csinálni már a függvényt egyváltozósként is x[:, 0], x[:, 1] vektorokkal.
+
+def gradm(fun, fund, x0, alfa, n, tol):
+    pontok = np.zeros((n + 1, len(x0)))               # n + 1 sor, len(x0) oszlop
+    fval = np.zeros(n + 1)                            # n + 1 sor, 1 oszlop
+
+    pontok[0] = x0
+    fval[0] = fun(x0)
+
+    k = 0
+    grad = fund(pontok[0])
+
+    while k < n and np.linalg.norm(grad) >= tol:      # Feltétel: a lépésszám kisebb, mint a maximum, és a gradiens normája nagyobb, mint a tolerancia (sqrt(x**2 + y**2 + ...) < tol nál megáll)
+        pontok[k + 1] = pontok[k] - alfa * grad       # A következő pont a jelenlegi pont mínusz a gradiens irányába lépve, a lépéshosszal szorozva
+        fval[k + 1] = fun(pontok[k + 1])              # A függvény értéke a következő pontban
+
+        k += 1
+        grad = fund(pontok[k])
+
+    return pontok[:k + 1], fval[:k + 1], k                   # Csak a bejárt pontokat adjuk vissza, sima tömbös módszernél nem kell ilyen csak idk hogy kell használni a numpyt xd
+
+import matplotlib.pyplot as plt
+
+p, f, m = gradm(fv1, g1, np.array([-0.2, -0.8]), 0.01, 400, 1e-3)       # Megadjuk a kezdőpontot, lépéshosszt, maximális iterációt és toleranciát
+
+xx = np.linspace(-3, 3, 100)
+yy = xx.copy()                                                          # -3 és 3 között 100 pontot generálunk mindkét tengelyre
+
+xmatrix, ymatrix = np.meshgrid(xx, yy)                                  # Létrehozunk egy hálót a két tengely mentén
+
+zmatrix = fv(xmatrix, ymatrix)                                          # A függvény értékeit kiszámítjuk a háló minden pontjára
+plt.figure(figsize=(5, 5))
+
+plt.contour(xmatrix, ymatrix, zmatrix, levels=np.linspace(-3, 2, 15))
+
+plt.plot(p[0, 0], p[0, 1], marker="o", c="r", markersize=6)
+plt.plot(p[: m + 1, 0], p[: m + 1, 1], c="r")
+plt.plot(p[m, 0], p[m, 1], marker="*", c="r", markersize=6)
+plt.xlim(-3, 2)
+plt.ylim(-3, 2)
+plt.gca().set_aspect("equal")
+
+plt.tight_layout()
+plt.show()
+```
+
 :::
 
 
+::: {.callout-tip title="Gradiens módszer problémák"}
+
+- A negatív gradiens az adott pontbeli legmeredekebb csökkenés
+irányába mutat, ami **nem feltétlenül a (lokális) minimumhely iránya**.
+
+- Ha a célfüggvénynek **hosszú, elnyújtott, lapos völgyei vannak**, akkor
+ott a módszer lelassul.
+
+- Hirtelen, meredekebben változó résekben a **gradiens túl nagy**,
+“túllépünk” a minimumhelyen (divergencia, oszcilláció).
+
+- Az iteráció **beragadhat** egy lokális minimumhelybe.
+
+- Ha a célfüggvény **nem mindenhol differenciálható**.
+:::
+
+::: {.callout-caution title="Példa" collapse="true"}
+
+ $$f(x, y) = x^2 + 20y^2$$
+
+ $$\nabla f(x, y) = \begin{pmatrix} 2x \\ 40y \end{pmatrix}$$
+
+```{python}
+#| echo: true
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def grad_meth(f, g, x0, alfa, tol=1e-3, maxit=5000):
+    x = x0
+    pontok = [x.copy()]
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        x -= alfa * g(x)
+        pontok.append(x.copy())
+        n += 1
+    return np.array(pontok)
+
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+xmatrix = grad_meth(fv, grad, np.array([-3, 0.8]), 0.04)
+
+plt.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+plt.plot(xmatrix[:, 0], xmatrix[:, 1], "r*--")
+plt.show()
+
+```
+
+:::
+
+## Momentum módszer
+
+::: {.callout-note title="Momentum módszer"}
+
+**Alapötlet**: őrizzük meg valamennyit az előző lépés lendületéből, csökkentve a cikk-cakk mozágsokat.
+
+Az aktuális lépés az előző lépés és az aktuális gradiens lineáris kombinációja:
+
+$$v = \beta v - \alpha \nabla f(x_k)$$
+$$x = x + v$$
+
+
+Itt $v$ a momentum vektor, a $\beta$ pedig megmondja, hogy mennyire őrizzük meg az előző lépés lendületét. A 0 azt jelenti, hogy nem őrizzük meg a lendületet, míg az 1 azt jelenti, hogy teljesen megtartjuk az előző lépést.
+
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+
+Például, ha a $\nabla f(x_0) = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$, és $\nabla f(x_1) = \begin{pmatrix} 4 \\ -5 \end{pmatrix}$, akkor a momentum módszer:
+
+$v_0 = \alpha \begin{pmatrix} 2 \\ 1 \end{pmatrix}$
+
+$v_1 = \beta (\alpha \begin{pmatrix} 2 \\ 1 \end{pmatrix}) - \alpha \begin{pmatrix} 4 \\ -5 \end{pmatrix}$
+
+:::
+
+::: {.callout-tip title="Kód" collapse="true"}
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def momentum_m(f, g, x0, beta, alfa, tol=1e-3, maxit=5000):
+    n = 0
+    x_matrix = [x0]
+    v = 0
+    while np.linalg.norm(g(x0)) > tol and n < maxit:
+        v = beta * v - alfa * g(x0)
+        x0 += v
+        n += 1
+        x_matrix = np.append(x_matrix, [x0], axis=0)
+    return x0, n, x_matrix
+
+xmin, step, xmatrix = momentum_m(fv, grad, [-3, 0.8], 0.5, 0.03)
+
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+plt.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+plt.plot(xmatrix[:, 0], xmatrix[:, 1], "r*--")
+plt.show()
+```
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def momentum_m(f, g, x0, beta, alfa, tol=1e-3, maxit=5000):
+    x = np.array(x0, dtype=float).copy()
+    x_matrix = [x.copy()]
+    v = np.zeros_like(x)
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        v = beta * v - alfa * g(x)
+        x += v
+        n += 1
+        x_matrix.append(x.copy())
+    return x, n, np.array(x_matrix)
+
+def grad_meth(f, g, x0, alfa, tol=1e-3, maxit=5000):
+    x = np.array(x0, dtype=float).copy()
+    pontok = [x.copy()]
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        x -= alfa * g(x)
+        pontok.append(x.copy())
+        n += 1
+    return x, n, np.array(pontok)
+
+# Paraméterek
+x0 = [-3.0, 0.8]
+alfa_mom, beta_mom = 0.03, 0.5
+alfa_gd = 0.04
+
+# Számítások
+xmin_mom, step_mom, xmatrix_mom = momentum_m(fv, grad, x0, beta_mom, alfa_mom)
+xmin_gd, step_gd, xmatrix_gd = grad_meth(fv, grad, x0, alfa_gd)
+
+# Rács a szintvonalakhoz
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+# Ábrázolás
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Gradiens módszer ábra
+label_gd = (f"α = {alfa_gd}\n"
+            f"Lépések: {step_gd}")
+ax1.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax1.plot(xmatrix_gd[:, 0], xmatrix_gd[:, 1], "r*--", label=label_gd)
+ax1.set_xlim(-3, 3)
+ax1.set_ylim(-3, 3)
+ax1.set_title("Gradiens módszer")
+ax1.legend(loc="upper right")
+
+# Momentum ábra
+label_mom = (f"α = {alfa_mom}, β = {beta_mom}\n"
+             f"Lépések: {step_mom}")
+ax2.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax2.plot(xmatrix_mom[:, 0], xmatrix_mom[:, 1], "r*--", label=label_mom)
+ax2.set_xlim(-3, 3)
+ax2.set_ylim(-3, 3)
+ax2.set_title("Momentum módszer")
+ax2.legend(loc="upper right")
+
+
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+## truead
+
+::: {.callout-note title="AdaGrad"}
+**Alapötlet:** ha a gradiensvektor koordinátái nagyon különöbző nagyságrendűek, akkor a kisebbek irányában alig mozdul az iteráicó.
+Kényszerítsük az algoritmust, hogy ezeket az irányokat valamivel nagyobb súllyal vegye figyelembe.
+
+Az algoritmus:
+$$s_0 = 0$$
+$$s_t = s_{t-1} + \nabla f(x)^2$$
+$$x_t = x_{t-1} - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)$$, ahol a $c$ egy kis pozitív szám, hogy ne legyen osztás nullával.
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+A lényege az egésznek, hogy az $s_t$ a korábbi gradiensvektorok négyzetösszegét tartalmazza, ezáltal a kisebb koordináták irányában a lépések nagyobbak lesznek, míg a nagyobb koordináták irányában kisebbek.
+
+Például, ha a gradiensvektor koordinátái $[0.1, 10]$, akkor az AdaGrad módszer a második koordináta irányában kisebb lépéseket fog tenni, míg az első koordináta irányában nagyobbakat. Ezzel smoothabbá válik a konvergencia.
+
+Maga az algoritmus nagyon lassan konvergál, de a gradiens módszerhez képest sokkal stabilabb lesz a viselkedése, különösen akkor, ha a függvény nagyon különböző nagyságrendű irányokban változik. Ezért nagyobb lépésközöket is lehet használni, mint a sima gradiens módszernél.
+:::
+
+::: {.callout-tip title="Kód" collapse="true"}
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def adagrad(f, g, x0, alfa, tol=1e-3, maxit=5000):
+    n = 0
+    x_matrix = [x0]
+    s = 0
+    while np.linalg.norm(g(x0)) > tol and n < maxit:
+        s = s + g(x0) ** 2
+        x0 -= alfa / (np.sqrt(s) + 10e-5) * g(x0)
+        n += 1
+        x_matrix = np.append(x_matrix, [x0], axis=0)
+    return x0, n, x_matrix
+  
+xmin, step, xmatrix = adagrad(fv, grad, [-3, 0.8], 0.4)
+
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+plt.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+plt.plot(xmatrix[:, 0], xmatrix[:, 1], "r*--")
+plt.show()
+```
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+# 1. AdaGrad módszer
+def adagrad(f, g, x0, alfa, tol=1e-3, maxit=5000, eps=1e-8):
+    x = np.array(x0, dtype=float).copy()
+    x_matrix = [x.copy()]
+    s = np.zeros_like(x)
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        gx = g(x)
+        s += gx ** 2
+        x -= (alfa / (np.sqrt(s) + eps)) * gx
+        n += 1
+        x_matrix.append(x.copy())
+    return x, n, np.array(x_matrix)
+
+# 2. Sima Gradiens módszer
+def grad_meth(f, g, x0, alfa, tol=1e-3, maxit=5000):
+    x = np.array(x0, dtype=float).copy()
+    pontok = [x.copy()]
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        x -= alfa * g(x)
+        pontok.append(x.copy())
+        n += 1
+    return x, n, np.array(pontok)
+
+# Paraméterek
+x0 = [-3.0, 0.8]
+alfa_adagrad = 0.4
+alfa_gd = 0.04
+
+# Számítások
+xmin_ada, step_ada, xmatrix_ada = adagrad(fv, grad, x0, alfa_adagrad)
+xmin_gd, step_gd, xmatrix_gd = grad_meth(fv, grad, x0, alfa_gd)
+
+# Rács a szintvonalakhoz
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+# Ábrázolás egymás mellett
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# AdaGrad ábra
+label_ada = (f"α = {alfa_adagrad}\n"
+             f"Lépések: {step_ada}\n"
+             f"Min: [{xmin_ada[0]:.4f}, {xmin_ada[1]:.4f}]")
+ax2.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax2.plot(xmatrix_ada[:, 0], xmatrix_ada[:, 1], "r*--", label=label_ada)
+ax2.set_xlim(-3, 3)
+ax2.set_ylim(-3, 3)
+ax2.set_title("AdaGrad módszer")
+ax2.legend(loc="upper right")
+
+# Gradiens módszer ábra
+label_gd = (f"α = {alfa_gd}\n"
+            f"Lépések: {step_gd}\n"
+            f"Min: [{xmin_gd[0]:.4f}, {xmin_gd[1]:.4f}]")
+ax1.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax1.plot(xmatrix_gd[:, 0], xmatrix_gd[:, 1], "r*--", label=label_gd)
+ax1.set_xlim(-3, 3)
+ax1.set_ylim(-3, 3)
+ax1.set_title("Gradiens módszer")
+ax1.legend(loc="upper right")
+
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+## RMSProp
+
+::: {.callout-note title="RMSProp"}
+**Alapötlet**: az adagrad módserben ne hagyjuk az s értékét nagyon megnőni (ezzel nagyon lelassítva a konvergenciát).
+
+Az algoritmus:
+
+$$s_0 = 0$$
+$$s_t = \beta s_{t-1} + (1 - \beta) \nabla f(x)^2$$
+$$x = x - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)$$, ahol a $c$ egy kis pozitív szám, hogy ne legyen osztás nullával, $\beta$ pedig a súlyozás mértékét adja, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat.
+
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+Az AdaGrad módszerben az s értéke a korábbi gradiensvektorok négyzetösszegét tartalmazza.Ilyenkor nagyon kicsi lépéseket tesz az algoritmus, ami miatt nagyon lassan konvergál. A RMSProp módszerben az s értéket az előző s érték és az aktuális gradiensvektor négyzetének súlyozott átlaga adja, így az s értéke nem nőhet túl nagyra, és az algoritmus gyorsabban konvergál.
+:::
+
+::: {.callout-tip title="Kód" collapse="true"}
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0] ** 2 + 20 * x[1] ** 2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def rmsprop(f, g, x0, beta, alfa, tol=1e-3, maxit=5000):
+    n = 0
+    s = 0
+    x_matrix = [x0]
+    while np.linalg.norm(g(x0)) > tol and n < maxit:
+        s = beta * s + (1 - beta) * g(x0) ** 2
+        x0 -= alfa / (np.sqrt(s) + 10e-5) * g(x0)
+        n += 1
+        x_matrix = np.append(x_matrix, [x0], axis=0)
+    return x0, n, x_matrix
+
+xmin, step, xmatrix = rmsprop(fv, grad, [-3, 0.8], 0.9, 0.2)
+
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+plt.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+plt.plot(xmatrix[:, 0], xmatrix[:, 1], "r*--")
+plt.show()
+```
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+# 1. RMSprop módszer
+def rmsprop(f, g, x0, beta, alfa, tol=1e-3, maxit=5000, eps=1e-8):
+    x = np.array(x0, dtype=float).copy()
+    x_matrix = [x.copy()]
+    s = np.zeros_like(x)
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        gx = g(x)
+        s = beta * s + (1 - beta) * (gx ** 2)
+        x -= (alfa / (np.sqrt(s) + eps)) * gx
+        n += 1
+        x_matrix.append(x.copy())
+    return x, n, np.array(x_matrix)
+
+# 2. AdaGrad módszer
+def adagrad(f, g, x0, alfa, tol=1e-3, maxit=5000, eps=1e-8):
+    x = np.array(x0, dtype=float).copy()
+    x_matrix = [x.copy()]
+    s = np.zeros_like(x)
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        gx = g(x)
+        s += gx ** 2
+        x -= (alfa / (np.sqrt(s) + eps)) * gx
+        n += 1
+        x_matrix.append(x.copy())
+    return x, n, np.array(x_matrix)
+
+# Paraméterek
+x0 = [-3.0, 0.8]
+beta_rms, alfa_rms = 0.9, 0.2
+alfa_ada = 0.4
+
+# Számítások
+xmin_rms, step_rms, xmatrix_rms = rmsprop(fv, grad, x0, beta_rms, alfa_rms)
+xmin_ada, step_ada, xmatrix_ada = adagrad(fv, grad, x0, alfa_ada)
+
+# Rács a szintvonalakhoz
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+# Ábrázolás egymás mellett
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# RMSprop ábra
+label_rms = (f"α = {alfa_rms}, β = {beta_rms}\n"
+             f"Lépések: {step_rms}\n"
+             f"Min: [{xmin_rms[0]:.4f}, {xmin_rms[1]:.4f}]")
+ax2.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax2.plot(xmatrix_rms[:, 0], xmatrix_rms[:, 1], "r*--", label=label_rms)
+ax2.set_xlim(-3, 3)
+ax2.set_ylim(-3, 3)
+ax2.set_title("RMSprop módszer")
+ax2.legend(loc="upper right")
+
+# AdaGrad ábra
+label_ada = (f"α = {alfa_ada}\n"
+             f"Lépések: {step_ada}\n"
+             f"Min: [{xmin_ada[0]:.4f}, {xmin_ada[1]:.4f}]")
+ax1.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax1.plot(xmatrix_ada[:, 0], xmatrix_ada[:, 1], "r*--", label=label_ada)
+ax1.set_xlim(-3, 3)
+ax1.set_ylim(-3, 3)
+ax1.set_title("AdaGrad módszer")
+ax1.legend(loc="upper right")
+
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+## Adam
+
+::: {.callout-note title="Adam"}
+**Alapötlet**: kombináljuk a momentum és adagrad (RMSProp) módszerek
+ötleteit, azaz tartsunk meg valamennyit az előző lépés lendületéből és
+segítsük a lassabban változó irányban az elmozdulást.
+
+Az algoritmus:
+
+$$s_0 = 0, v_0 = 0$$
+$$v_t = \beta_1 v_{t-1} + (1 - \beta_1) \nabla f(x)$$
+$$s_t = \beta_2 s_{t-1} + (1 - \beta_2) \nabla f(x)^2$$
+
+$$\hat{v}_t = \frac{v_t}{1 - \beta_1^t}, \hat{s}_t = \frac{s_t}{1 - \beta_2^t}$$
+
+$$x = x - \frac{\alpha}{\sqrt{\hat{s}_t + c}} \hat{v}_t$$, ahol a $c$ egy kis pozitív szám, hogy ne legyen osztás nullával, $\beta_1$ és $\beta_2$ pedig a súlyozás mértékét adják, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat. (0.9 és 0.999 a tipikus értékek)
+
+:::
+
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+A kettő módszer kombinációja miatt az Adam módszer gyorsan konvergál, és stabilabb, mint a sima gradiens módszer. A momentum rész segít a cikk-cakk mozgások csökkentésében, míg az adagrad rész segít a lassabban változó irányokban az elmozdulásban. 
+
+A $\hat{v}_t$ és $\hat{s}_t$ értékek normalizálás miatt vannak, így a konvergencia stabilabb. 
+
+A $\beta_1^t$ és $\beta_2^t$ nél a $t$ a lépések számát jelenti, így a normalizálás mértéke csökken a lépések számával, ami segít a konvergenciában.
+:::
+
+::: {.callout-tip title="Kód" collapse="true"}
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0] ** 2 + 20 * x[1] ** 2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+def adam(f, g, x0, beta1, beta2, alfa, tol=1e-3, maxit=5000):
+    n = 0
+    v = 0
+    s = 0
+    x_matrix = [x0]
+    while np.linalg.norm(g(x0)) > tol and n < maxit:
+        v = beta1 * v + (1 - beta1) * g(x0)
+        s = beta2 * s + (1 - beta2) * g(x0) ** 2
+        vkalap = v / (1 - beta1 ** (n + 1))
+        skalap = s / (1 - beta2 ** (n + 1))
+        x0 -= alfa * vkalap / (np.sqrt(skalap) + 10e-5)
+        n += 1
+        x_matrix = np.append(x_matrix, [x0], axis=0)
+    return x0, n, x_matrix
+
+xmin, step, xmatrix = adam(fv, grad, [-3, 0.8], 0.8, 0.999, 0.2)
+
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+plt.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+plt.plot(xmatrix[:, 0], xmatrix[:, 1], "r*--")
+plt.show()
+```
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+def fv(x):
+    return x[0]**2 + 20 * x[1]**2
+
+def grad(x):
+    return np.array([2 * x[0], 40 * x[1]])
+
+# 1. Adam módszer
+def adam(f, g, x0, beta1, beta2, alfa, tol=1e-3, maxit=5000, eps=1e-8):
+    x = np.array(x0, dtype=float).copy()
+    x_matrix = [x.copy()]
+    v = np.zeros_like(x)
+    s = np.zeros_like(x)
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        gx = g(x)
+        v = beta1 * v + (1 - beta1) * gx
+        s = beta2 * s + (1 - beta2) * (gx ** 2)
+        vkalap = v / (1 - beta1 ** (n + 1))
+        skalap = s / (1 - beta2 ** (n + 1))
+        x -= (alfa * vkalap) / (np.sqrt(skalap) + eps)
+        n += 1
+        x_matrix.append(x.copy())
+    return x, n, np.array(x_matrix)
+
+# 2. Sima Gradiens módszer
+def grad_meth(f, g, x0, alfa, tol=1e-3, maxit=5000):
+    x = np.array(x0, dtype=float).copy()
+    pontok = [x.copy()]
+    n = 0
+    while np.linalg.norm(g(x)) > tol and n < maxit:
+        x -= alfa * g(x)
+        pontok.append(x.copy())
+        n += 1
+    return x, n, np.array(pontok)
+
+# Paraméterek
+x0 = [-3.0, 0.8]
+beta1_adam, beta2_adam, alfa_adam = 0.8, 0.999, 0.2
+alfa_gd = 0.04
+
+# Számítások
+xmin_adam, step_adam, xmatrix_adam = adam(fv, grad, x0, beta1_adam, beta2_adam, alfa_adam)
+xmin_gd, step_gd, xmatrix_gd = grad_meth(fv, grad, x0, alfa_gd)
+
+# Rács a szintvonalakhoz
+xm = np.linspace(-3, 3, 100)
+ym = np.linspace(-3, 3, 100)
+X, Y = np.meshgrid(xm, ym)
+Z = fv(np.array([X, Y]))
+
+# Ábrázolás egymás mellett
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Adam ábra
+label_adam = (f"α = {alfa_adam}, β₁ = {beta1_adam}, β₂ = {beta2_adam}\n"
+              f"Lépések: {step_adam}\n"
+              f"Min: [{xmin_adam[0]:.4f}, {xmin_adam[1]:.4f}]")
+ax2.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax2.plot(xmatrix_adam[:, 0], xmatrix_adam[:, 1], "r*--", label=label_adam)
+ax2.set_xlim(-3, 3)
+ax2.set_ylim(-3, 3)
+ax2.set_title("Adam módszer")
+ax2.legend(loc="upper right")
+
+# Gradiens módszer ábra
+label_gd = (f"α = {alfa_gd}\n"
+            f"Lépések: {step_gd}\n"
+            f"Min: [{xmin_gd[0]:.4f}, {xmin_gd[1]:.4f}]")
+ax1.contour(X, Y, Z, levels=np.linspace(0, 15, 15))
+ax1.plot(xmatrix_gd[:, 0], xmatrix_gd[:, 1], "r*--", label=label_gd)
+ax1.set_xlim(-3, 3)
+ax1.set_ylim(-3, 3)
+ax1.set_title("Gradiens módszer")
+ax1.legend(loc="upper right")
+
+plt.tight_layout()
+plt.show()
+```
+:::
+
+# SGD
+
+::: {.callout-note title="Optimalizáció a gépi tanulásban"}
+**Felügyelt tanulás**: $(x^{(1)}, y^{(1)}), \ldots, (x^{(n)}, y^{(n)})$ tanuló adatok.
+
+$x^{(i)} \in \mathbb{R}^d$: **jellemzővektor** (feature vector), $y^{(i)}$: **elvárt kimenet**.
+
+$\hat{y}^{(i)}$: az $x^{(i)}$-ből **predikált kimenet**, ami függ egy $w$ súlyvektortól.
+
+A cél hogy olyan súlyvektort találjunk, melyre az elvárt és prediktált kimenetek **közötti eltérés (loss) a lehető legkisebb**.
+
+Ha $f_i(w)$ a $i$-edik tanulóadatnak megfelelő **veszteség**, akkor a **veszteségfüggvény** (célfüggvény):
+
+$$f(w) = \frac{1}{n} \sum_{i=1}^n f_i(w)$$
+:::
+
+::: {.callout-tip title="Példa"}
+**Lineáris regresszió:**  
+$\hat{y} = w_1x_1^{(i)} + \ldots + w_dx_d^{(i)} = (x^{(i)})^T w$, vagyis a feature vektor transzponáltja szorozva a súlyvektorral.  
+$f(w) = \frac{1}{n}\sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})^2$, ami MSE vagyis átlagos négyzetes hiba.
+:::
+
+::: {.callout-note title="Stochastic Gradient Descent (SGD)"}
+**Alapötlet**: a gradiens helyett használjuk annak egy torzítatlan becslését, mivel a gradiens számítása nagyon költséges lehet, ha sok tanulóadatunk van.
+
+**Gradiens módszer**: $$w = w - \frac{\alpha}{n} \sum_{i=1}^n \nabla f_i(w)$$  
+**SGD**: $$w = w - \alpha \nabla f_i(w)$$
+
+**1 epoch**: amikor $i$ minden értéket felvesz (a tanulóadatokat mindig keverve).
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+
+Az SGD képlete abban külnöbözik, hogy nem az összes tanulóadat gradiensét számítja ki, hanem csak egyet. Ezáltal a lépések gyorsabbak lesznek, de zajosabbak is. Az SGD gyakran gyorsabban konvergál, különösen nagy adathalmazok esetén, mivel nem kell minden adatot feldolgozni minden iterációban.
+
+Az epoch azt jelenti, hogy az összes tanulóadatot egyszer feldolgoztuk. Az SGD során minden epoch után a tanulóadatokat keverjük, hogy a gradiens becslés ne legyen torzított. Általában több epochot futtatunk, hogy a súlyvektor konvergáljon a minimumhoz.
+
+:::
+
+## Mini-batch SGD
+
+::: {.callout-note title="Mini-batch SGD"}
+Az $\{1, ..., N\}$ indexhalmazt véletlenszerűen felosztjuk $m$ elemű $N_1, ..., N_k$ részhalmazokra, és
+
+$$w = w - \frac{\alpha}{m} \sum_{i \in N_j} \nabla f_i(w)$$
+
+**1 epoch:** amikor $j$ minden értéket felvesz $\{1, ..., K\}$-ból
+
+**Előny**: kisebb memóriaigény  
+**Hátrány**: zajosabb célfüggvény
+:::
+
+::: {.callout-caution title="Magyarázat" collapse="true"}
+Az történik, hogy a teljes tanulóadat halmazt kisebb részhalmazokra bontjuk (kis csomagokra), és minden iterációban csak egy részhalmazt használunk a gradiens számításához. 
+
+Például, ha 12 tanulóadatunk van, és 3 elemű mini-batch-eket használunk, akkor az első iterációban az első 3 adatot használjuk, a második iterációban a következő 3-at, és így tovább. Ezáltal a memóriaigény csökken, mivel nem kell az összes adatot egyszerre betölteni.
+
+:::
+
+## Órai kód
+
+::: {.callout-note title="Feladat"}
+
+**Feladat:** Olvassa be a pontok200E.txt fájlt. Ebben 200 térbeli pont koordinátái adottak, minden sor egy pont $x$, $y$ és $z$ koordinátáit tartalmazza, ebben a sorrendben. Abrázolja a pontokat! Meg szeretnénk határozni a pontokat közelítő
+$$p(w,x,y) = w_1 \sin(\pi x) e^{-w_2 x^2 - w_3 y^2}$$
+
+alakú függvényt, melyre
+
+$$F(w) = \frac{1}{N} \sum_{i=1}^{N} (p(w, x_i, y_i) - z_i)^2$$
+
+minimális, ahol N a pontok száma, ($x_i$, $y_i$, $z_i$), $i = 1, ..., N$ a pontok koordinátái. Használjon mini-batch SGD módszert a paraméterek meghatározására. Kísérletezzen különböző lépéshosszakkal és batch méretekkel. Abrázolja a célfüggvény értékét az epoch szám függvényében
+
+:::
+
+::: {.callout-tip title="Megoldás" collapse="true"}
+Előszőr is beolvassuk az adathalmazt, és kirajzoljuk a pontokat:
+```{python}
+# | echo: true
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: true
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.loadtxt(
+    "pontok200E.txt",
+    dtype=float,
+)
+
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+ax.scatter(data[:, 0], data[:, 1], data[:, 2]) # X Y Z koordináták
+plt.title("A pontok (pontok200E.txt)")
+plt.show()
+```
+
+Definiáljuk a modellt, a célfüggvényt és a gradiensét:
+
+```python
+def fun_p(w, x, y):                                                             # A p(w,x,y) függvény
+    return (
+        w[0] * np.sin(math.pi * x) * np.exp(-w[1] * np.square(x) - w[2] * np.square(y))
+    )
+
+
+def fun_m(w, d):                                                                # A célfüggvény, amit minimalizálni szeretnénk. w a súlyvektor, d a pontok koordinátái
+    return np.mean(np.square(fun_p(w, d[:, 0], d[:, 1]) - d[:, 2]))
+
+
+def fun_m_grad(w, d):                                                           # A célfüggvény gradiense
+    c = 2 * (fun_p(w, d[:, 0], d[:, 1]) - d[:, 2])                              # Összetett függvény deriváltja, a láncszabály miatt
+    g1 = (
+        c
+        * np.sin(math.pi * d[:, 0])
+        * np.exp(-w[1] * np.square(d[:, 0]) - w[2] * np.square(d[:, 1]))
+    )                                                                           # x koordináta szerinti derivált
+    g2 = c * (-np.square(d[:, 0]) * fun_p(w, d[:, 0], d[:, 1]))                 # y koordináta szerinti derivált
+    g3 = c * (-np.square(d[:, 1]) * fun_p(w, d[:, 0], d[:, 1]))                 # z koordináta szerinti derivált
+    return np.array([np.mean(g1), np.mean(g2), np.mean(g3)])
+
+fun1 = lambda w: fun_m(w, data)               # Átdobjuk egyváltozósra, a data változó adott
+fun_1_g = lambda w: fun_m_grad(w, data)       # Ugyanez
+```
+
+Mini-batch SGD implementációja:
+
+```python
+import random
+
+def batch_sgd(data0, f, g, x0, eta, bs=1, tol=1e-3, maxit=5000):
+    # data0: adattömb
+    # f,g: a célfüggvény és a gradiense
+    # x0: kezdőpont
+    # eta: lépéshossz
+    # bs:  batch size (bs = 1 --> SGD)
+    epoch = 0
+    f_matrix = [f(x0, data0)]                                               # A célfüggvény értéke az epochok során
+    n_data = data0.shape[0]                                                 # A pontok száma
+    m = n_data // bs                                                        # A batch-ek száma
+    ind = list(range(n_data))                                               # Legenerálunk egy index listát a pontokhoz
+    while np.linalg.norm(g(x0, data0)) > tol and epoch < maxit:             # Amíg a gradiens normája nagyobb, mint a tolerancia és az epochok száma kisebb, mint a maximum
+        random.shuffle(ind)                                                 # Megkeverjük az indexeket, hogy minden epochban más sorrendben vegyük a pontokat
+        for k in range(m):                                                  # A batch-eken végigmegyünk
+            batch = data0[ind[k * bs : (k + 1) * bs], :]                    # Kiválasztjuk a batch-et az indexek alapján, k * bs-től (k+1)*bs-ig. Pl. bs=10, akkor k=0nál, 0-9, k=1nél 10-19, stb.
+            grad_val = g(x0, batch)                                         # A batch-hez tartozó gradiens
+            x0 -= eta * grad_val                                            # A súlyvektor frissítése a gradiens és a lépéshossz alapján
+            f_matrix = np.append(f_matrix, [f(x0, data0)], axis=0)          # A célfüggvény értékének tárolása az epochok során
+        epoch += 1
+
+    return x0, epoch, f_matrix
+```
+Kirajzolás:
+
+```python
+batch_s = 8                                                                   # 8as batch méret
+wopt, n, f_matrix = batch_sgd(
+    data, fun_m, fun_m_grad, [0.0, 0.1, 0.1], eta=0.1, bs=batch_s             # Lépéshossz 0.1, kezdőpont [0.0, 0.1, 0.1]
+)
+print(
+    f"A parameterek becslese minibatch SGD eseten: {wopt}, amikor a batch size: {batch_s}"
+)
+
+plt.plot(f_matrix)
+plt.title(f"A celfuggveny, mini batch SGD, bs: {batch_s}, epochszam: {n}")
+plt.show()
+```
+
+```{python}
+# | echo: false
+# | message: true
+# | warning: false
+# | cache: true
+# | eval: true
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+# a modell
+def fun_p(w, x, y):
+    return (
+        w[0] * np.sin(math.pi * x) * np.exp(-w[1] * np.square(x) - w[2] * np.square(y))
+    )
+
+
+# a celfuggveny
+def fun_m(w, d):
+    # w: sulyok, d: adatmatrix
+    return np.mean(np.square(fun_p(w, d[:, 0], d[:, 1]) - d[:, 2]))
+
+
+# a celfv gradiense
+def fun_m_grad(w, d):
+    # w: sulyok, d: adatmatrix
+    c = 2 * (fun_p(w, d[:, 0], d[:, 1]) - d[:, 2])
+    g1 = (
+        c
+        * np.sin(math.pi * d[:, 0])
+        * np.exp(-w[1] * np.square(d[:, 0]) - w[2] * np.square(d[:, 1]))
+    )
+    g2 = c * (-np.square(d[:, 0]) * fun_p(w, d[:, 0], d[:, 1]))
+    g3 = c * (-np.square(d[:, 1]) * fun_p(w, d[:, 0], d[:, 1]))
+    return np.array([np.mean(g1), np.mean(g2), np.mean(g3)])
+
+
+##############################################################################################
+##############################################################################################
+
+fun1 = lambda w: fun_m(w, data)
+fun_1_g = lambda w: fun_m_grad(w, data)
+##############################################################################################
+##############################################################################################
+
+
+##############################################################################################
+# mini-bath SGD. Itt a lepeshossz fix.
+import random
+
+
+def batch_sgd(data0, f, g, x0, eta, bs=1, tol=1e-3, maxit=5000):
+    # data0: adattomb
+    # f,g: a celfv es a gradiense
+    # x0: kezdopont
+    # eta: lepeshossz
+    # bs:  batch size (bs = 1 --> SGD)
+    epoch = 0
+    f_matrix = [f(x0, data0)]
+    n_data = data0.shape[0]
+    # hany batch lesz (lehetnek kimarado elemek)
+    m = n_data // bs
+    ind = list(range(n_data))
+    while np.linalg.norm(g(x0, data0)) > tol and epoch < maxit:
+        random.shuffle(ind)
+        for k in range(m):
+            batch = data0[ind[k * bs : (k + 1) * bs], :]
+            grad_val = g(x0, batch)
+            x0 -= eta * grad_val
+            f_matrix = np.append(f_matrix, [f(x0, data0)], axis=0)
+        epoch += 1
+
+    return x0, epoch, f_matrix
+
+
+##############################################################################################
+# az eredmenyek
+batch_s = 8
+wopt, n, f_matrix = batch_sgd(
+    data, fun_m, fun_m_grad, [0.0, 0.1, 0.1], eta=0.1, bs=batch_s
+)
+print(
+    f"A parameterek becslese minibatch SGD eseten: {wopt}, amikor a batch size: {batch_s}"
+)
+
+plt.plot(f_matrix)
+plt.title(f"A celfuggveny, mini batch SGD, bs: {batch_s}, epochszam: {n}")
+plt.show()
+```
+:::
+
+::: {.callout-note title="A batch size és a learning rate kapcsolata a mérések alapján"}
+
+A **lépéshossz ($\alpha$)** határozza meg az ugrás mértékét (bal oldali ábra):
+
+- Ha **túl kicsi ($\alpha = 0.1$, kék)**, a modell csak **vánszorog**, 12 epoch alatt alig felezi a hibát.
+- Ha **ideális ($\alpha = 2.0$, zöld)**, pillanatok alatt beül a legmélyebb pontra ($0.0386$).
+- Ha **túl nagy ($\alpha = 10.0$, piros)**, **átugorjuk a völgyet**, és a folyamatos oszcilláció miatt rángatózni kezd a görbe.
+
+A **batch size ($B$)** a lépések számát és a számítási időt szabja meg (jobb oldali ábra):
+
+- **Nagy batch ($B = 4096$, kék):** Mivel 1 epoch alatt alig lépünk párat, a modell szinte meg sem mozdul ($0.1447$), a tanulás beragad.
+- **Tiszta SGD ($B = 1$, narancs):** A mintánkénti frissítéssel fokozatosan csökken a hiba, de a rengeteg különálló művelet miatt **lassú ($0.173\text{ s}$)**, és a zaj miatt kevésbé pontos ($0.0555$).
+- **Ideális Mini-batch ($B = 64$, zöld):** A kettő tökéletes ötvözete: a hardveres vektorizáció miatt **villámgyors ($0.004\text{ s}$)**, miközben a legkisebb hibát éri el ($0.0386$).
+
+Összességében a kettő **egyenesen arányos egymással**: kis batchnél a zaj miatt óvatosabb $\alpha$ kell, míg nagyobb batchnél a ritkább lépéseket nagyobb $\alpha$-val kell kompenzálni.
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+# | cache: true
+# | eval: true
+import math
+import time
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 1. Adatok betöltése
+data = np.loadtxt(
+    "C:/Users/Andris/Desktop/msc/targyak/optimalizalas/pontok200E.txt",
+    dtype=float,
+)
+
+
+def fun_p(w, x, y):
+    return (
+        w[0] * np.sin(math.pi * x) * np.exp(-w[1] * np.square(x) - w[2] * np.square(y))
+    )
+
+
+def fun_m(w, d):
+    return np.mean(np.square(fun_p(w, d[:, 0], d[:, 1]) - d[:, 2]))
+
+
+def fun_m_grad(w, d):
+    diff = fun_p(w, d[:, 0], d[:, 1]) - d[:, 2]
+    c = 2 * diff
+    g1 = (
+        c
+        * np.sin(math.pi * d[:, 0])
+        * np.exp(-w[1] * np.square(d[:, 0]) - w[2] * np.square(d[:, 1]))
+    )
+    g2 = c * (-np.square(d[:, 0]) * fun_p(w, d[:, 0], d[:, 1]))
+    g3 = c * (-np.square(d[:, 1]) * fun_p(w, d[:, 0], d[:, 1]))
+    return np.array([np.mean(g1), np.mean(g2), np.mean(g3)])
+
+
+# Optimalizáló algoritmus
+def run_experiment(data0, f, g, x0, eta, bs, epochs=10):
+    w = np.array(x0, dtype=float).copy()
+    loss_history = [f(w, data0)]
+    n_data = data0.shape[0]
+    m = n_data // bs
+    ind = np.arange(n_data)
+
+    t_start = time.perf_counter()
+    for _ in range(epochs):
+        np.random.shuffle(ind)
+        for k in range(m):
+            batch = data0[ind[k * bs : (k + 1) * bs], :]
+            grad_val = g(w, batch)
+
+            if np.any(np.isnan(grad_val)) or np.linalg.norm(grad_val) > 1e3:
+                loss_history.append(2.0)
+                return w, loss_history, time.perf_counter() - t_start
+
+            w -= eta * grad_val
+
+        loss = f(w, data0)
+        loss_history.append(min(loss, 2.0) if not np.isnan(loss) else 2.0)
+
+    elapsed_time = time.perf_counter() - t_start
+    return w, loss_history, elapsed_time
+
+
+w_start = [0.5, 0.1, 0.1]
+epochs = 12
+
+# =============================================================================
+# 1. KÍSÉRLET: Fix Batch Size (B = 64) mellett a Learning Rate 3 arca
+# =============================================================================
+fixed_bs = 64
+lr_tests = [
+    {"lr": 0.1, "label": "Túl kicsi (α = 0.1)", "color": "#1f77b4", "ls": ":"},
+    {"lr": 2.0, "label": "Ideális (α = 2.0)", "color": "#2e7d32", "ls": "-"},
+    {"lr": 10.0, "label": "Túl nagy (α = 10.0)", "color": "#d62728", "ls": "--"},
+]
+
+lr_results = {}
+for item in lr_tests:
+    _, losses, _ = run_experiment(
+        data, fun_m, fun_m_grad, w_start, eta=item["lr"], bs=fixed_bs, epochs=epochs
+    )
+    lr_results[item["label"]] = losses
+
+# =============================================================================
+# 2. KÍSÉRLET: Batch Size összehasonlítás (Epoch vs Loss, Idő feltüntetésével)
+# =============================================================================
+bs_tests = [
+    {
+        "bs": 1,
+        "eta": 0.005,
+        "label": "Tiszta SGD (B = 1)",
+        "color": "#d97706",
+        "ls": ":",
+    },
+    {
+        "bs": 64,
+        "eta": 2.000,
+        "label": "Ideális Mini-batch (B = 64)",
+        "color": "#2e7d32",
+        "ls": "-",
+    },
+    {
+        "bs": 4096,
+        "eta": 15.000,
+        "label": "Nagy Batch (B = 4096)",
+        "color": "#1f77b4",
+        "ls": "--",
+    },
+]
+
+bs_results = {}
+for item in bs_tests:
+    _, losses, el_time = run_experiment(
+        data, fun_m, fun_m_grad, w_start, eta=item["eta"], bs=item["bs"], epochs=epochs
+    )
+    bs_results[item["label"]] = {"loss": losses, "time": el_time}
+
+# =============================================================================
+# ÁBRÁZOLÁS: Mindkét oldal Epoch vs. Loss alapú
+# =============================================================================
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15.5, 5.8))
+fig.patch.set_facecolor("#faf8f5")
+
+# --- BAL OLDAL: Learning Rate hatása ---
+ax1.set_facecolor("#faf8f5")
+for item in lr_tests:
+    losses = lr_results[item["label"]]
+    ax1.plot(
+        losses,
+        marker="o",
+        markersize=5,
+        lw=2.2,
+        linestyle=item["ls"],
+        color=item["color"],
+        label=f"{item['label']} -> Loss: {losses[-1]:.4f}",
+    )
+
+ax1.set_title(
+    f"Fix Batch Size ($B = {fixed_bs}$) mellett a Learning Rate hatása",
+    fontsize=11.5,
+    fontweight="bold",
+    color="#342721",
+)
+ax1.set_xlabel("Epoch", fontsize=11, color="#342721")
+ax1.set_ylabel("MSE veszteség $f(w)$ [log skála]", fontsize=11, color="#342721")
+ax1.set_yscale("log")
+ax1.grid(True, linestyle=":", alpha=0.6, color="#8c7b70")
+ax1.legend(loc="upper right", fontsize=9, framealpha=0.95)
+
+# --- JOBB OLDAL: Batch Size hatása (Epoch vs Loss + Pontos Idő a címkében) ---
+ax2.set_facecolor("#faf8f5")
+for item in bs_tests:
+    res = bs_results[item["label"]]
+    losses = res["loss"]
+    total_time = res["time"]
+    final_loss = losses[-1]
+
+    # Pontos futási idő (másodpercben) és a végső Loss
+    label_str = f"{item['label']} | Idő: {total_time:.3f} s | Loss: {final_loss:.4f}"
+
+    ax2.plot(
+        losses,
+        marker="s",
+        markersize=5,
+        lw=2.2,
+        linestyle=item["ls"],
+        color=item["color"],
+        label=label_str,
+    )
+
+ax2.set_title(
+    "A Batch Size hatása és a valós számítási idő",
+    fontsize=11.5,
+    fontweight="bold",
+    color="#342721",
+)
+ax2.set_xlabel("Epoch", fontsize=11, color="#342721")
+ax2.set_ylabel("MSE veszteség $f(w)$ [log skála]", fontsize=11, color="#342721")
+ax2.set_yscale("log")
+ax2.grid(True, linestyle=":", alpha=0.6, color="#8c7b70")
+ax2.legend(loc="lower left", fontsize=8.8, framealpha=0.95)
+
+plt.tight_layout()
+plt.show()
+
+```
+
+:::
 
 ```{=html}
 <script>
@@ -1745,3 +2994,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 ```
+
