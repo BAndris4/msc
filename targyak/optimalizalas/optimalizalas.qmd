@@ -1967,7 +1967,7 @@ plt.show()
 # | message: false
 # | warning: false
 # | cache: true
-# | eval: false
+# | eval: true
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -2044,7 +2044,7 @@ plt.show()
 
 :::
 
-## truead
+## AdaGrad
 
 ::: {.callout-note title="AdaGrad"}
 **Alapötlet:** ha a gradiensvektor koordinátái nagyon különöbző nagyságrendűek, akkor a kisebbek irányában alig mozdul az iteráicó.
@@ -2949,6 +2949,34 @@ plt.show()
 
 :::
 
+## Skálázás (ezt bebaszva csináltam xdd)
+
+::: {.callout-note title="Jellemzők skálázása"}
+
+Van olyan, amikor a jellemzők (featureök) különböző mértékegységben vannak, és ez befolyásolja a gradiens módszer konvergenciáját. Például, ha az egyik jellemző méterben van, a másik pedig milliméterben, akkor a gradiens iránya torzulhat, és a konvergencia lassabb lehet. Ennek elkerülésére a jellemzőket skálázni kell, hogy hasonló mértékegységben legyenek. A leggyakoribb módszerek:
+
+- **standardizálás**: minden jellemző esetén vonjuk le az ott szereplő
+érétkek átlagát és osszuk el az értékek tapasztalati szórásával. $z = \frac{x - \mu}{\sigma}$
+
+- **min-max skálázás**: minden jellemző esetén vonjuk le az ott szereplő értékek minimumát és osszuk el az értékek tapasztalati maximumával. $z = \frac{x - x_{min}}{x_{max} - x_{min}}$
+
+:::
+
+::: {.callout-caution title="Példa standardizálásra" collapse="true"}
+
+```python
+data = np.loadtxt("pontok200.txt", dtype=float)
+
+mval = np.mean(data0[:, :2], axis=0)              # Várható érték
+sval = np.std(data0[:, :2], axis=0)               # Szórás
+
+data[:, 0] = (data[:, 0] - mval[0]) / sval[0]     # Standardizálás az első jellemzőre
+data[:, 1] = (data[:, 1] - mval[1]) / sval[1]     # Standardizálás a második jellemzőre
+
+# További kódrészlet...
+
+```
+:::
 ```{=html}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
