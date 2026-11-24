@@ -17,7 +17,7 @@ anchor-sections: false
 
 ## [Haladó optimalizációs módszerek [In Progress]{.badge-ip}](targyak/optimalizalas/optimalizalas.qmd)
 ## [Fejlett gépi tanuló modellek [TODO]{.badge-todo}](targyak/fejlett-gepi-tanulas/fejlett-gepi-tanulas.qmd)
-## [Gépi tanulás [TODO]{.badge-todo}](targyak/gepi-tanulas/gepi-tanulas.qmd)
+## [Gépi tanulás [In Progress]{.badge-ip}](targyak/gepi-tanulas/gepi-tanulas.qmd)
 ## [Mesterséges intelligencia statisztikai analízise [TODO]{.badge-todo}](targyak/statisztikai-analizis/statisztikai-analizis.qmd)
 ## [Neurális hálók elmélete [TODO]{.badge-todo}](targyak/neuralis-halok/neuralis-halok.qmd)
 ## [A mesterséges intelligencia matematikai alapjai [TODO]{.badge-todo}](targyak/ai-matek/ai-matek.qmd)

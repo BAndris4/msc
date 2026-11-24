@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -37,13 +72,14 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-09444deb2702fdccc09d834c5d53f2e0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-289332b5c8fbfb358c57f358551ffb85.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b098854469676d222b0cbcb59026526d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f97e55dcc697553583f4aea14fdf52d0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,11 +108,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+  (function () {
+    const saved = localStorage.getItem("msc_theme");
+    if (
+      saved === "dark" ||
+      (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark-theme");
+    }
+  })();
+</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="fullcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
@@ -85,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -103,17 +179,458 @@ Tartalomjegyzék
 <section id="gépi-tanulás" class="level1 unnumbered unlisted">
 <h1 class="unnumbered unlisted">Gépi tanulás</h1>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled" title="Hamarosan">
+</section>
+<section id="bevezetés" class="level1">
+<h1>Bevezetés</h1>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Hamarosan
+<span class="screen-reader-only">Note</span>Mi a gépi tanulás?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ez a tananyag jelenleg kidolgozás alatt áll.</p>
+<ul>
+<li><p>Az a tudományterület, amely képessé teszi a számítógépeket arra, hogy kifejezett <strong>programozás nélkül tanuljanak</strong>.</p></li>
+<li><p>Egy számítógépes programról akkor mondjuk, hogy tanul az E <strong>tapasztalatból</strong> a T <strong>feladatok egy osztályára</strong> és a P <strong>teljesítménymértékre</strong> nézve, ha a T-beli feladatokon nyújtott, P-vel mért teljesítménye <strong>javul</strong> az E tapasztalattal.</p></li>
+</ul>
+<p><strong>Például</strong>: dámajáték<br>
+<strong>E</strong> = sok dámajáték lejátszásának tapasztalata<br>
+<strong>T</strong> = a dámajáték játszásának feladata.<br>
+<strong>P</strong> = annak a valószínűsége, hogy a program megnyeri a következő játszmát.</p>
+<p>Bármely gépi tanulási probléma besorolható a két tág kategória egyikébe: <strong>felügyelt tanulás</strong>, vagy <strong>felügyelet nélküli tanulás</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Felügyelt tanulás (Supervised Learning)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Adott egy adathalmaz, és <strong>előre tudjuk, hogyan kell kinéznie a helyes kimenetnek</strong>, feltételezve, hogy kapcsolat van a bemenet és a kimenet között.</p>
+<p>A felügyelt tanulási problémákat két csoportra osztjuk:</p>
+<ul>
+<li><strong>Regresszió</strong>: <strong>folytonos kimenetet</strong> próbálunk megjósolni, vagyis a bemeneti változókat egy folytonos függvényre képezzük le.</li>
+<li><strong>Klasszifikáció (osztályozás)</strong>: <strong>diszkrét kimenetet</strong> próbálunk megjósolni, vagyis a bemeneti változókat diszkrét kategóriákba soroljuk.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Példa
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Regresszió</strong>:</p>
+<ul>
+<li>házak mérete alapján a pontos eladási ár megjósolása (folytonos érték).</li>
+<li>egy fénykép alapján az adott személy életkorának megjósolása.</li>
+</ul>
+<p><strong>Klasszifikáció</strong>:</p>
+<ul>
+<li>annak eldöntése, hogy a ház a kikiáltási ár <em>alatt vagy felett</em> kel-e el (két diszkrét kategória).</li>
+<li>egy fénykép alapján annak besorolása, hogy az illető középiskolás, egyetemista vagy diplomás korú-e; illetve banki hitelbírálat (kap-e hitelt valaki a hiteltörténete alapján).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Felügyelet nélküli tanulás (Unsupervised Learning)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Olyan problémák megközelítését teszi lehetővé, ahol <strong>alig vagy egyáltalán nincs elképzelésünk arról, hogyan kell kinéznie az eredménynek</strong>.</p>
+<p>Az adatokból nyerünk ki struktúrát anélkül, hogy ismernénk a változók pontos hatását. Nincs visszajelzés az előrejelzések alapján (nincs „tanár”, aki kijavítaná a modellt).</p>
+<p><strong>Például:</strong></p>
+<ul>
+<li><strong>Klaszterezés</strong>: 1000, az amerikai gazdaságról szóló esszé automatikus csoportosítása hasonlóságok alapján (pl. szógyakoriság, mondathossz, oldalszám szerint).<br>
+</li>
+<li><strong>Nem klaszterezéses eljárás</strong>: a „koktélparti-algoritmus” (<em>Cocktail Party Algorithm</em>), amely rendezetlen adatokban talál struktúrát – például különválasztja az egyes beszédhangokat és a zenét egy koktélparti hangzavarából.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="egyváltozós-lineáris-regresszió" class="level1">
+<h1>Egyváltozós lineáris regresszió</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Modellreprezentáció és hipotézisfüggvény
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az egyváltozós lineáris regressziót akkor alkalmazzuk, amikor egyetlen bemeneti változóból (<span class="math inline">\(x\)</span>) szeretnénk egyetlen folytonos kimeneti értéket (<span class="math inline">\(y\)</span>) megjósolni. Mivel felügyelt tanulásról van szó, van elképzelésünk a bemenet és a kimenet közötti ok-okozati kapcsolatról.</p>
+<p>A <strong>hipotézisfüggvény</strong> általános alakja (amely egy egyenes egyenletének felel meg):</p>
+<p><span class="math display">\[\hat{y} = h_\theta(x) = \theta_0 + \theta_1 x\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta_0\)</span> és <span class="math inline">\(\theta_1\)</span> a modell <strong>paraméterei</strong> (súlyai), amelyek megadásával megkapjuk a becsült kimenetet (<span class="math inline">\(\hat{y}\)</span>).</li>
+<li>Célunk olyan <span class="math inline">\(\theta_0\)</span> és <span class="math inline">\(\theta_1\)</span> értékek megtalálása, amelyek a legjobban illeszkedő egyenest adják az <span class="math inline">\(x\)</span>-<span class="math inline">\(y\)</span> síkon elhelyezkedő adatpontokra.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Példa
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tegyük fel, hogy adott az alábbi tanító adathalmaz:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Bemenet (<span class="math inline">\(x\)</span>)</th>
+<th style="text-align: center;">Kimenet (<span class="math inline">\(y\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">8</td>
+</tr>
+</tbody>
+</table>
+<p>Ha véletlenszerűen a <span class="math inline">\(\theta_0 = 2\)</span> és <span class="math inline">\(\theta_1 = 2\)</span> paramétereket választjuk, a hipotézisfüggvényünk:</p>
+<p><span class="math display">\[h_\theta(x) = 2 + 2x\]</span></p>
+<p>Ekkor <span class="math inline">\(x = 1\)</span> bemenetre a modell által becsült érték <span class="math inline">\(h_\theta(1) = 4\)</span>, ami <span class="math inline">\(3\)</span>-mal tér el a valós <span class="math inline">\(y = 7\)</span> értéktől.</p>
+<div id="3bf2c4f3" class="cell" data-cache="true" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gepi-tanulas_files/figure-html/cell-2-output-1.png" width="664" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="költségfüggvény" class="level2">
+<h2 data-anchor-id="költségfüggvény">Költségfüggvény</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Költségfüggvény (Cost Function)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A hipotézisfüggvény pontosságát a <strong>költségfüggvénnyel</strong> mérjük, amely a becsült és a valós értékek különbségének négyzetátlagát számítja ki:</p>
+<p><span class="math display">\[J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left(\hat{y}^{(i)} - y^{(i)}\right)^2 = \frac{1}{2m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2\]</span></p>
+<ul>
+<li>Ezt <strong>négyzetes hibafüggvénynek</strong> (<em>Squared error function</em>) vagy <strong>átlagos négyzetes hibának</strong> (<em>Mean Squared Error, MSE</em>) is nevezzük.</li>
+<li>Az átlag felezése (<span class="math inline">\(\frac{1}{2m}\)</span>) technikai kényelmi lépés: a gradiens ereszkedés során a négyzetfüggvény deriválásából adódó <span class="math inline">\(2\)</span>-es szorzó így pontosan kiejti az <span class="math inline">\(\frac{1}{2}\)</span>-et.</li>
+<li><strong>Vizuális értelmezés</strong>: a legjobb egyenes az, amelynél az adatpontok egyenestől mért függőleges távolságainak négyzetátlaga a legkisebb. Ideális esetben (ha az egyenes minden ponton áthalad) <span class="math inline">\(J(\theta_0, \theta_1) = 0\)</span>.</li>
+<li><span class="math inline">\(\hat{y}^{(i)} = h_\theta(x^{(i)})\)</span>: az <span class="math inline">\(i\)</span>-edik tanítópélda bemenetére (<span class="math inline">\(x^{(i)}\)</span>) a hipotézisfüggvény (<span class="math inline">\(h_\theta\)</span>) által adott becsült kimeneti érték (<span class="math inline">\(\hat{y}^{(i)}\)</span>).</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="órai-kód" class="level2">
+<h2 data-anchor-id="órai-kód">Órai kód</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>1. Adathalmazok letöltése és előkészítése</strong></p>
+<p>Első lépésként létrehozunk egy helyi <code>Files</code> könyvtárat, majd letöltjük a gyakorláshoz szükséges két adathalmazt (<code>ex1data1.txt</code> az egyváltozós, <code>ex1data2.txt</code> a többváltozós lineáris regresszióhoz), amennyiben azok még nem találhatók meg a gépen.</p>
+<div id="b4f327b5" class="cell" data-message="false" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os.path <span class="im">as</span> op</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.request <span class="im">import</span> urlretrieve</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Mappa létrehozása, ha még nem létezik</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_folder(folder):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> op.exists(folder):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        os.mkdir(folder)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Creating:</span><span class="ch">\t\t</span><span class="ss"> </span><span class="sc">{</span>folder<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Already exist:</span><span class="ch">\t\t</span><span class="ss"> </span><span class="sc">{</span>folder<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fájl letöltése a megadott URL-ről, ha még nincs letöltve</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_file(url, filename):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> op.exists(filename):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Downloading:</span><span class="ch">\t\t</span><span class="ss"> </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss"> --&gt; </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        urlretrieve(url, filename)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Already downloaded:</span><span class="ch">\t</span><span class="ss"> </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss"> --&gt; </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Célkönyvtár és az adathalmazok elérési útjainak definiálása</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>FILES <span class="op">=</span> <span class="st">"Files"</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>EX1DATA1_URL <span class="op">=</span> <span class="st">"[https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data1.txt](https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data1.txt)"</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>EX1DATA1 <span class="op">=</span> FILES <span class="op">+</span> <span class="st">"/ex1data1.txt"</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>EX1DATA2_URL <span class="op">=</span> <span class="st">"[https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data2.txt](https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data2.txt)"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>EX1DATA2 <span class="op">=</span> FILES <span class="op">+</span> <span class="st">"/ex1data2.txt"</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Könyvtár létrehozása és a fájlok letöltése</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>create_folder(FILES)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>download_file(EX1DATA1_URL, EX1DATA1)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>download_file(EX1DATA2_URL, EX1DATA2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Already exist:       Files
+Already downloaded:  [https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data1.txt](https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data1.txt) --&gt; Files/ex1data1.txt
+Already downloaded:  [https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data2.txt](https://raw.githubusercontent.com/KeremDUZENLI/python-jupyter-machine-learning/refs/heads/main/notebooks/Files/ex1data2.txt) --&gt; Files/ex1data2.txt</code></pre>
+</div>
+</div>
+<p><strong>2. Az <code>ex1data1.txt</code> felépítése</strong></p>
+<p>Az állomány <span class="math inline">\(97\)</span> tanítópéldát tartalmaz két, szóközzel elválasztott oszlopban: az első oszlop a város lakossága (<span class="math inline">\(10\,000\)</span> főben), a második pedig az elért profit (<span class="math inline">\(10\,000\)</span> dollárban). Az első <span class="math inline">\(5\)</span> sor tartalma:</p>
+<pre class="text"><code>6.1101 17.592
+5.5277 9.1302
+8.5186 13.662
+7.0032 11.854
+5.8598 6.8233</code></pre>
+<p><strong>3. Adatok betöltése és vizualizációja</strong></p>
+<p>Betöltjük az <code>ex1data1.txt</code> fájlt egy NumPy tömbbe, szétválasztjuk a bemeneti változót (<span class="math inline">\(X\)</span>) és a kimeneti célértéket (<span class="math inline">\(y\)</span>), majd pontdiagramon ábrázoljuk az adatpontok eloszlását.</p>
+<div id="3a963ff1" class="cell" data-message="false" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adatpontok kirajzolása piros keresztekkel ("rx")</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plotData(x, y):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, y, <span class="st">"rx"</span>, markersize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Population of City in 10,000s"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Profit in $10,000s"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Adathalmaz beolvasása és felosztása jellemzőkre (X) és célértékre (y)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtxt(EX1DATA1)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[:, <span class="dv">0</span>]  <span class="co"># Első oszlop: bemeneti változó (lakosság)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[:, <span class="dv">1</span>]  <span class="co"># Második oszlop: kimeneti változó (profit)</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> y.size      <span class="co"># Tanítópéldák száma</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Adatok megjelenítése</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plotData(X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gepi-tanulas_files/figure-html/cell-4-output-1.png" width="585" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>4. A költségfüggvény (<span class="math inline">\(J(\theta)\)</span>) implementálása és tesztelése</strong></p>
+<p>Vektorizált formában implementáljuk a négyzetes hibafüggvényt: <span class="math inline">\(J(\theta) = \frac{1}{2m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2\)</span>, ahol a becsléseket a mátrix-vektor szorzás (<code>X.dot(theta)</code>) számítja ki egyszerre az összes tanítópéldára.</p>
+<p>A mátrixszorzáshoz az <span class="math inline">\(X\)</span> bemeneti vektor elé beszúrunk egy csupa egyesekből álló oszlopot (<code>np.ones((m, 1))</code>) a <span class="math inline">\(\theta_0\)</span> eltolási tag (<em>bias/intercept</em>) kezeléséhez, majd ellenőrizzük a függvény működését <span class="math inline">\(\theta = [0, 0]^T\)</span> és <span class="math inline">\(\theta = [-1, 2]^T\)</span> kezdőértékekkel.</p>
+<div id="638dc360" class="cell" data-message="false" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> computeCost(X, y, theta):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> y.size                                         <span class="co"># Tanítópéldák száma</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> X.dot(theta)                         <span class="co"># Hipotézis értékek: h_theta(x) = X * theta</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    J <span class="op">=</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> m)) <span class="op">*</span> np.<span class="bu">sum</span>((predictions <span class="op">-</span> y) <span class="op">**</span> <span class="dv">2</span>) <span class="co"># Átlagos négyzetes hiba fele</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> J</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Csupa 1-es oszlop hozzáadása az X mátrixhoz a theta_0 tag miatt</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.c_[np.ones((m, <span class="dv">1</span>)), X]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>X_b <span class="op">=</span> X</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Initial cost with theta = [0, 0]:"</span>, computeCost(X, y, np.array([<span class="dv">0</span>, <span class="dv">0</span>])))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cost with theta = [-1, 2]:"</span>, computeCost(X, y, np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Initial cost with theta = [0, 0]: 32.072733877455676
+Cost with theta = [-1, 2]: 54.24245508201238</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="gradiens-ereszkedés-gradient-descent" class="level2">
+<h2 data-anchor-id="gradiens-ereszkedés-gradient-descent">Gradiens ereszkedés (Gradient Descent)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A gradiens ereszkedés algoritmusa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A gradiens ereszkedés egy iteratív optimalizáló algoritmus, amellyel megkeressük a költségfüggvény minimumát (vagyis az optimális <span class="math inline">\(\theta_0, \theta_1\)</span> paramétereket).</p>
+<ul>
+<li>Ha a <span class="math inline">\(\theta_0\)</span> és <span class="math inline">\(\theta_1\)</span> paramétereket a vízszintes tengelyeken, a <span class="math inline">\(J(\theta_0, \theta_1)\)</span> költséget pedig a függőleges tengelyen ábrázoljuk, egy felületet kapunk, amelynek a <strong>legmélyebb pontját</strong> keressük.</li>
+<li>A parciális deriváltakból álló gradiens vektor (<span class="math inline">\(\nabla J(\theta)\)</span>) a legmeredekebb emelkedés irányába mutat – mi ezzel ellentétes irányba (a negatív gradiens felé) lépünk lefelé:</li>
+</ul>
+<p><span class="math display">\[\nabla J(\theta) = \begin{bmatrix} \frac{\partial}{\partial \theta_0} J(\theta_0, \theta_1) \\ \frac{\partial}{\partial \theta_1} J(\theta_0, \theta_1) \end{bmatrix}\]</span></p>
+<p><strong>Általános frissítési szabály (ismétlés konvergenciáig):</strong></p>
+<p><span class="math display">\[\theta := \theta - \alpha \nabla J(\theta) \qquad \Longleftrightarrow \qquad \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1) \quad (j = 0, 1)\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(\alpha\)</span> (tanulási ráta / <em>learning rate</em>)</strong>: meghatározza a lépésközt, amellyel lefelé haladunk a felületen.</li>
+<li><strong>Intuitívan</strong>: <span class="math inline">\(\theta_j := \theta_j - \alpha \cdot [\text{az érintő meredeksége a } j\text{-edik dimenzióban}]\)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Gradiens ereszkedés lineáris regresszióra
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A költségfüggvény és a hipotézisfüggvény behelyettesítése, valamint a parciális deriváltak kiszámítása után a paraméterek frissítési szabályai a következő alakot öltik:</p>
+<p><strong>Skaláris alak (szimultán frissítéssel, konvergenciáig):</strong></p>
+<p><span class="math display">\[\theta_0 := \theta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right)\]</span></p>
+<p><span class="math display">\[\theta_1 := \theta_1 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right) x^{(i)}\]</span></p>
+<p><strong>Vektorizált alak:</strong></p>
+<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m} X^T (X\theta - y)\]</span></p>
+<ul>
+<li>Ahol <span class="math inline">\(m\)</span> a tanítópéldák száma, <span class="math inline">\(x^{(i)}\)</span> és <span class="math inline">\(y^{(i)}\)</span> pedig az <span class="math inline">\(i\)</span>-edik tanítópélda értékei.</li>
+<li>A <span class="math inline">\(\theta_1\)</span> képletében a láncszabály szerinti deriválás miatt jelenik meg az <span class="math inline">\(x^{(i)}\)</span>-vel való szorzás.</li>
+<li>Fontos, hogy <span class="math inline">\(\theta_0\)</span> és <span class="math inline">\(\theta_1\)</span> értékét minden iterációban <strong>egyszerre (szimultán)</strong> kell frissíteni.</li>
+</ul>
+<p>Kapcsolódó tananyag: <a href="../../targyak/optimalizalas/optimalizalas.html#lineáris-regresszió-és-a-kvadratikus-függvény">Lineáris regresszió és a kvadratikus függvény</a></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Magyarázat: Hogyan lesz a szummákból mátrixszorzás?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A skaláris felírásban a két paraméter frissítése külön-külön így néz ki:</p>
+<p><span class="math display">\[\theta_0 := \theta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right) \cdot 1\]</span></p>
+<p><span class="math display">\[\theta_1 := \theta_1 - \alpha \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right) \cdot x^{(i)}\]</span></p>
+<p>Bontsuk három lépésre a vektorizált <code>X.T.dot(X.dot(theta) - y)</code> kifejezést:</p>
+<ol type="1">
+<li><p><strong>Predikciók és hibavektor (<span class="math inline">\(e = X\theta - y\)</span>)</strong>:<br>
+Mivel az <span class="math inline">\(X\)</span> mátrix első oszlopa csupa <span class="math inline">\(1\)</span>-esből áll (<span class="math inline">\(x_0^{(i)} = 1\)</span>), a mátrix-vektor szorzat egyszerre számolja ki az összes predikciót, <span class="math inline">\(y\)</span> kivonása pedig az <span class="math inline">\(m\)</span> elemű <strong>hibavektort</strong> adja:</p>
+<p><span class="math display">\[e = X\theta - y = \begin{bmatrix} 1 &amp; x^{(1)} \\ 1 &amp; x^{(2)} \\ \vdots &amp; \vdots \\ 1 &amp; x^{(m)} \end{bmatrix} \begin{bmatrix} \theta_0 \\ \theta_1 \end{bmatrix} - \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \end{bmatrix} = \begin{bmatrix} h_\theta(x^{(1)}) - y^{(1)} \\ h_\theta(x^{(2)}) - y^{(2)} \\ \vdots \\ h_\theta(x^{(m)}) - y^{(m)} \end{bmatrix} \in \mathbb{R}^{m \times 1}\]</span></p></li>
+<li><p><strong>Szorzás a transzponált bemeneti mátrixszal (<span class="math inline">\(X^T e\)</span>)</strong>:<br>
+Az <span class="math inline">\(X\)</span> mátrix transzponálásával (<span class="math inline">\(X^T \in \mathbb{R}^{2 \times m}\)</span>) a jellemzők sorokba kerülnek. A hibavektorral való szorzás így pontosan a két parciális derivált szummáját állítja elő:</p>
+<p><span class="math display">\[X^T (X\theta - y) = \begin{bmatrix} 1 &amp; 1 &amp; \cdots &amp; 1 \\ x^{(1)} &amp; x^{(2)} &amp; \cdots &amp; x^{(m)} \end{bmatrix} \begin{bmatrix} e^{(1)} \\ e^{(2)} \\ \vdots \\ e^{(m)} \end{bmatrix} = \begin{bmatrix} \sum_{i=1}^{m} 1 \cdot e^{(i)} \\ \sum_{i=1}^{m} x^{(i)} \cdot e^{(i)} \end{bmatrix} \in \mathbb{R}^{2 \times 1}\]</span></p></li>
+<li><p><strong>Skálázás és szimultán frissítés</strong>:<br>
+A kapott <span class="math inline">\(2 \times 1\)</span>-es vektort megszorozzuk az <span class="math inline">\(\frac{\alpha}{m}\)</span> skalárral, és kivonjuk a jelenlegi <span class="math inline">\(\theta\)</span> vektorból:</p>
+<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m} X^T (X\theta - y) \quad \Longleftrightarrow \quad \texttt{theta = theta - (alpha / m) * (X.T.dot(X.dot(theta) - y))}\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>1. A gradiens ereszkedés implementálása és futtatása</strong></p>
+<p>A vektorizált frissítési szabályt alkalmazva megkeressük az optimális <span class="math inline">\(\theta\)</span> paramétereket <span class="math inline">\(\alpha = 0.01\)</span> tanulási rátával és <span class="math inline">\(1500\)</span> iterációval, miközben a <code>J_history</code> tömbben naplózzuk a költségfüggvény alakulását.</p>
+<div id="75436c89" class="cell" data-message="false" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradientDescent(X, y, theta, alpha, num_iters):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Gradiens ereszkedés végrehajtása a theta paraméterek megtanulásához.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> y.size                        <span class="co"># Tanítópéldák száma</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    J_history <span class="op">=</span> np.zeros(num_iters)   <span class="co"># Költségfüggvény értékeinek naplózása</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iters):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Paraméterek szimultán frissítése a negatív gradiens irányába</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        theta <span class="op">=</span> theta <span class="op">-</span> (alpha <span class="op">/</span> m) <span class="op">*</span> (X.T.dot(X.dot(theta) <span class="op">-</span> y))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aktuális költség elmentése</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        J_history[i] <span class="op">=</span> computeCost(X, y, theta)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> theta, J_history</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Hiperparaméterek beállítása</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>iterations <span class="op">=</span> <span class="dv">1500</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.zeros(<span class="dv">2</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimalizálás futtatása a kezdeti [0, 0] paramétervektorról indulva</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>theta, J_history <span class="op">=</span> gradientDescent(X, y, theta, alpha, iterations)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theta found by gradient descent:"</span>, theta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theta found by gradient descent: [-3.63029144  1.16636235]</code></pre>
+</div>
+</div>
+<p><strong>2. Az illesztett regressziós egyenes megjelenítése</strong></p>
+<p>A megtanult <span class="math inline">\(\theta_0 \approx -3.63\)</span> és <span class="math inline">\(\theta_1 \approx 1.17\)</span> paraméterekkel kirajzoljuk az adatokra illesztett regressziós egyenest (<span class="math inline">\(h_\theta(x) = X\theta\)</span>).</p>
+<div id="c66ca5fd" class="cell" data-message="false" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[:, <span class="dv">1</span>], y, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, label<span class="op">=</span><span class="st">'Training Data'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(X[:, <span class="dv">1</span>], X.dot(theta), label<span class="op">=</span><span class="st">'Linear Regression'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Population of City in 10,000s"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Profit in $10,000s"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gepi-tanulas_files/figure-html/cell-7-output-1.png" width="585" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <script>
@@ -162,8 +679,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </section>
+</section>
 
 </main> <!-- /main -->
+<button id="theme-toggle" class="theme-toggle-btn" aria-label="Téma váltása" title="Téma váltása">
+  <!-- Hold ikon (világos módban látható -> sötétre váltás) -->
+  <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"></path>
+  </svg>
+  <!-- Nap ikon (sötét módban látható -> világosra váltás) -->
+  <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"></path>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      const isDark = document.documentElement.classList.toggle("dark-theme");
+      localStorage.setItem("msc_theme", isDark ? "dark" : "light");
+    });
+  })();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const isCodeAnnotation = (el) => {
@@ -235,7 +775,8 @@ document.addEventListener("DOMContentLoaded", function () {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -244,8 +785,69 @@ document.addEventListener("DOMContentLoaded", function () {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -259,6 +861,7 @@ document.addEventListener("DOMContentLoaded", function () {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -421,44 +1024,54 @@ document.addEventListener("DOMContentLoaded", function () {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -556,6 +1169,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 

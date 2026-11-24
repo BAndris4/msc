@@ -1172,6 +1172,7 @@ with open("animacio_hesse_3d.html", "w", encoding="utf-8") as file:
 
 HTML('<iframe src="animacio_hesse_3d.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>')
 ```
+
 :::
 
 ::: {.callout-tip title="Gradiens használata többváltozós függvényeknél"}
@@ -2478,6 +2479,7 @@ ax1.legend(loc="upper right")
 plt.tight_layout()
 plt.show()
 ```
+
 :::
 
 # SGD
@@ -2736,6 +2738,7 @@ plt.plot(f_matrix)
 plt.title(f"A celfuggveny, mini batch SGD, bs: {batch_s}, epochszam: {n}")
 plt.show()
 ```
+
 :::
 
 ::: {.callout-note title="A batch size és a learning rate kapcsolata a mérések alapján"}
@@ -2767,7 +2770,7 @@ import numpy as np
 
 # 1. Adatok betöltése
 data = np.loadtxt(
-    "C:/Users/Andris/Desktop/msc/targyak/optimalizalas/pontok200E.txt",
+    "C:/Users/András/Desktop/msc/targyak/optimalizalas/pontok200E.txt",
     dtype=float,
 )
 

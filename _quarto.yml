@@ -1,5 +1,12 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "targyak/**"
+    - "segedletek/**"
+
+execute:
+  freeze: auto
 
 website:
   title: "MSc Jegyzetek"
@@ -9,3 +16,5 @@ format:
     theme:
       - cosmo
       - tema.scss
+    include-in-header: dark-mode-header.html
+    include-after-body: dark-mode.html

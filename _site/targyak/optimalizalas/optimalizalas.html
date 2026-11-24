@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,13 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-09444deb2702fdccc09d834c5d53f2e0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-289332b5c8fbfb358c57f358551ffb85.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4ddb7f04b931016884c3dacbb9606b75.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f97e55dcc697553583f4aea14fdf52d0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,12 +108,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+  (function () {
+    const saved = localStorage.getItem("msc_theme");
+    if (
+      saved === "dark" ||
+      (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark-theme");
+    }
+  })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -146,7 +155,7 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="fullcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
@@ -155,7 +164,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -179,7 +188,7 @@ Tartalomjegyzék
 <section id="szélsőértékek-és-deriváltak" class="level2">
 <h2 data-anchor-id="szélsőértékek-és-deriváltak">Szélsőértékek és deriváltak</h2>
 <p><span class="math inline">\(f'(x_0)\)</span>: a <span class="math inline">\(x_0\)</span>-beli érintő meredeksége.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Monotonitás">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -194,12 +203,12 @@ Tartalomjegyzék
 <p>Ha <span class="math inline">\(x_0\)</span> lokális szélsőérték, akkor <span class="math inline">\(f'(x_0) = 0\)</span>, viszont <strong>ez fordítva nem igaz</strong>.</p>
 </div>
 </div>
-<div id="d924b64a" class="cell" data-cache="true" data-message="false" data-execution_count="1">
+<div id="ea320e9d" class="cell" data-cache="true" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <iframe src="animacio_derivalt.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:980px;"></iframe>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Konvexitás és szélsőértékek">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -216,7 +225,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div id="fcdf4495" class="cell" data-cache="true" data-message="false" data-execution_count="2">
+<div id="4697de0b" class="cell" data-cache="true" data-message="false" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <iframe src="animacio_masodrendu.html" width="100%" height="520" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>
 </div>
@@ -224,7 +233,7 @@ Tartalomjegyzék
 </section>
 <section id="minimumhely-közelítése" class="level2">
 <h2 data-anchor-id="minimumhely-közelítése">Minimumhely közelítése</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Gradiens módszer">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -239,7 +248,7 @@ Tartalomjegyzék
 <p>, ahol <span class="math inline">\(a &gt; 0\)</span> a <strong>lépéshossz</strong> (tanulási paraméter, learning rate).</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarul">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -256,7 +265,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div id="44da133a" class="cell" data-cache="true" data-message="false" data-execution_count="3">
+<div id="46f1973f" class="cell" data-cache="true" data-message="false" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <iframe src="animacio_gradiens.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:820px;"></iframe>
 </div>
@@ -265,7 +274,7 @@ Tartalomjegyzék
 <section id="a-lépéshossz-hatása" class="level2">
 <h2 data-anchor-id="a-lépéshossz-hatása">A lépéshossz hatása</h2>
 <p>Tekintsük az <span class="math inline">\(f(x) = \frac{x^4}{4} + \frac{x^3}{3} - x^2 + 1\)</span> függvényt a <span class="math inline">\([-3, 2]\)</span> intervallumon, ahol <span class="math inline">\(x_0 = -2.4\)</span>-ből indulunk.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Leállási feltétel és stabilitás">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -288,7 +297,7 @@ Tartalomjegyzék
 <li><strong><span class="math inline">\(\alpha = 0.5\)</span> (Oszcilláció):</strong> Átugorja a minimumot, és a két fal között pattog ide-oda.</li>
 <li><strong><span class="math inline">\(\alpha = 1.2\)</span> (Kilövés):</strong> Azonnal kiszabadul a tartományból, a gradiens kilő a végtelenbe.</li>
 </ol>
-<div id="17b73330" class="cell" data-cache="true" data-message="false" data-execution_count="4">
+<div id="d790c096" class="cell" data-cache="true" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <iframe src="animacio_lepeshossz.html" width="100%" height="450" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>
 </div>
@@ -296,7 +305,7 @@ Tartalomjegyzék
 </section>
 <section id="lépéshossz-választási-módszerek" class="level2">
 <h2 data-anchor-id="lépéshossz-választási-módszerek">Lépéshossz választási módszerek</h2>
-<div class="callout callout-style-default callout-tip callout-titled" title="Konstans lépéshossz">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -313,7 +322,7 @@ Tartalomjegyzék
 <p>Itt a <span class="math inline">\(c\)</span> egy pozitív konstans, amely a csökkenés mértékét szabályozza. Minél nagyobb <span class="math inline">\(c\)</span>, annál gyorsabban csökken a lépéshossz, így a gradiens módszer stabilabb lesz, de lassabban konvergál.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Dinamikus lépéshossz">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -327,7 +336,7 @@ Tartalomjegyzék
 <span class="math inline">\(\alpha_{k+1} = \alpha_k \cdot 1.05\)</span>, ha <span class="math inline">\(f(x_{k+1}) &lt; f(x_k)\)</span>, míg romló függvényérték esetén újraszámoljuk a lépéshosszt, például <span class="math inline">\(\alpha_{k+1} = \frac{\alpha_k}{2}\)</span>. Vagyis ha a függvényérték csökken, növeljük a lépéshosszt, ha nő, csökkentjük.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled" title="Célfüggvény">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -346,7 +355,7 @@ Tartalomjegyzék
 <h1>Többváltozós függvények</h1>
 <section id="gradiens-vektor-és-hesse-mátrix" class="level2">
 <h2 data-anchor-id="gradiens-vektor-és-hesse-mátrix">Gradiens vektor és Hesse-mátrix</h2>
-<div class="callout callout-style-default callout-tip callout-titled" title="Többváltozós függvény">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -360,7 +369,7 @@ Tartalomjegyzék
 <span class="math inline">\(f(x, y) = x^2 + y^2\)</span> egy kétváltozós függvény, ahol a bemeneti változók <span class="math inline">\(x\)</span> és <span class="math inline">\(y\)</span>. Kétváltozós függvény egy felületet ír le a háromdimenziós térben, ahol a függvényérték a <span class="math inline">\(z\)</span> tengelyen jelenik meg.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Gradiens vektor">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -379,7 +388,7 @@ Tartalomjegyzék
 \]</span></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Példa a gradiens vektorra">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -396,7 +405,7 @@ Tartalomjegyzék
 <p><span class="math display">\[\frac{\partial f}{\partial y} = 0 + 2y = 2y\]</span></p>
 <p>Ilyenkor a gradiens vektor: <span class="math inline">\(\nabla f(x, y) = \left[\begin{array}{c} 2x \\ 2y \end{array}\right]\)</span></p>
 <p>Tehát a felületen <span class="math inline">\((1, 1)\)</span> pontban a gradiens vektor: <span class="math inline">\(\nabla f(1, 1) = \left[\begin{array}{c} 2 \\ 2 \end{array}\right]\)</span>, ami az <span class="math inline">\((1, 1)\)</span> pontból a <span class="math inline">\((2, 2)\)</span> irányába mutat. Ez azt jelenti, hogy a függvény leggyorsabban ebbe az irányba nő.</p>
-<div id="ea2a7993" class="cell" data-cache="true" data-message="false" data-execution_count="5">
+<div id="5baa4f3e" class="cell" data-cache="true" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <iframe src="animacio_3d_forgas.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>
 </div>
@@ -404,7 +413,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Hesse-mátrix">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -418,7 +427,7 @@ Tartalomjegyzék
 <p><span class="math display">\[\nabla^2f(x) = \left(\frac{\partial^2 f}{\partial x_i \partial x_j}(x)\right)_{i,j} \in \mathbb{R}^{n \times n}\]</span></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Példa a Hesse-mátrixra">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -450,7 +459,7 @@ Tartalomjegyzék
 0 &amp; 2
 \end{pmatrix}
 \]</span></p>
-<div id="89cfba5c" class="cell" data-cache="true" data-message="false" data-execution_count="6">
+<div id="c44f618c" class="cell" data-cache="true" data-message="false" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 <iframe src="animacio_hesse_3d.html" width="100%" height="490" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:840px;"></iframe>
 </div>
@@ -458,7 +467,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Gradiens használata többváltozós függvényeknél">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -469,7 +478,7 @@ Tartalomjegyzék
 </div>
 <div class="callout-body-container callout-body">
 <p>Minimalizálásnál negatív gradiens vektor irányba lépünk, mivel a gradiens a legmeredekebb növekedés irányát mutatja. Negatív gradiens mező így néz ki a <span class="math inline">\(f(x) = \frac{x_1^4}{4} + \frac{x_2^4}{4} + \frac{x_1^3}{3} + \frac{x_2^3}{3} - x_1^2 - x_2^2 + 2 \space\)</span> függvény esetén.</p>
-<div id="b28b7bce" class="cell" data-cache="true" data-message="false" data-execution_count="7">
+<div id="52e6783d" class="cell" data-cache="true" data-message="false" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -483,7 +492,7 @@ Tartalomjegyzék
 </section>
 <section id="lokális-szélsőérték-feltételek" class="level2">
 <h2 data-anchor-id="lokális-szélsőérték-feltételek">Lokális szélsőérték feltételek</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Elsőrendű szükséges feltétel">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -496,7 +505,7 @@ Tartalomjegyzék
 <p>Ha <span class="math inline">\(x^*\)</span> egy lokális szélsőérték, és a <span class="math inline">\(f\)</span> függvény folytonosan differenciálható az <span class="math inline">\(x^*\)</span> nyílt környezetében (vagyis a <span class="math inline">\(f\)</span> függvény deriváltja létezik az <span class="math inline">\(x^*\)</span> pontban), akkor a <span class="math inline">\(\nabla f(x^*) = 0\)</span>.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Stacionárius pont">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -509,7 +518,7 @@ Tartalomjegyzék
 <p>Ha <span class="math inline">\(\nabla f(x^*) = 0\)</span>, akkor az <span class="math inline">\(x^*\)</span> pontot <strong>stacionárius pontnak</strong> nevezzük. A stacionárius pont lehet lokális minimum, lokális maximum vagy nyeregpont, amely se nem minimum, se nem maximum.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Példa nyeregpontra">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -522,7 +531,7 @@ Tartalomjegyzék
 <p>Az alábbi ábrán a <span class="math inline">\(f(x_1, x_2) = x_1^2 - x_2^2\)</span> függvény stacionárius pontja a <span class="math inline">\((0, 0)\)</span> pont, amely egy nyeregpont. A gradiens vektorok a stacionárius pontban nullvektorok, azaz <span class="math inline">\(\nabla f(0, 0) = (0, 0)\)</span>.</p>
 </div>
 </div>
-<div id="ca203e39" class="cell" data-cache="true" data-message="false" data-execution_count="8">
+<div id="c23391e2" class="cell" data-cache="true" data-message="false" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -534,7 +543,7 @@ Tartalomjegyzék
 </section>
 <section id="kvadratikus-függvény-és-taylor-approximáció" class="level2">
 <h2 data-anchor-id="kvadratikus-függvény-és-taylor-approximáció">Kvadratikus függvény és Taylor-approximáció</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Kvadratikus függvény">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -549,7 +558,7 @@ Tartalomjegyzék
 <p>alakba írható, ahol <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span> egy szimmetrikus mátrix, <span class="math inline">\(b \in \mathbb{R}^n\)</span> egy vektor, és <span class="math inline">\(c \in \mathbb{R}\)</span> egy skalár.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Példa kvadratikus függvényre">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -574,7 +583,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Kvadratikus függvény gradiens és Hesse-mátrix">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -589,7 +598,7 @@ Tartalomjegyzék
 <p>Ez azért jó, mert nem kell minden iterációban újra számolni a Hesse-mátrixot, mivel az állandó, a gradiens pedig lineárisan függ a változóktól, és ez kevésbé számításigényes, mint egy általános függvény esetén.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Taylor-approximáció">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -605,7 +614,7 @@ Tartalomjegyzék
 <p><span class="math display">\[f(x_0 + \delta x) \approx f(x_0) + \nabla f(x_0)^T \cdot \delta x + \frac{1}{2} \delta x^T \nabla^2 f(x_0) \cdot \delta x\]</span></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarul">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -622,7 +631,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Stacionárius pont és Hesse-mátrix">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -641,7 +650,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div id="0b5383c6" class="cell" data-cache="true" data-message="false" data-execution_count="9">
+<div id="6907fb9b" class="cell" data-cache="true" data-message="false" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -653,7 +662,7 @@ Tartalomjegyzék
 </section>
 <section id="lineáris-regresszió-és-a-kvadratikus-függvény" class="level2">
 <h2 data-anchor-id="lineáris-regresszió-és-a-kvadratikus-függvény">Lineáris regresszió és a kvadratikus függvény</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Lineáris regresszió">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -676,7 +685,7 @@ Tartalomjegyzék
 <p>függvény minimlizálásával találjuk meg, ahol <span class="math inline">\(X\)</span> a jellemzők mátrixa, <span class="math inline">\(y\)</span> pedig a célváltozók vektora.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -693,7 +702,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Kvadratikus függvény a lineáris regresszióban">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -709,7 +718,7 @@ Tartalomjegyzék
 <p>Ha <span class="math inline">\(X\)</span> oszlopai nem függetlenek, akkor a minimumhely nem egyértelmű.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -734,7 +743,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div id="0d51fdbf" class="cell" data-cache="true" data-message="false" data-execution_count="10">
+<div id="2457c670" class="cell" data-cache="true" data-message="false" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <iframe src="animacio_linearis_regresszio.html" width="100%" height="470" scrolling="no" style="border:none; overflow:hidden; display:block; margin:0 auto; max-width:880px;"></iframe>
 </div>
@@ -743,7 +752,7 @@ Tartalomjegyzék
 </section>
 <section id="gradiens-módszer" class="level1">
 <h1>Gradiens módszer</h1>
-<div class="callout callout-style-default callout-note callout-titled" title="Gradiens">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -761,7 +770,7 @@ Tartalomjegyzék
 <span class="math inline">\(p = \nabla f(x_0)\)</span> az <span class="math inline">\(x_0\)</span>-beli legmeredekebb emelkedés iránya</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Gradiens módszer">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -777,7 +786,7 @@ Tartalomjegyzék
 <strong>Választási módszerek:</strong> iterációszám függvényében csökkenő, célfüggvény értékének megfelelően csökkenő, vagy iránymenti keresés (vagyis az <span class="math inline">\(\alpha\)</span>-t úgy választjuk, hogy <span class="math inline">\(- \nabla f(x_k)\)</span> irányban az optimális lépést találjuk).</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Kétváltozós függvényeknél a gradiens módszer">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -845,7 +854,7 @@ Tartalomjegyzék
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)                                                       <span class="co"># Az x és y tengelyek arányát egyenlővé tesszük, hogy a kontúrok ne torzuljanak</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.plot(p[:, <span class="dv">0</span>], p[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">"r"</span>)                                       <span class="co"># A gradiens módszer által bejárt pontokat piros vonallal rajzoljuk ki</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="6a14f708" class="cell" data-cache="true" data-message="false" data-execution_count="11">
+<div id="349d14d6" class="cell" data-cache="true" data-message="false" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -856,7 +865,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Gradiens módszer problémák">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -875,7 +884,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Példa">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -889,7 +898,7 @@ Tartalomjegyzék
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[f(x, y) = x^2 + 20y^2\]</span></p>
 <p><span class="math display">\[\nabla f(x, y) = \begin{pmatrix} 2x \\ 40y \end{pmatrix}\]</span></p>
-<div id="2eea6afb" class="cell" data-cache="true" data-message="false" data-execution_count="12">
+<div id="1a914f54" class="cell" data-cache="true" data-message="false" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -932,7 +941,7 @@ Tartalomjegyzék
 </div>
 <section id="momentum-módszer" class="level2">
 <h2 data-anchor-id="momentum-módszer">Momentum módszer</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Momentum módszer">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -948,7 +957,7 @@ Tartalomjegyzék
 <p>Itt <span class="math inline">\(v\)</span> a momentum vektor, a <span class="math inline">\(\beta\)</span> pedig megmondja, hogy mennyire őrizzük meg az előző lépés lendületét. A 0 azt jelenti, hogy nem őrizzük meg a lendületet, míg az 1 azt jelenti, hogy teljesen megtartjuk az előző lépést.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -966,7 +975,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1008,7 +1017,7 @@ Tartalomjegyzék
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="45f6b0eb" class="cell" data-cache="true" data-message="false" data-execution_count="13">
+<div id="8b3ac7f3" class="cell" data-cache="true" data-message="false" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1023,7 +1032,7 @@ Tartalomjegyzék
 </section>
 <section id="adagrad" class="level2">
 <h2 data-anchor-id="adagrad">AdaGrad</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="AdaGrad">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1037,7 +1046,7 @@ Tartalomjegyzék
 <p>Az algoritmus: <span class="math display">\[s_0 = 0\]</span> <span class="math display">\[s_t = s_{t-1} + \nabla f(x)^2\]</span> <span class="math display">\[x_t = x_{t-1} - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1055,7 +1064,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1097,7 +1106,7 @@ Tartalomjegyzék
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="ea7541d0" class="cell" data-cache="true" data-message="false" data-execution_count="14">
+<div id="40dfda31" class="cell" data-cache="true" data-message="false" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1112,7 +1121,7 @@ Tartalomjegyzék
 </section>
 <section id="rmsprop" class="level2">
 <h2 data-anchor-id="rmsprop">RMSProp</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="RMSProp">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1127,7 +1136,7 @@ Tartalomjegyzék
 <p><span class="math display">\[s_0 = 0\]</span> <span class="math display">\[s_t = \beta s_{t-1} + (1 - \beta) \nabla f(x)^2\]</span> <span class="math display">\[x = x - \frac{\alpha}{\sqrt{s_t + c}} \nabla f(x)\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával, <span class="math inline">\(\beta\)</span> pedig a súlyozás mértékét adja, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1143,7 +1152,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1185,7 +1194,7 @@ Tartalomjegyzék
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="d6ac61f9" class="cell" data-cache="true" data-message="false" data-execution_count="15">
+<div id="feb8d456" class="cell" data-cache="true" data-message="false" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1200,7 +1209,7 @@ Tartalomjegyzék
 </section>
 <section id="adam" class="level2">
 <h2 data-anchor-id="adam">Adam</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Adam">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1217,7 +1226,7 @@ Tartalomjegyzék
 <p><span class="math display">\[x = x - \frac{\alpha}{\sqrt{\hat{s}_t + c}} \hat{v}_t\]</span>, ahol a <span class="math inline">\(c\)</span> egy kis pozitív szám, hogy ne legyen osztás nullával, <span class="math inline">\(\beta_1\)</span> és <span class="math inline">\(\beta_2\)</span> pedig a súlyozás mértékét adják, hogy mennyire vegyük figyelembe a korábbi gradiensvektorokat. (0.9 és 0.999 a tipikus értékek)</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1235,7 +1244,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Kód">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1281,7 +1290,7 @@ Tartalomjegyzék
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>plt.contour(X, Y, Z, levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">15</span>))</span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.plot(xmatrix[:, <span class="dv">0</span>], xmatrix[:, <span class="dv">1</span>], <span class="st">"r*--"</span>)</span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="56aa71c3" class="cell" data-cache="true" data-message="false" data-execution_count="16">
+<div id="75e722a5" class="cell" data-cache="true" data-message="false" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1297,7 +1306,7 @@ Tartalomjegyzék
 </section>
 <section id="sgd" class="level1">
 <h1>SGD</h1>
-<div class="callout callout-style-default callout-note callout-titled" title="Optimalizáció a gépi tanulásban">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1315,7 +1324,7 @@ Tartalomjegyzék
 <p><span class="math display">\[f(w) = \frac{1}{n} \sum_{i=1}^n f_i(w)\]</span></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Példa">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1330,7 +1339,7 @@ Tartalomjegyzék
 <span class="math inline">\(f(w) = \frac{1}{n}\sum_{i=1}^n (\hat{y}^{(i)} - y^{(i)})^2\)</span>, ami MSE vagyis átlagos négyzetes hiba.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Stochastic Gradient Descent (SGD)">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1346,7 +1355,7 @@ Tartalomjegyzék
 <p><strong>1 epoch</strong>: amikor <span class="math inline">\(i\)</span> minden értéket felvesz (a tanulóadatokat mindig keverve).</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1365,7 +1374,7 @@ Tartalomjegyzék
 </div>
 <section id="mini-batch-sgd" class="level2">
 <h2 data-anchor-id="mini-batch-sgd">Mini-batch SGD</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Mini-batch SGD">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1382,7 +1391,7 @@ Tartalomjegyzék
 <strong>Hátrány</strong>: zajosabb célfüggvény</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Magyarázat">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1402,7 +1411,7 @@ Tartalomjegyzék
 </section>
 <section id="órai-kód" class="level2">
 <h2 data-anchor-id="órai-kód">Órai kód</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Feladat">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1418,7 +1427,7 @@ Tartalomjegyzék
 <p>minimális, ahol N a pontok száma, (<span class="math inline">\(x_i\)</span>, <span class="math inline">\(y_i\)</span>, <span class="math inline">\(z_i\)</span>), <span class="math inline">\(i = 1, ..., N\)</span> a pontok koordinátái. Használjon mini-batch SGD módszert a paraméterek meghatározására. Kísérletezzen különböző lépéshosszakkal és batch méretekkel. Abrázolja a célfüggvény értékét az epoch szám függvényében</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Megoldás">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1431,7 +1440,7 @@ Tartalomjegyzék
 <div id="callout-52" class="callout-52-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Előszőr is beolvassuk az adathalmazt, és kirajzoljuk a pontokat:</p>
-<div id="93ab9171" class="cell" data-cache="true" data-message="false" data-execution_count="17">
+<div id="7ef4edc6" class="cell" data-cache="true" data-message="false" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1513,14 +1522,14 @@ Tartalomjegyzék
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.plot(f_matrix)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"A celfuggveny, mini batch SGD, bs: </span><span class="sc">{</span>batch_s<span class="sc">}</span><span class="ss">, epochszam: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="77e14d1d" class="cell" data-cache="true" data-message="true" data-execution_count="18">
+<div id="af4cf771" class="cell" data-cache="true" data-message="true" data-execution_count="18">
 <div class="cell-output cell-output-stdout">
-<pre><code>A parameterek becslese minibatch SGD eseten: [1.92983983 1.00373806 0.79341473], amikor a batch size: 8</code></pre>
+<pre><code>A parameterek becslese minibatch SGD eseten: [1.93055773 0.99987928 0.79243451], amikor a batch size: 8</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optimalizalas_files/figure-html/cell-19-output-2.png" width="593" height="432" class="figure-img"></p>
+<p><img src="optimalizalas_files/figure-html/cell-19-output-2.png" width="579" height="432" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1528,7 +1537,7 @@ Tartalomjegyzék
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="A batch size és a learning rate kapcsolata a mérések alapján">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1551,7 +1560,7 @@ Tartalomjegyzék
 <li><strong>Ideális Mini-batch (<span class="math inline">\(B = 64\)</span>, zöld):</strong> A kettő tökéletes ötvözete: a hardveres vektorizáció miatt <strong>villámgyors (<span class="math inline">\(0.004\text{ s}\)</span>)</strong>, miközben a legkisebb hibát éri el (<span class="math inline">\(0.0386\)</span>).</li>
 </ul>
 <p>Összességében a kettő <strong>egyenesen arányos egymással</strong>: kis batchnél a zaj miatt óvatosabb <span class="math inline">\(\alpha\)</span> kell, míg nagyobb batchnél a ritkább lépéseket nagyobb <span class="math inline">\(\alpha\)</span>-val kell kompenzálni.</p>
-<div id="01abfade" class="cell" data-cache="true" data-message="false" data-execution_count="19">
+<div id="df8acf40" class="cell" data-cache="true" data-message="false" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1565,7 +1574,7 @@ Tartalomjegyzék
 </section>
 <section id="skálázás-ezt-bebaszva-csináltam-xdd" class="level2">
 <h2 data-anchor-id="skálázás-ezt-bebaszva-csináltam-xdd">Skálázás (ezt bebaszva csináltam xdd)</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Jellemzők skálázása">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1582,7 +1591,7 @@ Tartalomjegyzék
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Példa standardizálásra">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1655,6 +1664,28 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 
 </main> <!-- /main -->
+<button id="theme-toggle" class="theme-toggle-btn" aria-label="Téma váltása" title="Téma váltása">
+  <!-- Hold ikon (világos módban látható -> sötétre váltás) -->
+  <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"></path>
+  </svg>
+  <!-- Nap ikon (sötét módban látható -> világosra váltás) -->
+  <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"></path>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      const isDark = document.documentElement.classList.toggle("dark-theme");
+      localStorage.setItem("msc_theme", isDark ? "dark" : "light");
+    });
+  })();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const isCodeAnnotation = (el) => {
@@ -1726,7 +1757,8 @@ document.addEventListener("DOMContentLoaded", function () {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1735,8 +1767,69 @@ document.addEventListener("DOMContentLoaded", function () {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1750,6 +1843,7 @@ document.addEventListener("DOMContentLoaded", function () {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1912,44 +2006,54 @@ document.addEventListener("DOMContentLoaded", function () {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -2047,6 +2151,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 

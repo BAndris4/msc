@@ -1,6 +1,7 @@
 /* =========================================================
    QUARTO MSc JEGYZETEK – TÉMA (tema.scss)
-   Design: Cocoa Noir & Amber Lux (Warm Vintage Editorial)
+   Light: Cocoa Noir & Amber Lux
+   Dark:  Midnight Slate & Monokai Code
    Fontok: Calistoga (Címek) + Plus Jakarta Sans (Szöveg)
    ========================================================= */
 
@@ -20,15 +21,14 @@ $body-bg: #faf8f5;
 $body-color: #342721;
 $link-color: #8e5a23;
 
-$font-family-sans-serif:
-  "Plus Jakarta Sans",
+$font-family-sans-serif: "Plus Jakarta Sans",
   -apple-system,
   BlinkMacSystemFont,
   sans-serif;
 $font-family-monospace: "JetBrains Mono", Consolas, monospace;
 
 /* =========================================================
-   3. DESKTOP TELJES SZÉLESSÉG (PÁR PIXEL SZÉLSŐ PADDING)
+   3. DESKTOP TELJES SZÉLESSÉG
    ========================================================= */
 
 /*-- scss:rules --*/
@@ -46,7 +46,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Teljes szélességű konténer alig 6 pixel margóval (NEM 100px!) */
 #quarto-content {
   width: 100% !important;
   max-width: 100% !important;
@@ -75,7 +74,7 @@ main.content,
 }
 
 /* =========================================================
-   4. CÍMSOROK (SANS-SERIF TARTALÉK BETŰTÍPUS)
+   4. CÍMSOROK
    ========================================================= */
 
 h1,
@@ -149,28 +148,18 @@ hr {
 }
 
 /* =========================================================
-   VISSZA GOMB AZ ALOLDALAKON (.back-link) – KITŰNŐ PILL GOMB
-   ========================================================= */
-
-/* =========================================================
-   SZOLID, SZERKESZTŐI VISSZA GOMB (.back-link)
-   ========================================================= */
-
-/* =========================================================
-   KOHERENS, TIPOGRÁFIAI VISSZA GOMB (.back-link)
+   VISSZA GOMB (.back-link)
    ========================================================= */
 
 .back-link {
   font-family: "Plus Jakarta Sans", sans-serif !important;
-  font-size: 1.05rem !important; /* Nagyobb, kényelmesen olvasható méret */
+  font-size: 1.05rem !important;
   font-weight: 600 !important;
   letter-spacing: -0.01em !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
-
-  /* Természetes tintaszín, mint a címek */
   color: #342721 !important;
   background: transparent !important;
   border: none !important;
@@ -182,7 +171,6 @@ hr {
     opacity 0.12s ease,
     color 0.12s ease !important;
 
-  /* Nyíl: natív tipográfiai jel, nem ikon vagy emoji */
   &::before {
     content: "←";
     font-size: 1.25rem !important;
@@ -191,7 +179,6 @@ hr {
     transform: translateY(-1px);
   }
 
-  /* Szolid kiemelés rávitelkor: nem ugrik, csak megkapja a karamell fókuszt */
   &:hover {
     opacity: 1 !important;
     color: #8e5a23 !important;
@@ -199,7 +186,7 @@ hr {
 }
 
 /* =========================================================
-   5. SZOLID, LEBEGŐ TARTALOMJEGYZÉK (TOC)
+   5. LEBEGŐ TARTALOMJEGYZÉK (TOC)
    ========================================================= */
 
 #quarto-margin-sidebar {
@@ -258,7 +245,7 @@ hr {
       margin: 1px 0 !important;
     }
 
-    li.toc-h1 > a {
+    li.toc-h1>a {
       font-weight: 600 !important;
     }
 
@@ -266,7 +253,7 @@ hr {
       padding-left: 0.75rem !important;
       margin: 1px 0 !important;
 
-      li.toc-h2 > a {
+      li.toc-h2>a {
         font-size: 0.8rem !important;
         font-weight: 400 !important;
         color: #736257 !important;
@@ -305,7 +292,7 @@ hr {
 }
 
 /* =========================================================
-   6. KIEMELŐ DOBOZOK (CALLOUTS) – HEROICONS & NEM KÉK FEJLÉC
+   6. KIEMELŐ DOBOZOK (CALLOUTS) – LIGHT MODE
    ========================================================= */
 
 .callout {
@@ -358,6 +345,7 @@ hr {
     svg {
       display: none !important;
     }
+
     &::before {
       display: none !important;
       content: "" !important;
@@ -372,13 +360,14 @@ hr {
     > :first-child {
       margin-top: 0 !important;
     }
+
     > :last-child {
       margin-bottom: 0 !important;
     }
   }
 }
 
-/* 1. Note / Definíció – NEM KÉK: Meleg karamell fejléc */
+/* 1. Note / Definíció */
 .callout.callout-note,
 div.callout-note.callout-style-default {
   border-left: 4px solid #8e5a23 !important;
@@ -388,6 +377,7 @@ div.callout-note.callout-style-default {
     background-color: #eddcc6 !important;
     color: #61360c !important;
   }
+
   .callout-icon {
     color: #8e5a23 !important;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
@@ -395,7 +385,7 @@ div.callout-note.callout-style-default {
   }
 }
 
-/* 2. Tip / Tétel – Zsályazöld fejléc */
+/* 2. Tip / Tétel */
 .callout.callout-tip,
 div.callout-tip.callout-style-default {
   border-left: 4px solid #4d7358 !important;
@@ -405,6 +395,7 @@ div.callout-tip.callout-style-default {
     background-color: #dbe8da !important;
     color: #1e3a26 !important;
   }
+
   .callout-icon {
     color: #4d7358 !important;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3Cpath d='M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.7 3.5 5.8.5.3.8.8.8 1.4V17a1 1 0 0 0 1 1h3.4a1 1 0 0 0 1-1v-.8c0-.6.3-1.1.8-1.4 2-1.1 3.5-3.3 3.5-5.8a7 7 0 0 0-7-7Z'/%3E%3C/svg%3E") !important;
@@ -412,7 +403,7 @@ div.callout-tip.callout-style-default {
   }
 }
 
-/* 3. Warning / Feltétel – Meleg narancs fejléc */
+/* 3. Warning / Feltétel */
 .callout.callout-warning,
 div.callout-warning.callout-style-default {
   border-left: 4px solid #bf6426 !important;
@@ -422,6 +413,7 @@ div.callout-warning.callout-style-default {
     background-color: #f5e0ce !important;
     color: #703309 !important;
   }
+
   .callout-icon {
     color: #bf6426 !important;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
@@ -429,7 +421,7 @@ div.callout-warning.callout-style-default {
   }
 }
 
-/* 4. Important / Fontos – Terrakotta fejléc */
+/* 4. Important / Fontos */
 .callout.callout-important,
 div.callout-important.callout-style-default {
   border-left: 4px solid #a33a30 !important;
@@ -439,6 +431,7 @@ div.callout-important.callout-style-default {
     background-color: #f3d7d0 !important;
     color: #631c15 !important;
   }
+
   .callout-icon {
     color: #a33a30 !important;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
@@ -446,7 +439,7 @@ div.callout-important.callout-style-default {
   }
 }
 
-/* 5. Példa / Magyarázat (Caution) – Heroicon: document-text */
+/* 5. Példa / Magyarázat (Caution) */
 .callout.callout-caution,
 div.callout-caution.callout-style-default {
   border-left: 4px solid #5d6778 !important;
@@ -456,6 +449,7 @@ div.callout-caution.callout-style-default {
     background-color: #e2e6ed !important;
     color: #273142 !important;
   }
+
   .callout-icon {
     color: #5d6778 !important;
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000'%3E%3Cpath fill-rule='evenodd' d='M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
@@ -464,7 +458,7 @@ div.callout-caution.callout-style-default {
 }
 
 /* =========================================================
-   7. VISSZAÁLLÍTVA: FŐOLDAL (.home-page) ÉS STÁTUSZ JELVÉNYEK
+   7. FŐOLDAL (.home-page) ÉS STÁTUSZ JELVÉNYEK
    ========================================================= */
 
 .home-page {
@@ -474,8 +468,7 @@ div.callout-caution.callout-style-default {
     display: none !important;
   }
 
-  /* Kategória címek (Segédletek, 1. félév) */
-  .level1 > h1 {
+  .level1>h1 {
     font-size: 2.1rem !important;
     color: #342721 !important;
     margin-top: 2.8rem !important;
@@ -485,11 +478,10 @@ div.callout-caution.callout-style-default {
     display: block !important;
   }
 
-  .level1:first-child > h1 {
+  .level1:first-child>h1 {
     margin-top: 0 !important;
   }
 
-  /* Tantárgy-sorok: háttér nélküli tiszta lista */
   .level2 {
     background: transparent !important;
     border: none !important;
@@ -512,7 +504,6 @@ div.callout-caution.callout-style-default {
     }
   }
 
-  /* Listaelem szövege és linkje */
   h2 {
     margin: 0 !important;
     padding: 0 !important;
@@ -532,7 +523,6 @@ div.callout-caution.callout-style-default {
   }
 }
 
-/* Státusz badge-ek */
 .badge-ip,
 .badge-todo {
   font-family: "JetBrains Mono", monospace !important;
@@ -562,11 +552,13 @@ div.callout-caution.callout-style-default {
 }
 
 @keyframes pulse-dot {
+
   0%,
   100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.35;
     transform: scale(0.8);
@@ -580,7 +572,7 @@ div.callout-caution.callout-style-default {
 }
 
 /* =========================================================
-   8. KÓDBLOKKOK ÉS 50%-OS KÉPMÉRET
+   8. KÓDBLOKKOK, ÁBRÁK, TÁBLÁZATOK (LIGHT MODE)
    ========================================================= */
 
 code:not(pre code) {
@@ -611,7 +603,6 @@ pre code {
   line-height: 1.9em !important;
 }
 
-/* Matplotlib diagramok méretezése: 50% szélesség, középre igazítva */
 .cell-output-display,
 .quarto-figure {
   width: 100% !important;
@@ -675,4 +666,520 @@ tr:nth-child(2n) {
 
 ::-webkit-scrollbar-track {
   background: #faf8f5;
+}
+
+/* =========================================================
+   10. SÖTÉT MÓD (DARK MODE) – TELJES REDESIGN
+   Design: Midnight Slate & Monokai / GitHub Dark
+   ========================================================= */
+
+/* --- TÉMAVÁLTÓ GOMB (BAL FELÜL) --- */
+.theme-toggle-btn {
+  position: fixed !important;
+  top: 14px !important;
+  left: 14px !important;
+  z-index: 9999 !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  background: #faf8f5 !important;
+  border: 1px solid rgba(52, 39, 33, 0.16) !important;
+  color: #342721 !important;
+  box-shadow: 0 2px 6px rgba(52, 39, 33, 0.05) !important;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease !important;
+  padding: 0 !important;
+
+  &:hover {
+    background: #f0eae0 !important;
+    color: #8e5a23 !important;
+    border-color: #8e5a23 !important;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke-width: 1.8 !important;
+  }
+
+  .theme-icon-sun {
+    display: none !important;
+  }
+
+  .theme-icon-moon {
+    display: block !important;
+  }
+}
+
+/* --- SÖTÉT MÓD STÍLUSOK (html.dark-theme) --- */
+
+html.dark-theme {
+  color-scheme: dark;
+
+  /* Témaváltó gomb */
+  .theme-toggle-btn {
+    background: #161b22 !important;
+    border-color: #30363d !important;
+    color: #f0b05c !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45) !important;
+
+    &:hover {
+      background: #21262d !important;
+      color: #ffd08a !important;
+      border-color: #f0b05c !important;
+    }
+
+    .theme-icon-sun {
+      display: block !important;
+    }
+
+    .theme-icon-moon {
+      display: none !important;
+    }
+  }
+
+  /* Alap háttér és betűszínek – tiszta mély pala */
+  &,
+  body {
+    background-color: #0d1117 !important;
+    color: #e6edf3 !important;
+  }
+
+  /* Címsorok */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .quarto-title .title {
+    color: #ffffff !important;
+  }
+
+  h1.unnumbered,
+  .quarto-title .title {
+    border-bottom: 2px solid #21262d !important;
+  }
+
+  strong,
+  b {
+    color: #ffffff;
+  }
+
+  /* Linkek */
+  a {
+    color: #58a6ff !important;
+
+    &:hover {
+      color: #79c0ff !important;
+    }
+  }
+
+  hr {
+    border-top: 1px solid #21262d !important;
+  }
+
+  /* Vissza gomb */
+  .back-link {
+    color: #9da7b3 !important;
+
+    &:hover {
+      color: #58a6ff !important;
+    }
+  }
+
+  /* Lebegő tartalomjegyzék (TOC) */
+  #quarto-margin-sidebar {
+    background: rgba(22, 27, 34, 0.94) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid #30363d !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  #TOC {
+    .toc-title {
+      color: #8b949e !important;
+
+      &::after {
+        color: #6e7681 !important;
+      }
+    }
+
+    ul {
+      li.toc-h2>a {
+        color: #8b949e !important;
+      }
+
+      a {
+        color: #c9d1d9 !important;
+
+        &:hover {
+          color: #58a6ff !important;
+          background-color: rgba(88, 166, 255, 0.1) !important;
+        }
+      }
+    }
+  }
+
+  /* =======================================================
+     CALLOUT DOBOZOK – TISZTA KÁRTYÁK, ÉLES KONTRASZT
+     ======================================================= */
+
+  .callout {
+    background-color: #131820 !important;
+    border: 1px solid #262e3a !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28) !important;
+
+    .callout-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .callout-body {
+      color: #dfe6ee !important;
+    }
+
+    /* Lenyitható callout nyíl */
+    .callout-btn-toggle .callout-toggle::before {
+      filter: brightness(0) invert(0.85) !important;
+    }
+  }
+
+  /* 1. Note / Definíció – Meleg borostyán */
+  .callout.callout-note,
+  div.callout-note.callout-style-default {
+    border-left: 4px solid #e5a454 !important;
+    background-color: #15181e !important;
+
+    .callout-header {
+      background-color: rgba(229, 164, 84, 0.13) !important;
+      color: #f6c989 !important;
+    }
+
+    .callout-icon {
+      color: #f0b05c !important;
+    }
+  }
+
+  /* 2. Tip / Tétel / Kód – Smaragdzöld */
+  .callout.callout-tip,
+  div.callout-tip.callout-style-default {
+    border-left: 4px solid #3fb950 !important;
+    background-color: #121917 !important;
+
+    .callout-header {
+      background-color: rgba(63, 185, 80, 0.13) !important;
+      color: #7ee787 !important;
+    }
+
+    .callout-icon {
+      color: #3fb950 !important;
+    }
+  }
+
+  /* 3. Warning – Narancs */
+  .callout.callout-warning,
+  div.callout-warning.callout-style-default {
+    border-left: 4px solid #d29922 !important;
+    background-color: #1a1712 !important;
+
+    .callout-header {
+      background-color: rgba(210, 153, 34, 0.14) !important;
+      color: #f0c674 !important;
+    }
+
+    .callout-icon {
+      color: #e3b341 !important;
+    }
+  }
+
+  /* 4. Important – Korallpiros */
+  .callout.callout-important,
+  div.callout-important.callout-style-default {
+    border-left: 4px solid #f85149 !important;
+    background-color: #1b1316 !important;
+
+    .callout-header {
+      background-color: rgba(248, 81, 73, 0.14) !important;
+      color: #ffa198 !important;
+    }
+
+    .callout-icon {
+      color: #f85149 !important;
+    }
+  }
+
+  /* 5. Caution / Példa / Magyarázat – Égkék */
+  .callout.callout-caution,
+  div.callout-caution.callout-style-default {
+    border-left: 4px solid #58a6ff !important;
+    background-color: #121822 !important;
+
+    .callout-header {
+      background-color: rgba(88, 166, 255, 0.13) !important;
+      color: #9ecbff !important;
+    }
+
+    .callout-icon {
+      color: #58a6ff !important;
+    }
+  }
+
+  /* =======================================================
+     FŐOLDAL (.home-page) & BADGE-EK
+     ======================================================= */
+
+  .home-page {
+    .level1>h1 {
+      color: #ffffff !important;
+      border-bottom: 2px solid #30363d !important;
+    }
+
+    .level2 {
+      border-bottom: 1px solid #21262d !important;
+
+      &:hover {
+        border-bottom-color: #58a6ff !important;
+
+        h2 a {
+          color: #58a6ff !important;
+        }
+      }
+    }
+
+    h2 a {
+      color: #e6edf3 !important;
+    }
+  }
+
+  .badge-ip {
+    background: rgba(240, 176, 92, 0.14) !important;
+    color: #f6c989 !important;
+    border-color: rgba(240, 176, 92, 0.35) !important;
+
+    &::before {
+      background-color: #f0b05c !important;
+    }
+  }
+
+  .badge-todo {
+    background: #161b22 !important;
+    color: #8b949e !important;
+    border-color: #30363d !important;
+  }
+
+  /* =======================================================
+     KÓDBLOKKOK & TELJES MONOKAI / GITHUB DARK SZINTAXIS
+     ======================================================= */
+
+  /* Inline kód */
+  code:not(pre code) {
+    color: #ffa657 !important;
+    background-color: #1c222d !important;
+    border: 1px solid #30363d !important;
+  }
+
+  /* Kódblokk konténer */
+  div.sourceCode {
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    margin: 1rem 0 !important;
+  }
+
+  pre,
+  pre.sourceCode {
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    color: #e6edf3 !important;
+  }
+
+  div.sourceCode pre {
+    border: none !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+  }
+
+  /* EZ JAVÍTJA A SÖTÉTKÉK SZÖVEGET: a sor-spanok alapértelmezett színe! */
+  pre code,
+  code.sourceCode,
+  pre>code.sourceCode>span,
+  code.sourceCode>span,
+  code.sourceCode span {
+    color: #e6edf3 !important;
+    background: transparent !important;
+  }
+
+  /* Kód kimenet (stdout) */
+  .cell-output-stdout pre {
+    background-color: #0b0e14 !important;
+    border: 1px solid #262e3a !important;
+    border-left: 3px solid #3fb950 !important;
+    color: #c9d1d9 !important;
+
+    code {
+      color: #c9d1d9 !important;
+    }
+  }
+
+  /* Másolás gomb */
+  .code-copy-button {
+    color: #8b949e !important;
+
+    &:hover {
+      color: #ffffff !important;
+    }
+  }
+
+  /* Pandoc szintaxis tokenek – magas specifikussággal */
+  code.sourceCode span.kw,
+  code.sourceCode span.cf {
+    color: #ff6188 !important;
+    /* def, return, if, for, else */
+    font-weight: 500;
+  }
+
+  code.sourceCode span.im,
+  code.sourceCode span.pp {
+    color: #ff6188 !important;
+    /* import, from */
+  }
+
+  code.sourceCode span.fu {
+    color: #79c0ff !important;
+    /* függvénynevek */
+  }
+
+  code.sourceCode span.bu {
+    color: #ffd866 !important;
+    /* print, range, len, sum */
+  }
+
+  code.sourceCode span.st,
+  code.sourceCode span.ch,
+  code.sourceCode span.vs,
+  code.sourceCode span.ss {
+    color: #a9dc76 !important;
+    /* stringek */
+  }
+
+  code.sourceCode span.dv,
+  code.sourceCode span.fl,
+  code.sourceCode span.bn,
+  code.sourceCode span.cn {
+    color: #ab9df2 !important;
+    /* számok, konstansok */
+  }
+
+  code.sourceCode span.co,
+  code.sourceCode span.do,
+  code.sourceCode span.an,
+  code.sourceCode span.cv,
+  code.sourceCode span.in {
+    color: #7c869a !important;
+    /* kommentek, docstringek */
+    font-style: italic;
+  }
+
+  code.sourceCode span.op {
+    color: #78dce8 !important;
+    /* operátorok: =, +, -, *, / */
+  }
+
+  code.sourceCode span.dt {
+    color: #ffd866 !important;
+    /* típusok */
+  }
+
+  code.sourceCode span.sc,
+  code.sourceCode span.ex {
+    color: #fc9867 !important;
+    /* escape karakterek */
+  }
+
+  code.sourceCode span.va,
+  code.sourceCode span.at,
+  code.sourceCode span.ot {
+    color: #e6edf3 !important;
+    /* változók, attribútumok */
+  }
+
+  code.sourceCode span.er,
+  code.sourceCode span.al {
+    color: #ff5555 !important;
+    font-weight: 600;
+  }
+
+  code.sourceCode span.wa {
+    color: #fc9867 !important;
+  }
+
+  /* =======================================================
+     EGYÉB ELEMEK (IDÉZET, TÁBLÁZAT, ÁBRÁK, GÖRGETŐSÁV)
+     ======================================================= */
+
+  blockquote {
+    border-left-color: #58a6ff !important;
+    background: #161b22 !important;
+    color: #c9d1d9 !important;
+  }
+
+  table {
+    border-color: #30363d !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #262e3a !important;
+  }
+
+  th {
+    background-color: #161b22 !important;
+    color: #ffffff !important;
+  }
+
+  td {
+    color: #dfe6ee !important;
+  }
+
+  tr:nth-child(2n) {
+    background-color: #12171f !important;
+  }
+
+  .cell-output-display img,
+  .quarto-figure img {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55) !important;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #30363d;
+
+    &:hover {
+      background: #484f58;
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0d1117;
+  }
+
+  /* MathJax képletek színe */
+  mjx-container,
+  .MathJax,
+  svg.mjx-math {
+    color: inherit !important;
+  }
 }
